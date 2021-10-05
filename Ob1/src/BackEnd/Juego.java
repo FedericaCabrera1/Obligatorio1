@@ -4,10 +4,17 @@ import java.util.*;
 
 public class Juego {
     private Jugador jugador;
-    private String configuracion;
+    private char configuracion;
     private int puntaje;
     private int horaComienzo;
     private char[][] matriz;
+    
+    public Juego(Jugador j, char c,  int hora){
+        this.setJugador(j);
+        this.setConfiguracion(c);
+        this.setHoraComienzo(hora);
+        this.setPuntaje(0);
+    }
 
     public Jugador getJugador() {
         return jugador;
@@ -17,11 +24,11 @@ public class Juego {
         this.jugador = jugador;
     }
 
-    public String getConfiguracion() {
+    public char getConfiguracion() {
         return configuracion;
     }
 
-    public void setConfiguracion(String configuracion) {
+    public void setConfiguracion(char configuracion) {
         this.configuracion = configuracion;
     }
 

@@ -7,7 +7,8 @@ public class Saltar {
     private char color; //llevar el conteo de los colores
     
     public Saltar(){
-        color = 'R';
+        this.color = 'R';
+        
     }
 
     public char getColor() {
