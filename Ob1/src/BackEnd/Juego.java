@@ -7,6 +7,7 @@ public class Juego {
     private String configuracion;
     private int puntaje;
     private int horaComienzo;
+    private char[][] matriz;
 
     public Jugador getJugador() {
         return jugador;

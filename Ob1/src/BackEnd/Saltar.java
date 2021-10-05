@@ -5,11 +5,9 @@ import java.util.*;
 public class Saltar {
 
     private char color; //llevar el conteo de los colores
-    //private char[][] matriz;
     
     public Saltar(){
         color = 'R';
-        
     }
 
     public char getColor() {
