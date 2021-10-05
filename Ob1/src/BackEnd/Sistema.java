@@ -11,7 +11,7 @@ public class Sistema {
     }
     
     public void agregarJugador(String nombre, int edad, String alias){
-        Jugador j = Jugador(nombre, edad, alias);
+        Jugador j = new Jugador(nombre, edad, alias);
         this.listaJugadores.add(j);
     }
     
@@ -25,7 +25,7 @@ public class Sistema {
     
     public void JuegoSaltar(){
         //metodo que contiene toda la logica del juego Saltar, implementando los metodos de la clase saltar
-        //a este metodo lo llama el metodo Opcion2 desde el front
+        //a este metodo lo llama el metodo opcion2 desde el front
     }
     
 }
