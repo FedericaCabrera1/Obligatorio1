@@ -84,7 +84,22 @@ public class Saltar {
     }
 
     public int calcularPuntaje(char[][] mat) {
-        return 1;
+        int puntaje = 0;
+        int contador = 10;
+        for(int i=0; i<mat.length; i++){
+           for(int j=0; j<mat[0].length; j++){
+               if(mat[i][j] == 'R' || mat[i][j] == 'A' || mat[i][j] == 'V' || mat[i][j] == 'M'){
+                   puntaje += contador;
+               }
+           }
+           if(i==9){
+               contador += 20;
+           }else{
+               contador += 10; 
+           }
+            
+        }
+        return puntaje;
     }
     
     public char[][] matrizNueva(char[][] mat, int columna, int cantidadPosiciones){

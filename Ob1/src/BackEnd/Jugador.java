@@ -8,6 +8,11 @@ public class Jugador {
     private String alias;
     private Juego juego;
 
+    public Jugador(String unNombre, int unaEdad, String unAlias){
+        nombre = unNombre;
+        edad = unaEdad;
+        alias = unAlias;
+    }
     public String getNombre() {
         return nombre;
     }

@@ -10,7 +10,8 @@ public class Sistema {
         return listaJugadores;
     }
     
-    public void agregarJugador(Jugador j){
+    public void agregarJugador(String nombre, int edad, String alias){
+        Jugador j = Jugador(nombre, edad, alias);
         this.listaJugadores.add(j);
     }
     
@@ -20,6 +21,11 @@ public class Sistema {
     
     public void agregarJuego(Juego j){
         this.listaJuegos.add(j);
+    }
+    
+    public void JuegoSaltar(){
+        //metodo que contiene toda la logica del juego Saltar, implementando los metodos de la clase saltar
+        //a este metodo lo llama el metodo Opcion2 desde el front
     }
     
 }
