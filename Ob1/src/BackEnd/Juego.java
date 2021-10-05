@@ -47,6 +47,18 @@ public class Juego {
     public void setHoraComienzo(int horaComienzo) {
         this.horaComienzo = horaComienzo;
     }
+    
+    public char[][] getMatriz(){
+        return matriz;
+    }
+    
+    public void setMatriz(char[][] unaMatriz){
+        this.matriz = unaMatriz;
+    }
+    
+   
+    
+    
 
     
     

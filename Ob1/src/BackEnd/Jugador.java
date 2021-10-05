@@ -6,7 +6,6 @@ public class Jugador {
     private String nombre;
     private int edad;
     private String alias;
-    private Juego juego;
 
     public Jugador(String unNombre, int unaEdad, String unAlias){
         nombre = unNombre;
@@ -35,14 +34,6 @@ public class Jugador {
 
     public void setAlias(String alias) {
         this.alias = alias;
-    }
-
-    public Juego getJuego() {
-        return juego;
-    }
-
-    public void setJuego(Juego juego) {
-        this.juego = juego;
     }
     
     
