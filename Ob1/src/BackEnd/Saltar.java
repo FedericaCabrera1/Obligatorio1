@@ -81,6 +81,7 @@ public class Saltar extends Juego {
     }
     
     public void hacerMovida(int columna, int cantidadPosiciones){
+        //metodo que se llama una vez que la movida ya fue validada
         //llamar a los metodos this.getMatriz() y this.setMatriz(matriz cambiada);
         
     }

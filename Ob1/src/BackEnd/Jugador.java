@@ -36,6 +36,11 @@ public class Jugador {
         this.alias = alias;
     }
     
+    @Override
+    public String toString(){
+        return this.getNombre() + " (" + this.getAlias() + ")";
+    }
+    
     
     
 }

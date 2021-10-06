@@ -46,10 +46,12 @@ public class Menu {
             System.out.println("Ingrese Edad:");
             int edad = in.nextInt();
             System.out.println("Ingrese Alias:");
+            in.nextLine();
             String alias = in.nextLine();
             s.agregarJugador(nombre, edad, alias);
+            System.out.println("");
             System.out.println("Jugador Registrado con éxito");
-            System.out.println("?Que desea hacer? \n 1) Registrar otro jugador \n 2) Volver al menú principal \n 3) Exit");
+            System.out.println("¿Que desea hacer? \n 1) Registrar otro jugador \n 2) Volver al menú principal \n 3) Exit");
             int opcionIngresada = manejarError();
             if (opcionIngresada == 2) {
                 seguirIngresando = false;
@@ -61,14 +63,35 @@ public class Menu {
     public static void opcion2(Sistema s) {
         /*primero mostramos la lista de jugadores A MODO DE MENU, le pedimos q elija uno, 
         chequeamos q este todo OK y entonces comienza el juego con ese jugador*/
-
- /*aca llamamos al metodo epico de la clase sistema 
+        
+        /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
+        
+        Scanner lector = new Scanner(System.in);
+        System.out.println("BIENVENIDO AL JUEGO SALTAR");
+        System.out.println("Lista de jugadores");
+        ArrayList listaJugadores = s.getListaJugadores();
+        for (int i=0; i<listaJugadores.size(); i++){
+            System.out.println((i+1) + ": " + listaJugadores.get(i));
+        }
+        System.out.println("Seleccione un jugador de la lista para empezar: ");
+        int jugador = lector.nextInt();
+        
     }
 
     public static void opcion3(Sistema s) {
         /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase RECTANGULO y arranca el juego*/
+     
+        Scanner lector = new Scanner(System.in);
+        System.out.println("BIENVENIDO AL JUEGO RECTANGULO");
+        System.out.println("Lista de jugadores");
+        ArrayList listaJugadores = s.getListaJugadores();
+        for (int i=0; i<listaJugadores.size(); i++){
+            System.out.println((i+1) + ": " + listaJugadores.get(i));
+        }
+        System.out.println("Seleccione un jugador de la lista para empezar: ");
+        int jugador = lector.nextInt();
     }
 
     public static int manejarError() {

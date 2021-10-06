@@ -6,6 +6,11 @@ public class Sistema {
     private ArrayList<Jugador> listaJugadores;
     private ArrayList<Juego> listaJuegos;
     
+    public Sistema(){
+        listaJugadores = new ArrayList();
+        listaJuegos = new ArrayList();
+    }
+    
     public ArrayList<Jugador> getListaJugadores(){
         return listaJugadores;
     }
