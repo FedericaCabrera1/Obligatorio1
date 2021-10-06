@@ -1,10 +1,11 @@
-
 package BackEnd;
+import java.util.*;
 
 public class Main {
-    public static void main (String[] args){
+
+    public static void main(String[] args) {
         Jugador n = new Jugador ("AAA", 19, "mm");
-        Saltar j1 = new Saltar(n,'P', 20);
+        Saltar j1 = new Saltar(n,'P', "08:55");
         char[][] mat = j1.getMatrizSaltar();
         for (int i=0; i<mat.length; i++){
             for (int j=0; j<mat[0].length; j++){
@@ -12,8 +13,7 @@ public class Main {
             }
             System.out.println("");
         }
-        
-        
+
     }
-    
+
 }

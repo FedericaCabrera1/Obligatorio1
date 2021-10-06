@@ -1,16 +1,20 @@
 package FrontEnd;
 
+import BackEnd.Juego;
+import BackEnd.Jugador;
+import BackEnd.Saltar;
 import BackEnd.Sistema;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Menu {
 
     public static void main(String[] args) {
-        Sistema s = new Sistema();
+        Sistema sistema = new Sistema();
         menuPrincipal(s);
     }
 
-    public static void menuPrincipal(Sistema s) {
+    public static void menuPrincipal(Sistema sistema) {
         Scanner in = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 4) {
@@ -18,13 +22,13 @@ public class Menu {
             opcion = manejarError();
             switch (opcion) {
                 case 1:
-                    opcion1(s);
+                    opcion1(sistema);
                     break;
                 case 2:
-                    opcion2(s);
+                    opcion2(sistema);
                     break;
                 case 3:
-                    opcion3(s);
+                    opcion3(sistema);
                     break;
                 case 4:
                     System.out.println("Nos vemos pronto!");
@@ -36,7 +40,7 @@ public class Menu {
 
     }
 
-    public static void opcion1(Sistema s) {
+    public static void opcion1(Sistema sistema) {
         boolean seguirIngresando = true;
         while (seguirIngresando) {
             System.out.println("REGISTRO DE NUEVO JUGADOR");
@@ -44,11 +48,10 @@ public class Menu {
             System.out.println("Ingrese Nombre:");
             String nombre = in.nextLine();
             System.out.println("Ingrese Edad:");
-            int edad = in.nextInt();
+            int edad = manejarError();
             System.out.println("Ingrese Alias:");
-            in.nextLine();
             String alias = in.nextLine();
-            s.agregarJugador(nombre, edad, alias);
+            sistema.agregarJugador(nombre, edad, alias);
             System.out.println("");
             System.out.println("Jugador Registrado con éxito");
             System.out.println("¿Que desea hacer? \n 1) Registrar otro jugador \n 2) Volver al menú principal \n 3) Exit");
@@ -57,41 +60,84 @@ public class Menu {
                 seguirIngresando = false;
             }
         }
-        menuPrincipal(s);
+        menuPrincipal(sistema);
     }
 
-    public static void opcion2(Sistema s) {
+    public static void opcion2(Sistema sistema) {
         /*primero mostramos la lista de jugadores A MODO DE MENU, le pedimos q elija uno, 
         chequeamos q este todo OK y entonces comienza el juego con ese jugador*/
-        
-        /*aca llamamos al metodo epico de la clase sistema 
+
+ /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
-        
         Scanner lector = new Scanner(System.in);
         System.out.println("BIENVENIDO AL JUEGO SALTAR");
         System.out.println("Lista de jugadores");
-        ArrayList listaJugadores = s.getListaJugadores();
-        for (int i=0; i<listaJugadores.size(); i++){
-            System.out.println((i+1) + ": " + listaJugadores.get(i));
+        ArrayList listaJugadores = sistema.getListaJugadores();
+        for (int i = 0; i < listaJugadores.size(); i++) {
+            System.out.println((i + 1) + ": " + listaJugadores.get(i));
         }
         System.out.println("Seleccione un jugador de la lista para empezar: ");
-        int jugador = lector.nextInt();
+        int nroJugador = manejarError();
+        while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
+            System.out.println("El numero ingresado esta fuera del rango. Reingrese.");
+            nroJugador = manejarError();
+        }
+
+        System.out.println("");
+        System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
+        char configuracion = (lector.nextLine()).charAt(0);
+        while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
+            System.out.println("La letra ingresada no es valida, reingrese una P o una A.");
+            configuracion = (lector.nextLine()).charAt(0);
+        }
+
+        Date now = new Date(System.currentTimeMillis());
+        SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
+        String hora = hour.format(now) + "";
+
+        System.out.println("");
+        System.out.println("COMIENZA EL JUEGO SALTAR " + hora);
+        sistema.agregarJuego((nroJugador - 1), configuracion, hora, "saltar");
+        jugarASaltar(sistema, hora);
+    }
+    
+    public static void jugarASaltar(Sistema sistema, String hora){
+        Juego j = sistema.buscarJuegoPorHora(hora);
+        //while(noSeTermina)
+        //hacer cada movida que se valida 
+        char[][] mat = j.getMatriz();
+        String fila = "+-+-+-+-+";
+        for (int i=0; i<mat.length; i++){
+            System.out.println(fila);
+            for (int k=0; k<mat[0].length; k++){
+                System.out.print("|" + mat[i][k]);
+            }
+            System.out.print("|");
+            System.out.println("");
+        }
+        System.out.println(fila);
         
+        String movida = sistema.movidaJuegoSaltar(j);
+        System.out.println(movida);   
     }
 
     public static void opcion3(Sistema s) {
         /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase RECTANGULO y arranca el juego*/
-     
+
         Scanner lector = new Scanner(System.in);
         System.out.println("BIENVENIDO AL JUEGO RECTANGULO");
         System.out.println("Lista de jugadores");
         ArrayList listaJugadores = s.getListaJugadores();
-        for (int i=0; i<listaJugadores.size(); i++){
-            System.out.println((i+1) + ": " + listaJugadores.get(i));
+        for (int i = 0; i < listaJugadores.size(); i++) {
+            System.out.println((i + 1) + ": " + listaJugadores.get(i));
         }
         System.out.println("Seleccione un jugador de la lista para empezar: ");
         int jugador = lector.nextInt();
+
+        Date now = new Date(System.currentTimeMillis());
+        SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
+        String hora = hour + "";
     }
 
     public static int manejarError() {

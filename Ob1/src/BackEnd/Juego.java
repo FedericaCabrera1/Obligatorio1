@@ -2,14 +2,14 @@
 package BackEnd;
 import java.util.*;
 
-public class Juego {
+public abstract class Juego {
     private Jugador jugador;
     private char configuracion;
     private int puntaje;
-    private int horaComienzo;
+    private String horaComienzo;
     private char[][] matriz;
     
-    public Juego(Jugador j, char c,  int hora){
+    public Juego(Jugador j, char c,  String hora){
         this.setJugador(j);
         this.setConfiguracion(c);
         this.setHoraComienzo(hora);
@@ -40,11 +40,11 @@ public class Juego {
         this.puntaje = puntaje;
     }
 
-    public int getHoraComienzo() {
+    public String getHoraComienzo() {
         return horaComienzo;
     }
 
-    public void setHoraComienzo(int horaComienzo) {
+    public void setHoraComienzo(String horaComienzo) {
         this.horaComienzo = horaComienzo;
     }
     
@@ -54,6 +54,10 @@ public class Juego {
     
     public void setMatriz(char[][] unaMatriz){
         this.matriz = unaMatriz;
+    }
+    
+    public String toString(){
+        return "Jugador: " + this.getJugador().getNombre() + "\n Configuracion: " + this.getConfiguracion() + "\n Hora: " + this.getHoraComienzo();
     }
     
    

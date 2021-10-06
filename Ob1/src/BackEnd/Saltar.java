@@ -6,7 +6,7 @@ public class Saltar extends Juego {
 
     private char color; 
     
-    public Saltar(Jugador j, char configuracion, int hora){
+    public Saltar(Jugador j, char configuracion, String hora){
         super(j, configuracion, hora);
         this.color = 'R';
         this.setMatriz(crearMatriz());
@@ -75,6 +75,11 @@ public class Saltar extends Juego {
             mat[7][1] = 'A';
             mat[7][2] = 'V';
             mat[7][3] = 'M'; 
+        }
+        for (int i=6; i>=0; i--){
+            for (int j=0; j<mat[0].length; j++){
+                mat[i][j]= ' ';
+            }
         }
         return mat;
         
@@ -184,7 +189,7 @@ public class Saltar extends Juego {
         }
         if (contador == 4){
             res = "No hay posibles movimientos para el color " + this.getColor();
-            this.setColor(this.color);
+            this.setColor(this.getColor());
         }
         return res;  
     }
@@ -193,7 +198,7 @@ public class Saltar extends Juego {
         char[][] mat = this.getMatriz();
         boolean seTermina = false;
         int contador = 0;
-        for (int i=0; i<6; i++){
+        for (int i=6; i>0; i--){
             for (int j=0; j<mat[0].length; j++){
                 if (mat[i][j] == 'R' || mat[i][j] == 'A' || mat[i][j] == 'V' || mat[i][j] == 'M'){
                     contador++;
