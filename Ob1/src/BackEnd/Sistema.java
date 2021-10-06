@@ -1,5 +1,4 @@
 package BackEnd;
-
 import java.util.*;
 
 public class Sistema {
@@ -42,17 +41,9 @@ public class Sistema {
         }
     }
 
-    public String movidaJuegoSaltar(Saltar s) {
-        //metodo que contiene toda la logica del juego Saltar, implementando los metodos de la clase saltar
-        char colorActual = s.getColor();
+    public String mostrarColumnasAUsuario(Saltar s) {
         boolean[] columnasAMover = s.indicarColumnasParaJugador();
-        String res = "El color " + colorActual + " se puede mover en las siguientes columnas:";
-        for (int i=0; i<columnasAMover.length; i++){
-            if (columnasAMover[i]){
-                res += "\n" + i;
-            }
-        }
-        return res;
+        return s.mostrarMensajeAlJugador(columnasAMover);
     }
     
     public Juego buscarJuegoPorHora(String hora){
@@ -65,5 +56,19 @@ public class Sistema {
         }
         return ret;
     }
+    
+     /*public boolean validarColumnaIngresadaXUsuario(int nroColumna, Saltar s){
+        boolean[] columnas = s.indicarColumnasParaJugador();
+        boolean esCorrecto = false;
+        for (int i=0; i<columnas.length; i++){
+            if (columnas[i]){
+                if (i==nroColumna){
+                    esCorrecto = true;
+                }    
+            }
+        }
+        return esCorrecto;
+    }
+*/
 
 }

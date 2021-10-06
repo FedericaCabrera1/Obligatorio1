@@ -117,8 +117,20 @@ public class Menu {
         }
         System.out.println(fila);
         
-        String movida = sistema.movidaJuegoSaltar(j);
+        String movida = sistema.mostrarColumnasAUsuario(s);
         System.out.println(movida);   
+        System.out.println("Ingrese una columna de las opciones brindadas");
+        int columna = manejarError();
+        boolean validar = movida.contains(columna+"");
+        while (!validar){
+            System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
+            columna = manejarError();
+            validar = movida.contains(columna+"");   
+        }
+        
+        
+        
+        //hacer la movida
     }
 
     public static void opcion3(Sistema s) {

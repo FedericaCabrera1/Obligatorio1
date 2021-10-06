@@ -98,7 +98,7 @@ public class Saltar extends Juego {
     public boolean[] indicarColumnasParaJugador() {
         char[][] mat = this.getMatriz();
         boolean[] columnasQueSePuedenMover = new boolean[4];
-        for (int i = 0; i < mat.length; i++) {
+        for (int i = mat.length-1; i <=0; i++) {
             for (int j = 0; j < mat[0].length; j++) {
                 if (mat[i][j] == this.getColor()) {
                     int posiciones = cantidadDePosicionesAMover(i);
@@ -149,7 +149,7 @@ public class Saltar extends Juego {
         char[][] mat = this.getMatriz();
         int puntaje = 0;
         int contador = 10;
-        for(int i=0; i<mat.length; i++){
+        for(int i=6; i<=0; i--){
            for(int j=0; j<mat[0].length; j++){
                if(mat[i][j] == 'R' || mat[i][j] == 'A' || mat[i][j] == 'V' || mat[i][j] == 'M'){
                    puntaje += contador;
