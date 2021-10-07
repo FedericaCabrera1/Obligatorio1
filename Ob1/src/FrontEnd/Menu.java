@@ -17,8 +17,8 @@ public class Menu {
     public static void menuPrincipal(Sistema sistema) {
         Scanner in = new Scanner(System.in);
         int opcion = 0;
-        while (opcion != 4) {
-            System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Exit");
+        while (opcion != 5) {
+            System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
             opcion = manejarError();
             switch (opcion) {
                 case 1:
@@ -31,6 +31,9 @@ public class Menu {
                     opcion3(sistema);
                     break;
                 case 4:
+                    opcion4(sistema);
+                    break;
+                case 5:
                     System.out.println("Nos vemos pronto!");
                     break;
                 default:
@@ -62,7 +65,6 @@ public class Menu {
             Persona pAux=map.get("Micaela");
             map.containsKey("Micaela");
              */
-            
             sistema.agregarJugador(nombre, edad, alias);
             System.out.println("");
             System.out.println("Jugador Registrado con éxito");
@@ -79,7 +81,7 @@ public class Menu {
         /*primero mostramos la lista de jugadores A MODO DE MENU, le pedimos q elija uno, 
         chequeamos q este todo OK y entonces comienza el juego con ese jugador*/
 
-        /*aca llamamos al metodo epico de la clase sistema 
+ /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
         Scanner lector = new Scanner(System.in);
         System.out.println("BIENVENIDO AL JUEGO SALTAR");
@@ -116,6 +118,78 @@ public class Menu {
 
     public static void jugarASaltar(Sistema sistema, Saltar s) {
         //while(noSeTermina) 
+        boolean seTermina = false;
+        while (!seTermina) {
+            char[][] mat = s.getMatriz();
+            imprimirMatrizSaltar(s);
+            if (!(s.quedanDosFichas()) && s.quedanJugadasDisponibles()) {
+                //Se le muestra al jugador las columnas que puede mover para ese color
+                int[] columnas = sistema.mostrarColumnasAUsuario(s);
+                String res = "Las columnas que se pueden mover para el color " + s.getColor() + " son: ";
+                int cantidadMovimientos = 0;
+                for (int i = 0; i < columnas.length; i++) {
+                    if (columnas[i] != 0) {
+                        res += "\n" + i + ": " + columnas[i];
+                    } else {
+                        cantidadMovimientos++;
+                    }
+                }
+                if (cantidadMovimientos != 4) {
+                    System.out.println(res);
+                    System.out.println("Ingrese una columna de las opciones brindadas");
+                    int columna = manejarError();
+                    int cantPosiciones = 0;
+                    boolean validar = false;
+                    for (int i = 0; i < columnas.length; i++) {
+                        if (i == columna) {
+                            if (columnas[i] != 0) {
+                                validar = true;
+                                cantPosiciones = columnas[i];
+                            }
+                        }
+                    }
+                    while (!validar) {
+                        System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
+                        columna = manejarError();
+                        for (int i = 0; i < columnas.length; i++) {
+                            if (i == columna) {
+                                if (columnas[i] != 0) {
+                                    validar = true;
+                                    cantPosiciones = columnas[i];
+                                }
+                            }
+                        }
+                    }
+                    s.hacerMovida(columna, cantPosiciones);
+                } else {
+                    System.out.println("No hay movimientos disponibles para el color " + s.getColor());
+                    System.out.println("");
+                    s.setColor(s.getColor());
+                }
+            } else {
+                seTermina = true;
+            }
+        }
+
+        if (s.quedanDosFichas() && !s.quedanJugadasDisponibles()) {
+            System.out.println("El juego se termino porque solo quedan dos fichas en el area base y porque no hay mas movimientos para realizar");
+        } else {
+            if (s.quedanDosFichas()) {
+                System.out.println("El juego se termino porque solo quedan dos fichas en el area base");
+            } else {
+                if (!s.quedanJugadasDisponibles()) {
+                    System.out.println("El juego se termino porque no hay mas movimientos para realizar");
+                }
+
+            }
+        }
+        System.out.println("El juego finalizo.");
+        System.out.println("PUNTAJE FINAL: " + s.calcularPuntaje());
+        System.out.println("Se retornará al Menu Principal automaticamente");
+        System.out.println("");
+    }
+
+    public static void imprimirMatrizSaltar(Saltar s) {
         char[][] mat = s.getMatriz();
         String fila = "+-+-+-+-+";
         for (int i = 0; i < mat.length; i++) {
@@ -127,31 +201,6 @@ public class Menu {
             System.out.println("");
         }
         System.out.println(fila);
-
-        int[] columnas = sistema.mostrarColumnasAUsuario(s);
-        String res = "Las columnas que se pueden mover para el color " + s.getColor() + " son: ";
-        for (int i = 0; i < columnas.length; i++) {
-            if (columnas[i]!=0){
-                res += "\n" + i + ": " + columnas[i];        
-            }
-        }
-        System.out.println(res);
-        System.out.println("Ingrese una columna de las opciones brindadas");
-        int columna = manejarError();
-        boolean validar = false;
-        while (!validar) {
-            System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
-            columna = manejarError();
-            for (int i=0; i<columnas.length; i++){
-                if (i==columna){
-                    validar = true;
-                }
-            }   
-        }
-        
-        
-
-        //hacer la movida
     }
 
     public static void opcion3(Sistema s) {
@@ -171,6 +220,10 @@ public class Menu {
         Date now = new Date(System.currentTimeMillis());
         SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
         String hora = hour + "";
+    }
+    
+    public static void opcion4(Sistema s){
+        
     }
 
     public static int manejarError() {
