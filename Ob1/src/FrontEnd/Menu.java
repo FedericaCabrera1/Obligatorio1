@@ -115,8 +115,7 @@ public class Menu {
     }
 
     public static void jugarASaltar(Sistema sistema, Saltar s) {
-        //while(noSeTermina)
-        //hacer cada movida que se valida 
+        //while(noSeTermina) 
         char[][] mat = s.getMatriz();
         String fila = "+-+-+-+-+";
         for (int i = 0; i < mat.length; i++) {
@@ -143,8 +142,14 @@ public class Menu {
         while (!validar) {
             System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
             columna = manejarError();
-            validar = res.contains(columna + "");
+            for (int i=0; i<columnas.length; i++){
+                if (i==columna){
+                    validar = true;
+                }
+            }   
         }
+        
+        
 
         //hacer la movida
     }
