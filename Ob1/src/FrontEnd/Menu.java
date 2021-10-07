@@ -11,7 +11,7 @@ public class Menu {
 
     public static void main(String[] args) {
         Sistema sistema = new Sistema();
-        menuPrincipal(s);
+        menuPrincipal(sistema);
     }
 
     public static void menuPrincipal(Sistema sistema) {
@@ -51,6 +51,18 @@ public class Menu {
             int edad = manejarError();
             System.out.println("Ingrese Alias:");
             String alias = in.nextLine();
+            
+            /*Usar Hashmap
+            Persona p1 = new Persona(200);
+            p1.setNombre("Micaela");
+            HashMap<String, Persona> map = new HashMap();
+            
+            map.put(p1.getNombre(), p1);
+            
+            Persona pAux=map.get("Micaela");
+            map.containsKey("Micaela");
+            */
+            
             sistema.agregarJugador(nombre, edad, alias);
             System.out.println("");
             System.out.println("Jugador Registrado con éxito");
@@ -97,15 +109,15 @@ public class Menu {
 
         System.out.println("");
         System.out.println("COMIENZA EL JUEGO SALTAR " + hora);
-        sistema.agregarJuego((nroJugador - 1), configuracion, hora, "saltar");
-        jugarASaltar(sistema, hora);
+        Saltar s = sistema.crearSaltar((nroJugador - 1), configuracion, hora);
+        sistema.agregarJuego(s);
+        jugarASaltar(sistema, s);
     }
     
-    public static void jugarASaltar(Sistema sistema, String hora){
-        Juego j = sistema.buscarJuegoPorHora(hora);
+    public static void jugarASaltar(Sistema sistema, Saltar s){
         //while(noSeTermina)
         //hacer cada movida que se valida 
-        char[][] mat = j.getMatriz();
+        char[][] mat = s.getMatriz();
         String fila = "+-+-+-+-+";
         for (int i=0; i<mat.length; i++){
             System.out.println(fila);

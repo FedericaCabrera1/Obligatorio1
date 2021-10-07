@@ -1,4 +1,5 @@
 package BackEnd;
+
 import java.util.*;
 
 public class Sistema {
@@ -24,40 +25,50 @@ public class Sistema {
         return listaJuegos;
     }
 
-    public void agregarJuego(int nroJugador, char configuracion, String hora, String tipoDeJuego) {
+    public void agregarJuego(Juego j) {
+        listaJuegos.add(j);
+    }
+
+    public Saltar crearSaltar(int nroJugador, char configuracion, String hora) {
         Jugador jug = null;
         for (int i = 0; i < listaJugadores.size(); i++) {
             if (nroJugador == i) {
                 jug = listaJugadores.get(i);
             }
         }
-        if (tipoDeJuego.equalsIgnoreCase("saltar")){
-            Saltar s = new Saltar (jug, configuracion, hora);
-            this.listaJuegos.add(s);
+        Saltar s = new Saltar(jug, configuracion, hora);
+        return s;
+    }
+
+    public Rectangulo crearRectangulo(int nroJugador, char configuracion, String hora) {
+        Jugador jug = null;
+        for (int i = 0; i < listaJugadores.size(); i++) {
+            if (nroJugador == i) {
+                jug = listaJugadores.get(i);
+            }
         }
-        else {
-            Rectangulo r = new Rectangulo (jug, configuracion, hora);
-            this.listaJuegos.add(r);
-        }
+        Rectangulo r = new Rectangulo(jug, configuracion, hora);
+        return r;
+
     }
 
     public String mostrarColumnasAUsuario(Saltar s) {
         boolean[] columnasAMover = s.indicarColumnasParaJugador();
         return s.mostrarMensajeAlJugador(columnasAMover);
     }
-    
-    public Juego buscarJuegoPorHora(String hora){
+
+    public Juego buscarJuegoPorHora(String hora) {
         Juego ret = null;
-        for (int i=0; i<listaJuegos.size(); i++){
+        for (int i = 0; i < listaJuegos.size(); i++) {
             Juego j = listaJuegos.get(i);
-            if (j.getHoraComienzo().equalsIgnoreCase(hora)){
-                ret = j;   
+            if (j.getHoraComienzo().equalsIgnoreCase(hora)) {
+                ret = j;
             }
         }
         return ret;
     }
-    
-     /*public boolean validarColumnaIngresadaXUsuario(int nroColumna, Saltar s){
+
+    /*public boolean validarColumnaIngresadaXUsuario(int nroColumna, Saltar s){
         boolean[] columnas = s.indicarColumnasParaJugador();
         boolean esCorrecto = false;
         for (int i=0; i<columnas.length; i++){
@@ -69,6 +80,5 @@ public class Sistema {
         }
         return esCorrecto;
     }
-*/
-
+     */
 }
