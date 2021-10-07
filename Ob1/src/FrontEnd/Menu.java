@@ -62,6 +62,7 @@ public class Menu {
             Persona pAux=map.get("Micaela");
             map.containsKey("Micaela");
              */
+            
             sistema.agregarJugador(nombre, edad, alias);
             System.out.println("");
             System.out.println("Jugador Registrado con éxito");
@@ -78,7 +79,7 @@ public class Menu {
         /*primero mostramos la lista de jugadores A MODO DE MENU, le pedimos q elija uno, 
         chequeamos q este todo OK y entonces comienza el juego con ese jugador*/
 
- /*aca llamamos al metodo epico de la clase sistema 
+        /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
         Scanner lector = new Scanner(System.in);
         System.out.println("BIENVENIDO AL JUEGO SALTAR");
@@ -129,12 +130,11 @@ public class Menu {
         System.out.println(fila);
 
         int[] columnas = sistema.mostrarColumnasAUsuario(s);
-        String res = "Las columnas que se pueden mover son: ";
+        String res = "Las columnas que se pueden mover para el color " + s.getColor() + " son: ";
         for (int i = 0; i < columnas.length; i++) {
             if (columnas[i]!=0){
                 res += "\n" + i + ": " + columnas[i];        
             }
-
         }
         System.out.println(res);
         System.out.println("Ingrese una columna de las opciones brindadas");
