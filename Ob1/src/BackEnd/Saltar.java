@@ -98,16 +98,16 @@ public class Saltar extends Juego {
         return this.getMatriz();
     }
 
-    public boolean[] indicarColumnasParaJugador() {
+    public int[] indicarColumnasParaJugador() {
         char[][] mat = this.getMatriz();
-        boolean[] columnasQueSePuedenMover = new boolean[4];
+        int[] columnasQueSePuedenMover = new int[4];
         for (int i = mat.length - 1; i >= 0; i--) {
             for (int j = 0; j < mat[0].length; j++) {
                 if (mat[i][j] == this.getColor()) {
                     int posiciones = cantidadDePosicionesAMover(i);
                     boolean sePuede = puedeMover(posiciones, i, j);
                     if (sePuede) {
-                        columnasQueSePuedenMover[j] = true;
+                        columnasQueSePuedenMover[j] = posiciones;
                     }
                 }
             }

@@ -52,9 +52,9 @@ public class Sistema {
 
     }
 
-    public String mostrarColumnasAUsuario(Saltar s) {
-        boolean[] columnasAMover = s.indicarColumnasParaJugador();
-        return s.mostrarMensajeAlJugador(columnasAMover);
+    public int[] mostrarColumnasAUsuario(Saltar s) {
+        int[] columnasAMover = s.indicarColumnasParaJugador();
+        return columnasAMover;
     }
 
     public Juego buscarJuegoPorHora(String hora) {

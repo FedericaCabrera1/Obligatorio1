@@ -51,7 +51,7 @@ public class Menu {
             int edad = manejarError();
             System.out.println("Ingrese Alias:");
             String alias = in.nextLine();
-            
+
             /*Usar Hashmap
             Persona p1 = new Persona(200);
             p1.setNombre("Micaela");
@@ -61,8 +61,7 @@ public class Menu {
             
             Persona pAux=map.get("Micaela");
             map.containsKey("Micaela");
-            */
-            
+             */
             sistema.agregarJugador(nombre, edad, alias);
             System.out.println("");
             System.out.println("Jugador Registrado con éxito");
@@ -113,35 +112,40 @@ public class Menu {
         sistema.agregarJuego(s);
         jugarASaltar(sistema, s);
     }
-    
-    public static void jugarASaltar(Sistema sistema, Saltar s){
+
+    public static void jugarASaltar(Sistema sistema, Saltar s) {
         //while(noSeTermina)
         //hacer cada movida que se valida 
         char[][] mat = s.getMatriz();
         String fila = "+-+-+-+-+";
-        for (int i=0; i<mat.length; i++){
+        for (int i = 0; i < mat.length; i++) {
             System.out.println(fila);
-            for (int k=0; k<mat[0].length; k++){
+            for (int k = 0; k < mat[0].length; k++) {
                 System.out.print("|" + mat[i][k]);
             }
             System.out.print("|");
             System.out.println("");
         }
         System.out.println(fila);
-        
-        String movida = sistema.mostrarColumnasAUsuario(s);
-        System.out.println(movida);   
+
+        int[] columnas = sistema.mostrarColumnasAUsuario(s);
+        String res = "Las columnas que se pueden mover son: ";
+        for (int i = 0; i < columnas.length; i++) {
+            if (columnas[i]!=0){
+                res += "\n" + i + ": " + columnas[i];        
+            }
+
+        }
+        System.out.println(res);
         System.out.println("Ingrese una columna de las opciones brindadas");
         int columna = manejarError();
-        boolean validar = movida.contains(columna+"");
-        while (!validar){
+        boolean validar = false;
+        while (!validar) {
             System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
             columna = manejarError();
-            validar = movida.contains(columna+"");   
+            validar = res.contains(columna + "");
         }
-        
-        
-        
+
         //hacer la movida
     }
 
