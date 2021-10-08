@@ -54,18 +54,14 @@ public class Menu {
             int edad = manejarError();
             System.out.println("Ingrese Alias:");
             String alias = in.nextLine();
-
-            /*Usar Hashmap
-            Persona p1 = new Persona(200);
-            p1.setNombre("Micaela");
-            HashMap<String, Persona> map = new HashMap();
-            
-            map.put(p1.getNombre(), p1);
-            
-            Persona pAux=map.get("Micaela");
-            map.containsKey("Micaela");
-             */
-            
+            Jugador jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
+            boolean esta = sistema.aliasRepetido(jugadorAgregado);
+            while (esta) {
+                System.out.println("El alias elegido ya está en uso. Reingrese");
+                alias = in.nextLine();
+                jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
+                esta = sistema.aliasRepetido(jugadorAgregado);
+            }
             sistema.agregarJugador(nombre, edad, alias);
             System.out.println("");
             System.out.println("Jugador Registrado con éxito");
@@ -81,8 +77,8 @@ public class Menu {
     public static void opcion2(Sistema sistema) {
         /*primero mostramos la lista de jugadores A MODO DE MENU, le pedimos q elija uno, 
         chequeamos q este todo OK y entonces comienza el juego con ese jugador*/
-
- /*aca llamamos al metodo epico de la clase sistema 
+        
+        /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
         Scanner lector = new Scanner(System.in);
         System.out.println("BIENVENIDO AL JUEGO SALTAR");
@@ -162,6 +158,7 @@ public class Menu {
                         }
                     }
                     s.hacerMovida(columna, cantPosiciones);
+
                 } else {
                     System.out.println("No hay movimientos disponibles para el color " + s.getColor());
                     System.out.println("");
@@ -170,26 +167,24 @@ public class Menu {
             } else {
                 seTermina = true;
             }
-        }
-
-        if (s.quedanDosFichas() && !s.quedanJugadasDisponibles()) {
-            System.out.println("El juego se termino porque solo quedan dos fichas en el area base y porque no hay mas movimientos para realizar");
-        } else {
-            if (s.quedanDosFichas()) {
-                System.out.println("El juego se termino porque solo quedan dos fichas en el area base");
+            if (s.quedanDosFichas() && !s.quedanJugadasDisponibles()) {
+                System.out.println("El juego se termino porque solo quedan dos fichas en el area base y porque no hay mas movimientos para realizar");
             } else {
-                if (!s.quedanJugadasDisponibles()) {
-                    System.out.println("El juego se termino porque no hay mas movimientos para realizar");
-                }
+                if (s.quedanDosFichas()) {
+                    System.out.println("El juego se termino porque solo quedan dos fichas en el area base");
+                } else {
+                    if (!s.quedanJugadasDisponibles()) {
+                        System.out.println("El juego se termino porque no hay mas movimientos para realizar");
+                    }
 
+                }
             }
         }
-        System.out.println("El juego finalizo.");
         System.out.println("PUNTAJE FINAL: " + s.calcularPuntaje());
         System.out.println("Se retornará al Menu Principal automaticamente");
         System.out.println("");
     }
-
+    
     public static void imprimirMatrizSaltar(Saltar s) {
         char[][] mat = s.getMatriz();
         String fila = "+-+-+-+-+";
@@ -222,9 +217,9 @@ public class Menu {
         SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
         String hora = hour + "";
     }
-    
-    public static void opcion4(Sistema s){
-        
+
+    public static void opcion4(Sistema s) {
+
     }
 
     public static int manejarError() {
@@ -239,8 +234,10 @@ public class Menu {
             } catch (InputMismatchException e) {
                 System.out.println("Error en el formato del número. Reingrese");
                 in.nextLine();
+
             }
         }
         return opcionIngresada;
     }
+
 }

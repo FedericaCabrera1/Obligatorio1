@@ -21,6 +21,11 @@ public class Sistema {
         this.listaJugadores.add(j);
     }
 
+    public Jugador crearJugador(String nombre, int edad, String alias) {
+        Jugador j = new Jugador(nombre, edad, alias);
+        return j;
+    }
+
     public ArrayList<Juego> getListaJuegos() {
         return listaJuegos;
     }
@@ -57,28 +62,13 @@ public class Sistema {
         return columnasAMover;
     }
 
-    public Juego buscarJuegoPorHora(String hora) {
-        Juego ret = null;
-        for (int i = 0; i < listaJuegos.size(); i++) {
-            Juego j = listaJuegos.get(i);
-            if (j.getHoraComienzo().equalsIgnoreCase(hora)) {
-                ret = j;
+    public boolean aliasRepetido(Jugador j) {
+        boolean esta = false;
+        for (int i = 0; i < this.listaJugadores.size(); i++) {
+            if (listaJugadores.get(i).getAlias().equalsIgnoreCase(j.getAlias())) {
+                esta = true;
             }
         }
-        return ret;
+        return esta;
     }
-
-    /*public boolean validarColumnaIngresadaXUsuario(int nroColumna, Saltar s){
-        boolean[] columnas = s.indicarColumnasParaJugador();
-        boolean esCorrecto = false;
-        for (int i=0; i<columnas.length; i++){
-            if (columnas[i]){
-                if (i==nroColumna){
-                    esCorrecto = true;
-                }    
-            }
-        }
-        return esCorrecto;
-    }
-     */
 }
