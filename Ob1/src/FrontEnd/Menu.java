@@ -65,6 +65,7 @@ public class Menu {
             Persona pAux=map.get("Micaela");
             map.containsKey("Micaela");
              */
+            
             sistema.agregarJugador(nombre, edad, alias);
             System.out.println("");
             System.out.println("Jugador Registrado con éxito");
