@@ -187,21 +187,29 @@ public class Menu {
     
     public static void imprimirMatrizSaltar(Saltar s) {
         char[][] mat = s.getMatriz();
-        String fila = "+-+-+-+-+";
+        String fila = "  +-+-+-+-+";
+        int[] columna = {60, 40, 30, 20, 10};
+        int p = 0;
         for (int i = 0; i < mat.length; i++) {
             System.out.println(fila);
+            if(i>4){
+                    System.out.print("  ");
+                }else{
+                    System.out.print(columna[p]);
+                }
             for (int k = 0; k < mat[0].length; k++) {
+               
                 System.out.print("|" + mat[i][k]);
             }
             System.out.print("|");
             System.out.println("");
+            p++;
         }
         System.out.println(fila);
     }
 
+    
     public static void opcion3(Sistema s) {
-        /*aca llamamos al metodo epico de la clase sistema 
-        q nos conecta con los metodos en la clase RECTANGULO y arranca el juego*/
 
         Scanner lector = new Scanner(System.in);
         System.out.println("BIENVENIDO AL JUEGO RECTANGULO");
@@ -216,6 +224,7 @@ public class Menu {
         Date now = new Date(System.currentTimeMillis());
         SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
         String hora = hour + "";
+        
     }
 
     public static void opcion4(Sistema s) {

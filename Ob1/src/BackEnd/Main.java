@@ -26,7 +26,7 @@ public class Main {
 //        j1.hacerMovida(2,4);
 //        System.out.println(j1.quedanJugadasDisponibles());
 //        System.out.println(j1.quedanDosFichas());
-
+        Sistema sistema = new Sistema();
         Rectangulo j2 = new Rectangulo(n, 'A', "9:50");
         char[][] mat2 = j2.getMatriz();
         for (int i = 0; i < mat2.length; i++) {
@@ -34,7 +34,11 @@ public class Main {
                 System.out.print(mat2[i][j] + " ");
             }
             System.out.println("");
+            
         }
+        j2.crearMatriz();
+        
+      
 
     }
 
