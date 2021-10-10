@@ -3,14 +3,32 @@ package BackEnd;
 import java.util.*;
 
 public class Rectangulo extends Juego {
+
     private char color;
-    private char[][] matrizAnterior;
+    private int[] coordsMatrizAnterior;
+    private char colorAnterior;
 
     public Rectangulo(Jugador j, char configuracion, String hora) {
         super(j, configuracion, hora);
         this.color = 'R';
         this.setMatriz(this.crearMatriz());
+        this.colorAnterior = ' ';
+        
+        coordsMatrizAnterior = new int[4];
+        for(int i=0; i<this.coordsMatrizAnterior.length; i++){
+            this.coordsMatrizAnterior[i]=-1;
+        }
     }
+
+    public char getColorAnterior() {
+        return colorAnterior;
+    }
+
+    public void setColorAnterior(char unColorAnterior) {
+        
+        this.colorAnterior = unColorAnterior;
+    }
+    
 
     public char getColor() {
         return color;
@@ -25,14 +43,25 @@ public class Rectangulo extends Juego {
         }
     }
 
-    public char[][] getMatrizAnterior() {
-        return matrizAnterior;
-    }
-
-    public void setMatrizAnterior(char[][] unaMatrizAnterior) {
-        this.matrizAnterior = unaMatrizAnterior;
+    public int[] getCoordsMatrizAnterior() {
+        return coordsMatrizAnterior;
     }
     
+    public boolean outOfBounds(int filaInicial, int columnaInicial, int cantFilas, int cantColumnas){
+        boolean outOfBounds=false;
+        if(filaInicial+cantFilas>19 || columnaInicial+cantColumnas>19){
+            outOfBounds=true;
+        }
+        return outOfBounds;
+    }
+
+    public void setCoordsMatrizAnterior(int filaInicialAnt, int columnaInicialAnt, int cantFilasAnt, int cantColumnasAnt) {
+        this.getCoordsMatrizAnterior()[0] = filaInicialAnt;
+        this.getCoordsMatrizAnterior()[1] = columnaInicialAnt;
+        this.getCoordsMatrizAnterior()[2] = cantFilasAnt;
+        this.getCoordsMatrizAnterior()[3] = cantColumnasAnt;
+    }
+
     public char[][] crearMatriz() {
         char[][] mat = new char[20][20];
         if (this.getConfiguracion() == 'A' || this.getConfiguracion() == 'a') {
@@ -104,22 +133,119 @@ public class Rectangulo extends Juego {
     public boolean validacionAdyacente(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
         char[][] mat = this.getMatriz();
         boolean esAdyacente = false;
+
+        boolean esAdyVertical = false;
         //un primer if que verifique si son adyacentes las filas o las columnas
-        if (esAdyacente){
-            //si este if me dice que si, necesito verificar que esta out of bounds
-            if (this.chequearTamañoMatriz(filaInicial, columnaInicial, cantidadFilas, cantidadColumnas)){
-                //puedo agregar la matriz
-                esAdyacente = true;
+        int filaIA = this.getCoordsMatrizAnterior()[0];
+        int columnaIA = this.getCoordsMatrizAnterior()[1];
+        int cantFilasA = this.getCoordsMatrizAnterior()[2];
+        int cantColA = this.getCoordsMatrizAnterior()[3];
+
+        if(filaIA==-1){
+            esAdyacente=true;
+        }else{
+            boolean esAdyH = esAdyHorizontal(filaInicial, columnaInicial, cantidadFilas, cantidadColumnas);
+            boolean esAdyV = esAdyVertical(filaInicial, columnaInicial, cantidadFilas, cantidadColumnas);
+            if(esAdyH || esAdyV){
+                esAdyacente=true;
             }
         }
-         //si este if me dice que no, no necesito verificar si esta out of bounds
+        //si este if me dice que no, no necesito verificar si esta out of bounds
         return esAdyacente;
     }
-    
-    public boolean chequearTamañoMatriz(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas){
+
+    public boolean chequearTamañoMatriz(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
         boolean entra = true;
-        
+
         return entra;
+    }
+    public boolean esAdyacenteH2(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas){
+        boolean h = true;
+        /*
+        for (int i=columnaInicial; i<=columnaFinal; i++){
+                if (mat[filaInicial][i]==1){
+                    puntaje+=rango;
+                }
+                if (mat[filaFinal][i]==1){
+                    puntaje+=rango;
+                }
+            }
+            for (int j=filaInicial+1; j<=filaFinal-1; j++){
+                if (mat[j][columnaInicial]==1){
+                    puntaje+=rango;
+                }
+                if (mat[j][columnaFinal]==1){
+                    puntaje+=rango;
+                }
+                
+            }*/
+        return h;
+    }
+    
+    public boolean esAdyHorizontal(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
+        boolean esAdyHorizontal = true;
+
+        int filaIA = this.getCoordsMatrizAnterior()[0];
+        int columnaIA = this.getCoordsMatrizAnterior()[1];
+        int cantFilasA = this.getCoordsMatrizAnterior()[2];
+        int cantColA = this.getCoordsMatrizAnterior()[3];
+
+        if (columnaIA == 0) {
+            if (columnaInicial == columnaIA + cantColA) {
+                if (filaIA == 0) {
+                    if (filaInicial >= filaIA + cantFilasA) {
+                        esAdyHorizontal = false;
+                    }
+
+                } else {
+                    if (filaInicial + cantidadFilas < filaIA || filaInicial >= filaIA + cantFilasA) {
+                        esAdyHorizontal = false;
+                    }
+                }
+
+            }
+        } else {
+            if ((columnaIA + cantColA) - 1 == 19) {
+                if (columnaInicial + cantidadColumnas == columnaIA - 1) {
+                    if (filaIA == 0) {
+                        if (filaInicial >= filaIA + cantFilasA) {
+                            esAdyHorizontal = false;
+                        }
+
+                    } else {
+                        if (filaInicial + cantidadFilas < filaIA || filaInicial >= filaIA + cantFilasA) {
+                            esAdyHorizontal = false;
+                        }
+                    }
+                }
+
+            } else {
+                if (columnaInicial + cantidadColumnas == columnaIA - 1 || columnaInicial == columnaIA + cantColA) {
+                    if ((columnaIA + cantColA) - 1 == 19) {
+                        if (columnaInicial + cantidadColumnas == columnaIA - 1) {
+                            if (filaIA == 0) {
+                                if (filaInicial >= filaIA + cantFilasA) {
+                                    esAdyHorizontal = false;
+                                }
+
+                            } else {
+                                if (filaInicial + cantidadFilas < filaIA || filaInicial >= filaIA + cantFilasA) {
+                                    esAdyHorizontal = false;
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+            }
+        }
+        return esAdyHorizontal;
+    }
+    
+    public boolean esAdyVertical(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas){
+        boolean esAdyVertical = true;
+        return esAdyVertical;
     }
 
     public void crearNuevaMatriz(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
@@ -129,7 +255,12 @@ public class Rectangulo extends Juego {
                 mat[i][j] = this.getColor();
             }
         }
+        this.setColorAnterior(this.getColor());
         this.setColor(this.getColor());
-    }
+        this.setCoordsMatrizAnterior(filaInicial, columnaInicial, cantidadFilas, cantidadColumnas);
 
+    }
+   
+    
+   
 }

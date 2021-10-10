@@ -37,9 +37,49 @@ public class Main {
             
         }
         j2.crearMatriz();
+       Scanner lector = new Scanner(System.in);
+       String coordenadas = lector.nextLine();
+       int[] coords = new int[4];
+        int contador = 0;
+        for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
+            String res = "";
+            if (coordenadas.charAt(i) != ' ') {
+                res += coordenadas.charAt(i);
+                if (i != coordenadas.length()) {
+                    if (coordenadas.charAt(i + 1) != ' ') {
+                        res += coordenadas.charAt(i + 1);
+                    }
+
+                }
+                coords[contador] = Integer.parseInt(res);
+                contador++;
+
+            }
+        }
         
+    }
+        public static int[] recibirCoordenadas(String coordenadas) {
+        int[] coords = new int[4];
+        int contador = 0;
+        for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
+            String res = "";
+            if (coordenadas.charAt(i) != ' ') {
+                res += coordenadas.charAt(i);
+                if (i != coordenadas.length()) {
+                    if (coordenadas.charAt(i + 1) != ' ') {
+                        res += coordenadas.charAt(i + 1);
+                    }
+
+                }
+                coords[contador] = Integer.parseInt(res);
+                contador++;
+
+            }
+        }
+        return coords;
+    }
       
 
     }
 
-}
+
