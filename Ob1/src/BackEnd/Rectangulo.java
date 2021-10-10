@@ -1,5 +1,4 @@
 package BackEnd;
-
 import java.util.*;
 
 public class Rectangulo extends Juego {
@@ -13,10 +12,10 @@ public class Rectangulo extends Juego {
         this.color = 'R';
         this.setMatriz(this.crearMatriz());
         this.colorAnterior = ' ';
-        
+
         coordsMatrizAnterior = new int[4];
-        for(int i=0; i<this.coordsMatrizAnterior.length; i++){
-            this.coordsMatrizAnterior[i]=-1;
+        for (int i = 0; i < this.coordsMatrizAnterior.length; i++) {
+            this.coordsMatrizAnterior[i] = -1;
         }
     }
 
@@ -25,10 +24,9 @@ public class Rectangulo extends Juego {
     }
 
     public void setColorAnterior(char unColorAnterior) {
-        
+
         this.colorAnterior = unColorAnterior;
     }
-    
 
     public char getColor() {
         return color;
@@ -46,11 +44,11 @@ public class Rectangulo extends Juego {
     public int[] getCoordsMatrizAnterior() {
         return coordsMatrizAnterior;
     }
-    
-    public boolean outOfBounds(int filaInicial, int columnaInicial, int cantFilas, int cantColumnas){
-        boolean outOfBounds=false;
-        if(filaInicial+cantFilas>19 || columnaInicial+cantColumnas>19){
-            outOfBounds=true;
+
+    public boolean outOfBounds(int filaInicial, int columnaInicial, int cantFilas, int cantColumnas) {
+        boolean outOfBounds = false;
+        if (filaInicial + (cantFilas - 1) > 19 || columnaInicial + (cantColumnas - 1) > 19) {
+            outOfBounds = true;
         }
         return outOfBounds;
     }
@@ -120,8 +118,8 @@ public class Rectangulo extends Juego {
     public boolean validacionSuperposicion(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
         char[][] mat = this.getMatriz();
         boolean seSuperpone = false;
-        for (int i = filaInicial; i < filaInicial + cantidadFilas; i++) {
-            for (int j = columnaInicial; j < columnaInicial + cantidadColumnas; j++) {
+        for (int i = filaInicial; i < filaInicial + (cantidadFilas - 1); i++) {
+            for (int j = columnaInicial; j < columnaInicial + (cantidadColumnas - 1); j++) {
                 if (mat[i][j] != ' ') {
                     seSuperpone = true;
                 }
@@ -130,122 +128,118 @@ public class Rectangulo extends Juego {
         return seSuperpone;
     }
 
-    public boolean validacionAdyacente(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
-        char[][] mat = this.getMatriz();
-        boolean esAdyacente = false;
-
-        boolean esAdyVertical = false;
-        //un primer if que verifique si son adyacentes las filas o las columnas
+    public boolean esAdyacente(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
+        boolean esAdy = false;
+        int filaFinal = (filaInicial + cantidadFilas) - 1;
+        int columnaFinal = (columnaInicial + cantidadColumnas) - 1;
         int filaIA = this.getCoordsMatrizAnterior()[0];
-        int columnaIA = this.getCoordsMatrizAnterior()[1];
-        int cantFilasA = this.getCoordsMatrizAnterior()[2];
-        int cantColA = this.getCoordsMatrizAnterior()[3];
-
-        if(filaIA==-1){
-            esAdyacente=true;
-        }else{
-            boolean esAdyH = esAdyHorizontal(filaInicial, columnaInicial, cantidadFilas, cantidadColumnas);
-            boolean esAdyV = esAdyVertical(filaInicial, columnaInicial, cantidadFilas, cantidadColumnas);
-            if(esAdyH || esAdyV){
-                esAdyacente=true;
-            }
-        }
-        //si este if me dice que no, no necesito verificar si esta out of bounds
-        return esAdyacente;
-    }
-
-    public boolean chequearTamañoMatriz(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
-        boolean entra = true;
-
-        return entra;
-    }
-    public boolean esAdyacenteH2(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas){
-        boolean h = true;
-        /*
-        for (int i=columnaInicial; i<=columnaFinal; i++){
-                if (mat[filaInicial][i]==1){
-                    puntaje+=rango;
-                }
-                if (mat[filaFinal][i]==1){
-                    puntaje+=rango;
-                }
-            }
-            for (int j=filaInicial+1; j<=filaFinal-1; j++){
-                if (mat[j][columnaInicial]==1){
-                    puntaje+=rango;
-                }
-                if (mat[j][columnaFinal]==1){
-                    puntaje+=rango;
-                }
-                
-            }*/
-        return h;
-    }
-    
-    public boolean esAdyHorizontal(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
-        boolean esAdyHorizontal = true;
-
-        int filaIA = this.getCoordsMatrizAnterior()[0];
-        int columnaIA = this.getCoordsMatrizAnterior()[1];
-        int cantFilasA = this.getCoordsMatrizAnterior()[2];
-        int cantColA = this.getCoordsMatrizAnterior()[3];
-
-        if (columnaIA == 0) {
-            if (columnaInicial == columnaIA + cantColA) {
-                if (filaIA == 0) {
-                    if (filaInicial >= filaIA + cantFilasA) {
-                        esAdyHorizontal = false;
-                    }
-
-                } else {
-                    if (filaInicial + cantidadFilas < filaIA || filaInicial >= filaIA + cantFilasA) {
-                        esAdyHorizontal = false;
-                    }
-                }
-
-            }
+        if (filaIA == -1) {
+            esAdy = true;
         } else {
-            if ((columnaIA + cantColA) - 1 == 19) {
-                if (columnaInicial + cantidadColumnas == columnaIA - 1) {
-                    if (filaIA == 0) {
-                        if (filaInicial >= filaIA + cantFilasA) {
-                            esAdyHorizontal = false;
+            for (int i = columnaInicial; i <= columnaFinal; i++) {
+                if (filaInicial != 0 && filaFinal != 19) {
+                    if (this.getMatriz()[filaInicial - 1][i] == this.getColorAnterior() || this.getMatriz()[filaFinal + 1][i] == this.getColorAnterior()) {
+                        esAdy = true;
+                    }
+                } else {
+                    if (filaInicial == 0) {
+                        if (this.getMatriz()[filaFinal + 1][i] == this.getColorAnterior()) {
+                            esAdy = true;
                         }
-
                     } else {
-                        if (filaInicial + cantidadFilas < filaIA || filaInicial >= filaIA + cantFilasA) {
-                            esAdyHorizontal = false;
+                        if (filaFinal == 19) {
+                            if (this.getMatriz()[filaInicial - 1][i] == this.getColorAnterior()) {
+                                esAdy = true;
+                            }
                         }
                     }
+
                 }
 
-            } else {
-                if (columnaInicial + cantidadColumnas == columnaIA - 1 || columnaInicial == columnaIA + cantColA) {
-                    if ((columnaIA + cantColA) - 1 == 19) {
-                        if (columnaInicial + cantidadColumnas == columnaIA - 1) {
-                            if (filaIA == 0) {
-                                if (filaInicial >= filaIA + cantFilasA) {
-                                    esAdyHorizontal = false;
-                                }
-
+                for (int j = filaInicial; j <= filaFinal; j++) {
+                    if (columnaInicial != 0 && columnaFinal != 19) {
+                        if (this.getMatriz()[j][columnaInicial - 1] == this.getColorAnterior() || this.getMatriz()[j][columnaFinal + 1] == this.getColorAnterior()) {
+                            esAdy = true;
+                        }
+                    } else {
+                        if (columnaInicial == 0) {
+                            if (this.getMatriz()[j][columnaFinal + 1] == this.getColorAnterior()) {
+                                esAdy = true;
                             } else {
-                                if (filaInicial + cantidadFilas < filaIA || filaInicial >= filaIA + cantFilasA) {
-                                    esAdyHorizontal = false;
+                                if (columnaFinal == 19) {
+                                    if (this.getMatriz()[j][columnaInicial - 1] == this.getColorAnterior()) {
+                                        esAdy = true;
+                                    }
                                 }
                             }
 
                         }
                     }
+
+                }
+            }
+
+        }
+        return esAdy;
+    }
+
+    public boolean quedanJugadas() {
+        boolean quedanJugadas = false;
+
+        int filaInicial = this.getCoordsMatrizAnterior()[0];
+        int columnaInicial = this.getCoordsMatrizAnterior()[1];
+        int cantFilas = this.getCoordsMatrizAnterior()[2];
+        int cantColumnas = this.getCoordsMatrizAnterior()[3];
+        int filaFinal = filaInicial + (cantFilas - 1);
+        int columnaFinal = columnaInicial + (cantColumnas - 1);
+
+        if (filaInicial == -1) {
+            quedanJugadas = true;
+        }
+
+        for (int i = columnaInicial; i <= columnaFinal; i++) {
+            if (filaInicial != 0 && filaFinal != 19) {
+                if (this.getMatriz()[filaInicial - 1][i] == ' ' || this.getMatriz()[filaFinal + 1][i] == ' ') {
+                    quedanJugadas = true;
+                }
+            } else {
+                if (filaInicial == 0 && filaFinal!= 19) {
+                    if (this.getMatriz()[filaFinal + 1][i] == ' ') {
+                        quedanJugadas = true;
+                    }
+                } else {
+                    if (filaFinal == 19 && filaInicial != 0) {
+                        if (this.getMatriz()[filaInicial - 1][i] == ' ') {
+                            quedanJugadas = true;
+                        }
+                    }
+                }
+
+            }
+
+            for (int j = filaInicial; j <= filaFinal; j++) {
+                if (columnaInicial != 0 && columnaFinal != 19) {
+                    if (this.getMatriz()[j][columnaInicial - 1] == ' ' || this.getMatriz()[j][columnaFinal + 1] == ' ') {
+                        quedanJugadas = true;
+                    }
+                } else {
+                    if (columnaInicial == 0 && columnaFinal!=19) {
+                        if (this.getMatriz()[j][columnaFinal + 1] == ' ') {
+                            quedanJugadas = true;
+                        } else {
+                            if (columnaFinal == 19 && columnaInicial != 0) {
+                                if (this.getMatriz()[j][columnaInicial - 1] == ' ') {
+                                    quedanJugadas = true;
+                                }
+                            }
+                        }
+
+                    }
                 }
 
             }
         }
-        return esAdyHorizontal;
-    }
-    
-    public boolean esAdyVertical(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas){
-        boolean esAdyVertical = true;
-        return esAdyVertical;
+        return quedanJugadas;
     }
 
     public void crearNuevaMatriz(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
@@ -258,9 +252,8 @@ public class Rectangulo extends Juego {
         this.setColorAnterior(this.getColor());
         this.setColor(this.getColor());
         this.setCoordsMatrizAnterior(filaInicial, columnaInicial, cantidadFilas, cantidadColumnas);
+        this.setPuntaje(this.getPuntaje() + (cantidadFilas * cantidadColumnas));
 
     }
-   
-    
-   
+
 }

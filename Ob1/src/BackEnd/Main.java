@@ -27,38 +27,54 @@ public class Main {
 //        System.out.println(j1.quedanJugadasDisponibles());
 //        System.out.println(j1.quedanDosFichas());
         Sistema sistema = new Sistema();
-        Rectangulo j2 = new Rectangulo(n, 'A', "9:50");
+        Rectangulo j2 = new Rectangulo(n, 'P', "9:50");
         char[][] mat2 = j2.getMatriz();
         for (int i = 0; i < mat2.length; i++) {
             for (int j = 0; j < mat2[0].length; j++) {
                 System.out.print(mat2[i][j] + " ");
             }
             System.out.println("");
-            
+
         }
         j2.crearMatriz();
-       Scanner lector = new Scanner(System.in);
-       String coordenadas = lector.nextLine();
-       int[] coords = new int[4];
-        int contador = 0;
-        for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
-            String res = "";
-            if (coordenadas.charAt(i) != ' ') {
-                res += coordenadas.charAt(i);
-                if (i != coordenadas.length()) {
-                    if (coordenadas.charAt(i + 1) != ' ') {
-                        res += coordenadas.charAt(i + 1);
-                    }
 
-                }
-                coords[contador] = Integer.parseInt(res);
-                contador++;
-
-            }
+        for (int i = 0; i < 19; i++) {
+            j2.getMatriz()[1][i] = 'R';
         }
+        for (int i = 0; i < mat2.length; i++) {
+            for (int j = 0; j < mat2[0].length; j++) {
+                System.out.print(mat2[i][j] + " ");
+            }
+            System.out.println("");
+
+        }
+
+        for (int i = 3; i < 8; i++) {
+            j2.getMatriz()[2][i] = 'A';
+        }
+        for (int i = 0; i < mat2.length; i++) {
+            for (int j = 0; j < mat2[0].length; j++) {
+                System.out.print(mat2[i][j] + " ");
+            }
+            System.out.println("");
+
+        }
+        System.out.println(j2.esAdyacente(2, 8, 1, 5));
         
+        for (int i = 8; i < 14; i++) {
+            j2.getMatriz()[2][i] = 'V';
+        }
+        for (int i = 0; i < mat2.length; i++) {
+            for (int j = 0; j < mat2[0].length; j++) {
+                System.out.print(mat2[i][j] + " ");
+            }
+            System.out.println("");
+
+        }
+
     }
-        public static int[] recibirCoordenadas(String coordenadas) {
+
+    public static int[] recibirCoordenadas(String coordenadas) {
         int[] coords = new int[4];
         int contador = 0;
         for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
@@ -77,9 +93,7 @@ public class Main {
             }
         }
         return coords;
-    }
-      
 
     }
 
-
+}

@@ -273,10 +273,10 @@ public class Menu {
     
     public static void jugarARectangulo(Sistema s, Rectangulo r) {
         int contadorJugadas = 0;
-        while(contadorJugadas<=10){
+        while(contadorJugadas<10 && r.quedanJugadas()){
         Scanner lector = new Scanner(System.in);
         char[][] mat = r.getMatriz();
-       imprimirMatrizRectangulo(mat);
+        imprimirMatrizRectangulo(mat);
 
         System.out.println("Ingrese coordenadas de su rectangulo");
         String coordenadas = lector.nextLine();
@@ -285,8 +285,8 @@ public class Menu {
         int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
         int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
 
-        boolean seSuperpone = r.validacionSuperposicion(coordsCorrectas[0], coordsCorrectas[1], coordsCorrectas[2], coordsCorrectas[3]);
-        boolean esAdyacente = r.validacionAdyacente(coordsCorrectas[0], coordsCorrectas[1], coordsCorrectas[2], coordsCorrectas[3]);
+        boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+        boolean esAdyacente = r.esAdyacente((coordsCorrectas[0])-1, (coordsCorrectas[1])-1, (coordsCorrectas[2]), (coordsCorrectas[3]));
         while (seSuperpone || !esAdyacente) {
             if (seSuperpone && !esAdyacente) {
                 System.out.println("La matriz ingresada no es correcta. \n Se superpone con una matriz ya existente \n y no es adyacente a la matriz anterior");
@@ -305,31 +305,37 @@ public class Menu {
             coords = recibirCoordenadas(coordenadas);
             coordsCorrectas = coordCorrectas(coords, coordenadas);
             coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-            seSuperpone = r.validacionSuperposicion(coordsCorrectas[0], coordsCorrectas[1], coordsCorrectas[2], coordsCorrectas[3]);
-            esAdyacente = r.validacionAdyacente(coordsCorrectas[0], coordsCorrectas[1], coordsCorrectas[2], coordsCorrectas[3]);
-        }
-        int[] array = r.getCoordsMatrizAnterior();
-        for(int i = 0; i< array.length; i++){
-            System.out.println(array[i]);
-        }
-        System.out.println(r.getColorAnterior());
-        r.crearNuevaMatriz(coordsCorrectas[0], coordsCorrectas[1], coordsCorrectas[2], coordsCorrectas[3]);
-        contadorJugadas++;
-        int[] array1 = r.getCoordsMatrizAnterior();
-        for(int i = 0; i< array1.length; i++){
-            System.out.println(array1[i]);
-        }
-        System.out.println(r.getColorAnterior());
+            seSuperpone = r.validacionSuperposicion((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+            esAdyacente = r.esAdyacente((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
         }
         
-        System.out.println(r.getColorAnterior());
+        r.crearNuevaMatriz((coordsCorrectas[0])-1, (coordsCorrectas[1])-1 , (coordsCorrectas[2]), (coordsCorrectas[3]));
+        contadorJugadas++;
+        
+        }
+        
+        imprimirMatrizRectangulo(r.getMatriz());
+        if(contadorJugadas==10&& !r.quedanJugadas()){
+            System.out.println("Ya se realizaron 10 jugadas y no quedan movimientos disponibles");
+        }else{ 
+            if(contadorJugadas<10&& !r.quedanJugadas()){
+                System.out.println("No quedan movimientos disponibles");
+            }else{
+                if(contadorJugadas==10&& r.quedanJugadas()){
+                    System.out.println("Ya se realizaron 10 jugadas");
+                }
+            }
+        }
+        System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
+        System.out.println("Se retornará al Menu Principal automaticamente");
+        System.out.println("");
 
     }
 
     public static boolean validacionRangoCoords(int[] coords) {
         boolean correcto = true;
         for (int i = 0; i < coords.length; i++) {
-            if (coords[i] < 0 || coords[i] > 19) {
+            if (coords[i] < 1 || coords[i] > 20) {
                 correcto = false;
             }
         }
@@ -339,24 +345,29 @@ public class Menu {
     public static int[] coordCorrectas(int[] coords, String coordenadas) {
         Scanner lector = new Scanner(System.in);
         boolean validar = validacionRangoCoords(coords);
+        
         while (!validar) {
             System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+            
             coordenadas = lector.nextLine();
             coords = recibirCoordenadas(coordenadas);
             validar = validacionRangoCoords(coords);
         }
+        
+        
         return coords;
+        
     }
 
     public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r) {
         Scanner lector = new Scanner(System.in);
-        boolean excedeTamano = r.outOfBounds(coordsCorrectas[0], coordsCorrectas[1], coordsCorrectas[2], coordsCorrectas[3]);
+        boolean excedeTamano = r.outOfBounds((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
         while (excedeTamano) {
             System.out.println("La matriz esta fuera de rango. Reingrese");
             coordenadas = lector.nextLine();
             coords = recibirCoordenadas(coordenadas);
             coordsCorrectas = coordCorrectas(coords, coordenadas);
-            excedeTamano = r.outOfBounds(coordsCorrectas[0], coordsCorrectas[1], coordsCorrectas[2], coordsCorrectas[3]);
+            excedeTamano = r.outOfBounds((coordsCorrectas[0])-1, (coordsCorrectas[1])-1, (coordsCorrectas[2]), (coordsCorrectas[3]));
         }
         return coordsCorrectas;
     }
@@ -364,20 +375,27 @@ public class Menu {
     public static int[] recibirCoordenadas(String coordenadas) {
         int[] coords = new int[4];
         int contador = 0;
+        int aux = 0;
         for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
             String res = "";
-            if (coordenadas.charAt(i) != ' ') {
-                res += coordenadas.charAt(i);
-                if (i != coordenadas.length()-1) {
-                    if (coordenadas.charAt(i + 1) != ' ') {
-                        res += coordenadas.charAt(i + 1);
+            
+            if (coordenadas.charAt(aux) != ' ') {
+                res += coordenadas.charAt(aux);
+                if (aux != coordenadas.length()-1) {
+                    
+                    if (coordenadas.charAt(aux + 1) != ' ') {
+                        res += coordenadas.charAt(aux + 1);
+                        aux++;
+                        
                     }
 
                 }
+                
                 coords[contador] = Integer.parseInt(res);
                 contador++;
 
             }
+            aux++;
         }
         return coords;
     }
