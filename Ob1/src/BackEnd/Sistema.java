@@ -72,12 +72,5 @@ public class Sistema {
         return esta;
     }
     
-    
-    public boolean verificarMatrizRectangulo(int filaInicial, int columnaInicial, int cantFilas, int cantColumnas, Rectangulo r){
-        boolean sePuede = false;
-        boolean seSuperpone = r.validacionSuperposicion(filaInicial, columnaInicial, cantFilas, cantColumnas);
-        boolean esAdy = r.validacionAdyacente(filaInicial, columnaInicial, cantFilas, cantColumnas);
-        
-        return sePuede;
-    }
+   
 }
