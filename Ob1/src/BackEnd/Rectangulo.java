@@ -1,4 +1,5 @@
 package BackEnd;
+
 import java.util.*;
 
 public class Rectangulo extends Juego {
@@ -203,7 +204,7 @@ public class Rectangulo extends Juego {
                     quedanJugadas = true;
                 }
             } else {
-                if (filaInicial == 0 && filaFinal!= 19) {
+                if (filaInicial == 0 && filaFinal != 19) {
                     if (this.getMatriz()[filaFinal + 1][i] == ' ') {
                         quedanJugadas = true;
                     }
@@ -223,7 +224,7 @@ public class Rectangulo extends Juego {
                         quedanJugadas = true;
                     }
                 } else {
-                    if (columnaInicial == 0 && columnaFinal!=19) {
+                    if (columnaInicial == 0 && columnaFinal != 19) {
                         if (this.getMatriz()[j][columnaFinal + 1] == ' ') {
                             quedanJugadas = true;
                         } else {
