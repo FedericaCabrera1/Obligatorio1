@@ -154,7 +154,7 @@ public class Rectangulo extends Juego {
                             }
                         }
                     }
-
+     
                 }
 
                 for (int j = filaInicial; j <= filaFinal; j++) {
