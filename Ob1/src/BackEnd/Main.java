@@ -69,7 +69,6 @@ public class Main {
                 System.out.print(mat2[i][j] + " ");
             }
             System.out.println("");
-
         }
 
     }
@@ -85,7 +84,6 @@ public class Main {
                     if (coordenadas.charAt(i + 1) != ' ') {
                         res += coordenadas.charAt(i + 1);
                     }
-
                 }
                 coords[contador] = Integer.parseInt(res);
                 contador++;

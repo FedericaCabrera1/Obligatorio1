@@ -13,7 +13,6 @@ public class Rectangulo extends Juego {
         this.color = 'R';
         this.setMatriz(this.crearMatriz());
         this.colorAnterior = ' ';
-
         coordsMatrizAnterior = new int[4];
         for (int i = 0; i < this.coordsMatrizAnterior.length; i++) {
             this.coordsMatrizAnterior[i] = -1;
@@ -119,8 +118,8 @@ public class Rectangulo extends Juego {
     public boolean validacionSuperposicion(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
         char[][] mat = this.getMatriz();
         boolean seSuperpone = false;
-        for (int i = filaInicial; i < filaInicial + (cantidadFilas - 1); i++) {
-            for (int j = columnaInicial; j < columnaInicial + (cantidadColumnas - 1); j++) {
+        for (int i = filaInicial; i <= filaInicial + (cantidadFilas - 1); i++) {
+            for (int j = columnaInicial; j <= columnaInicial + (cantidadColumnas - 1); j++) {
                 if (mat[i][j] != ' ') {
                     seSuperpone = true;
                 }
@@ -155,8 +154,9 @@ public class Rectangulo extends Juego {
                         }
                     }
 
-                }
 
+                }
+                
                 for (int j = filaInicial; j <= filaFinal; j++) {
                     if (columnaInicial != 0 && columnaFinal != 19) {
                         if (this.getMatriz()[j][columnaInicial - 1] == this.getColorAnterior() || this.getMatriz()[j][columnaFinal + 1] == this.getColorAnterior()) {

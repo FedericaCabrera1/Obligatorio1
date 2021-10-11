@@ -36,6 +36,7 @@ public class Menu {
                     break;
                 case 5:
                     System.out.println("Nos vemos pronto!");
+                    opcion = 5; //aca estamos validando q nos pone exit => lo terminamos 
                     break;
                 default:
                     System.out.println("La opción ingresada no es correcta. Reingrese");
@@ -81,37 +82,45 @@ public class Menu {
 
  /*aca llamamos al metodo epico de la clase sistema 
         q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
-        Scanner lector = new Scanner(System.in);
-        System.out.println("BIENVENIDO AL JUEGO SALTAR");
-        System.out.println("Lista de jugadores");
-        ArrayList listaJugadores = sistema.getListaJugadores();
-        for (int i = 0; i < listaJugadores.size(); i++) {
-            System.out.println((i + 1) + ": " + listaJugadores.get(i));
-        }
-        System.out.println("Seleccione un jugador de la lista para empezar: ");
-        int nroJugador = manejarError();
-        while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
-            System.out.println("El numero ingresado esta fuera del rango. Reingrese.");
-            nroJugador = manejarError();
+        ArrayList<Jugador> listaJugadores = sistema.getListaJugadores();
+        if (listaJugadores.size() == 0) {
+            System.out.println("No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo.");
+            menuPrincipal(sistema);
+        } else {
+            Scanner lector = new Scanner(System.in);
+            System.out.println("BIENVENIDO AL JUEGO SALTAR");
+            System.out.println("Lista de jugadores");
+            listaJugadores = sistema.getListaJugadores();
+            for (int i = 0; i < listaJugadores.size(); i++) {
+                System.out.println((i + 1) + ": " + listaJugadores.get(i));
+            }
+            System.out.println("Seleccione un jugador de la lista para empezar: ");
+            int nroJugador = manejarError();
+            while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
+                System.out.println("El numero ingresado esta fuera del rango. Reingrese.");
+                nroJugador = manejarError();
+            }
+
+            System.out.println("");
+            System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
+            char configuracion = (lector.nextLine()).charAt(0);
+            while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
+                System.out.println("La letra ingresada no es valida, reingrese una P o una A.");
+                configuracion = (lector.nextLine()).charAt(0);
+            }
+
+            Date now = new Date(System.currentTimeMillis());
+            SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
+            String hora = hour.format(now) + "";
+
+            System.out.println("");
+            System.out.println("COMIENZA EL JUEGO SALTAR " + hora);
+            Saltar s = sistema.crearSaltar((nroJugador - 1), configuracion, hora);
+            sistema.agregarJuego(s);
+            jugarASaltar(sistema, s);
+
         }
 
-        System.out.println("");
-        System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
-        char configuracion = (lector.nextLine()).charAt(0);
-        while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
-            System.out.println("La letra ingresada no es valida, reingrese una P o una A.");
-            configuracion = (lector.nextLine()).charAt(0);
-        }
-
-        Date now = new Date(System.currentTimeMillis());
-        SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
-        String hora = hour.format(now) + "";
-
-        System.out.println("");
-        System.out.println("COMIENZA EL JUEGO SALTAR " + hora);
-        Saltar s = sistema.crearSaltar((nroJugador - 1), configuracion, hora);
-        sistema.agregarJuego(s);
-        jugarASaltar(sistema, s);
     }
 
     public static void jugarASaltar(Sistema sistema, Saltar s) {
@@ -212,34 +221,59 @@ public class Menu {
     }
 
     public static void opcion3(Sistema sistema) {
+        ArrayList<Jugador> listaJugadores = sistema.getListaJugadores();
+        if (listaJugadores.size() == 0) {
+            System.out.println("No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo.");
+            menuPrincipal(sistema);
+        } else {
+            Scanner lector = new Scanner(System.in);
+            System.out.println("BIENVENIDO AL JUEGO RECTANGULO");
+            System.out.println("Lista de jugadores");
+            listaJugadores = sistema.getListaJugadores();
+            for (int i = 0; i < listaJugadores.size(); i++) {
+                System.out.println((i + 1) + ": " + listaJugadores.get(i));
+            }
+            System.out.println("Seleccione un jugador de la lista para empezar: ");
+            int nroJugador = manejarError();
+            while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
+                System.out.println("El numero ingresado esta fuera del rango. Reingrese.");
+                nroJugador = manejarError();
+            }
 
-        Scanner lector = new Scanner(System.in);
-        System.out.println("BIENVENIDO AL JUEGO RECTANGULO");
-        System.out.println("Lista de jugadores");
-        ArrayList listaJugadores = sistema.getListaJugadores();
-        for (int i = 0; i < listaJugadores.size(); i++) {
-            System.out.println((i + 1) + ": " + listaJugadores.get(i));
-        }
-        System.out.println("Seleccione un jugador de la lista para empezar: ");
-        int nroJugador = manejarError();
-        while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
-            System.out.println("El numero ingresado esta fuera del rango. Reingrese.");
-            nroJugador = manejarError();
-        }
+            System.out.println("");
+            System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
+            char configuracion = (lector.nextLine()).charAt(0);
+            while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
+                System.out.println("La letra ingresada no es valida, reingrese una P o una A.");
+                configuracion = (lector.nextLine()).charAt(0);
+            }
 
+            Date now = new Date(System.currentTimeMillis());
+            SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
+            String hora = hour.format(now) + "";
+
+            System.out.println("");
+            System.out.println("COMIENZA EL JUEGO RECTANGULO " + hora);
+            Rectangulo r = sistema.crearRectangulo((nroJugador - 1), configuracion, hora);
+            sistema.agregarJuego(r);
+            jugarARectangulo(sistema, r);
+        }
+    }
+
+    public static void imprimirMatrizRectangulo(char[][] mat) {
+        String[] col1 = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"};
+        String[] col2 = {" ", " ", " ", " ", " ", " ", " ", " ", " ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+        System.out.print("    ");
+        for (int i = 0; i < col1.length; i++) {
+            System.out.print(col1[i] + " ");
+        }
         System.out.println("");
-        System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
-        char configuracion = (lector.nextLine()).charAt(0);
-        while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
-            System.out.println("La letra ingresada no es valida, reingrese una P o una A.");
-            configuracion = (lector.nextLine()).charAt(0);
+        System.out.print("    ");
+        for (int i = 0; i < col2.length; i++) {
+            System.out.print(col2[i] + " ");
         }
-
-        Date now = new Date(System.currentTimeMillis());
-        SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
-        String hora = hour.format(now) + "";
-
         System.out.println("");
+<<<<<<< HEAD
         System.out.println("COMIENZA EL JUEGO RECTANGULO " + hora);
         Rectangulo r = sistema.crearRectangulo((nroJugador - 1), configuracion, hora);
         sistema.agregarJuego(r);
@@ -247,81 +281,111 @@ public class Menu {
 
     }
 
-    public static void imprimirMatrizRectangulo(char[][] mat){
+    public static void imprimirMatrizRectangulo(char[][] mat) {
         for (int i = 0; i < mat.length; i++) {
-            if(i<9){
-                System.out.print("0"+(i+1));
-            }else{
-                System.out.print(i+1);
+            if (i < 9) {
+                System.out.print("0" + (i + 1));
+            } else {
+                System.out.print(i + 1);
+=======
+        for (int i = 0; i < mat.length; i++) {
+            if (i < 9) {
+                System.out.print("0" + (i + 1) + " ");
+            } else {
+                System.out.print((i + 1) + " ");
+>>>>>>> main
             }
             System.out.print(" ");
             for (int j = 0; j < mat[0].length; j++) {
-                
+
                 if (mat[i][j] == ' ') {
                     System.out.print('_');
-                 
+
                 } else {
                     System.out.print(mat[i][j]);
                 }
                 System.out.print(" ");
-                
-                
+
             }
             System.out.println("");
         }
     }
-    
+
     public static void jugarARectangulo(Sistema s, Rectangulo r) {
         int contadorJugadas = 0;
-        while(contadorJugadas<10 && r.quedanJugadas()){
-        Scanner lector = new Scanner(System.in);
-        char[][] mat = r.getMatriz();
-        imprimirMatrizRectangulo(mat);
+        while (contadorJugadas < 10 && r.quedanJugadas()) {
+            Scanner lector = new Scanner(System.in);
+            char[][] mat = r.getMatriz();
+<<<<<<< HEAD
+            imprimirMatrizRectangulo(mat);
 
-        System.out.println("Ingrese coordenadas de su rectangulo");
-        String coordenadas = lector.nextLine();
+=======
+            System.out.println("");
+            imprimirMatrizRectangulo(mat);
+            System.out.println("");
+>>>>>>> main
+            System.out.println("Ingrese coordenadas de su rectangulo");
+            String coordenadas = lector.nextLine();
 
-        int[] coords = recibirCoordenadas(coordenadas);
-        int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
-        int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
+            int[] coords = recibirCoordenadas(coordenadas);
+            int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
+            int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
 
-        boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-        boolean esAdyacente = r.esAdyacente((coordsCorrectas[0])-1, (coordsCorrectas[1])-1, (coordsCorrectas[2]), (coordsCorrectas[3]));
-        while (seSuperpone || !esAdyacente) {
-            if (seSuperpone && !esAdyacente) {
-                System.out.println("La matriz ingresada no es correcta. \n Se superpone con una matriz ya existente \n y no es adyacente a la matriz anterior");
-            } else {
-                if (seSuperpone && esAdyacente) {
-                    System.out.println("La matriz ingresada no es correcta. \n Se superpone con una matriz ya existente");
+<<<<<<< HEAD
+            boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+            boolean esAdyacente = r.esAdyacente((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+            while (seSuperpone || !esAdyacente) {
+                if (seSuperpone && !esAdyacente) {
+                    System.out.println("La matriz ingresada no es correcta. \n Se superpone con una matriz ya existente \n y no es adyacente a la matriz anterior");
                 } else {
-                    if (!seSuperpone && !esAdyacente) {
-                        System.out.println("La matriz ingresada no es correcta. \n No es adyacente a la matriz anterior");
+                    if (seSuperpone && esAdyacente) {
+                        System.out.println("La matriz ingresada no es correcta. \n Se superpone con una matriz ya existente");
+                    } else {
+                        if (!seSuperpone && !esAdyacente) {
+                            System.out.println("La matriz ingresada no es correcta. \n No es adyacente a la matriz anterior");
+=======
+            boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
+            boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
+            while (seSuperpone || !esAdyacente) {
+                if (seSuperpone && !esAdyacente) {
+                    System.out.println("La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior");
+                } else {
+                    if (seSuperpone && esAdyacente) {
+                        System.out.println("La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada");
+                    } else {
+                        if (!seSuperpone && !esAdyacente) {
+                            System.out.println("La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior");
+>>>>>>> main
+                        }
                     }
                 }
+
+                System.out.println("REINGRESE LAS COORDENADAS");
+                coordenadas = lector.nextLine();
+                coords = recibirCoordenadas(coordenadas);
+                coordsCorrectas = coordCorrectas(coords, coordenadas);
+                coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
+                seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+                esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
             }
 
-            System.out.println("REINGRESE LAS COORDENADAS");
-            coordenadas = lector.nextLine();
-            coords = recibirCoordenadas(coordenadas);
-            coordsCorrectas = coordCorrectas(coords, coordenadas);
-            coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-            seSuperpone = r.validacionSuperposicion((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-            esAdyacente = r.esAdyacente((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+            r.crearNuevaMatriz((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+            contadorJugadas++;
+
         }
-        
-        r.crearNuevaMatriz((coordsCorrectas[0])-1, (coordsCorrectas[1])-1 , (coordsCorrectas[2]), (coordsCorrectas[3]));
-        contadorJugadas++;
-        
-        }
-        
+
         imprimirMatrizRectangulo(r.getMatriz());
-        if(contadorJugadas==10&& !r.quedanJugadas()){
+<<<<<<< HEAD
+=======
+        System.out.println("");
+>>>>>>> main
+        if (contadorJugadas == 10 && !r.quedanJugadas()) {
             System.out.println("Ya se realizaron 10 jugadas y no quedan movimientos disponibles");
-        }else{ 
-            if(contadorJugadas<10&& !r.quedanJugadas()){
+        } else {
+            if (contadorJugadas < 10 && !r.quedanJugadas()) {
                 System.out.println("No quedan movimientos disponibles");
-            }else{
-                if(contadorJugadas==10&& r.quedanJugadas()){
+            } else {
+                if (contadorJugadas == 10 && r.quedanJugadas()) {
                     System.out.println("Ya se realizaron 10 jugadas");
                 }
             }
@@ -334,8 +398,14 @@ public class Menu {
 
     public static boolean validacionRangoCoords(int[] coords) {
         boolean correcto = true;
+      
+        
         for (int i = 0; i < coords.length; i++) {
+            if(coords[i]==0){
+                
+            }
             if (coords[i] < 1 || coords[i] > 20) {
+                
                 correcto = false;
             }
         }
@@ -345,29 +415,35 @@ public class Menu {
     public static int[] coordCorrectas(int[] coords, String coordenadas) {
         Scanner lector = new Scanner(System.in);
         boolean validar = validacionRangoCoords(coords);
-        
+
         while (!validar) {
+           
             System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
-            
+
             coordenadas = lector.nextLine();
             coords = recibirCoordenadas(coordenadas);
             validar = validacionRangoCoords(coords);
+            
         }
-        
-        
+
         return coords;
-        
+
     }
 
     public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r) {
         Scanner lector = new Scanner(System.in);
-        boolean excedeTamano = r.outOfBounds((coordsCorrectas[0]-1), (coordsCorrectas[1]-1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+        boolean excedeTamano = r.outOfBounds((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
         while (excedeTamano) {
             System.out.println("La matriz esta fuera de rango. Reingrese");
             coordenadas = lector.nextLine();
+<<<<<<< HEAD
+            coords = recibirCoordenadas(coordenadas); //recibo el array con las coords q me ingresan 
+            coordsCorrectas = coordCorrectas(coords, coordenadas);//
+=======
             coords = recibirCoordenadas(coordenadas);
             coordsCorrectas = coordCorrectas(coords, coordenadas);
-            excedeTamano = r.outOfBounds((coordsCorrectas[0])-1, (coordsCorrectas[1])-1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+>>>>>>> main
+            excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
         }
         return coordsCorrectas;
     }
@@ -378,30 +454,42 @@ public class Menu {
         int aux = 0;
         for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
             String res = "";
-            
+
             if (coordenadas.charAt(aux) != ' ') {
                 res += coordenadas.charAt(aux);
-                if (aux != coordenadas.length()-1) {
-                    
+                if (aux != coordenadas.length() - 1) {
+<<<<<<< HEAD
+                    while (coordenadas.charAt(aux + 1) != ' ') {
+                        res += coordenadas.charAt(aux + 1);
+                        aux++;
+=======
+
                     if (coordenadas.charAt(aux + 1) != ' ') {
                         res += coordenadas.charAt(aux + 1);
                         aux++;
-                        
-                    }
 
+>>>>>>> main
+                    }
                 }
-                
+
                 coords[contador] = Integer.parseInt(res);
                 contador++;
 
             }
             aux++;
         }
+
         return coords;
     }
 
-    public static void opcion4(Sistema s) {
+    public static void opcion4(Sistema sistema) {
+        ArrayList<Juego> listaJuegos = sistema.getListaJuegos();
+        if (listaJuegos.size() == 0) {
+            System.out.println("No hay ningun juego registrado en el sistema, porfavor seleccione la opcion 2 o 3 del menu para hacerlo.");
+            menuPrincipal(sistema);
+        } else {
 
+        }
     }
 
     public static int manejarError() {
