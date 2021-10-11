@@ -154,8 +154,9 @@ public class Rectangulo extends Juego {
                         }
                     }
 
-                }
 
+                }
+                
                 for (int j = filaInicial; j <= filaFinal; j++) {
                     if (columnaInicial != 0 && columnaFinal != 19) {
                         if (this.getMatriz()[j][columnaInicial - 1] == this.getColorAnterior() || this.getMatriz()[j][columnaFinal + 1] == this.getColorAnterior()) {
