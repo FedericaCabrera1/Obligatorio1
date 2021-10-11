@@ -274,6 +274,7 @@ public class Menu {
         }
         System.out.println("");
 <<<<<<< HEAD
+<<<<<<< HEAD
         System.out.println("COMIENZA EL JUEGO RECTANGULO " + hora);
         Rectangulo r = sistema.crearRectangulo((nroJugador - 1), configuracion, hora);
         sistema.agregarJuego(r);
@@ -287,6 +288,13 @@ public class Menu {
                 System.out.print("0" + (i + 1));
             } else {
                 System.out.print(i + 1);
+=======
+        for (int i = 0; i < mat.length; i++) {
+            if (i < 9) {
+                System.out.print("0" + (i + 1) + " ");
+            } else {
+                System.out.print((i + 1) + " ");
+>>>>>>> main
 =======
         for (int i = 0; i < mat.length; i++) {
             if (i < 9) {
@@ -317,8 +325,14 @@ public class Menu {
             Scanner lector = new Scanner(System.in);
             char[][] mat = r.getMatriz();
 <<<<<<< HEAD
+<<<<<<< HEAD
             imprimirMatrizRectangulo(mat);
 
+=======
+            System.out.println("");
+            imprimirMatrizRectangulo(mat);
+            System.out.println("");
+>>>>>>> main
 =======
             System.out.println("");
             imprimirMatrizRectangulo(mat);
@@ -332,6 +346,7 @@ public class Menu {
             int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
             boolean esAdyacente = r.esAdyacente((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
             while (seSuperpone || !esAdyacente) {
@@ -344,6 +359,8 @@ public class Menu {
                         if (!seSuperpone && !esAdyacente) {
                             System.out.println("La matriz ingresada no es correcta. \n No es adyacente a la matriz anterior");
 =======
+=======
+>>>>>>> main
             boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
             boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
             while (seSuperpone || !esAdyacente) {
@@ -355,6 +372,9 @@ public class Menu {
                     } else {
                         if (!seSuperpone && !esAdyacente) {
                             System.out.println("La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior");
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
                         }
                     }
@@ -376,6 +396,10 @@ public class Menu {
 
         imprimirMatrizRectangulo(r.getMatriz());
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        System.out.println("");
+>>>>>>> main
 =======
         System.out.println("");
 >>>>>>> main
@@ -442,6 +466,9 @@ public class Menu {
 =======
             coords = recibirCoordenadas(coordenadas);
             coordsCorrectas = coordCorrectas(coords, coordenadas);
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
             excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
         }
@@ -459,14 +486,22 @@ public class Menu {
                 res += coordenadas.charAt(aux);
                 if (aux != coordenadas.length() - 1) {
 <<<<<<< HEAD
+<<<<<<< HEAD
                     while (coordenadas.charAt(aux + 1) != ' ') {
                         res += coordenadas.charAt(aux + 1);
                         aux++;
 =======
+=======
+>>>>>>> main
 
                     if (coordenadas.charAt(aux + 1) != ' ') {
                         res += coordenadas.charAt(aux + 1);
                         aux++;
+<<<<<<< HEAD
+=======
+
+                    }
+>>>>>>> main
 
 >>>>>>> main
                     }
