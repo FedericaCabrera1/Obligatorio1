@@ -36,7 +36,6 @@ public class Menu {
                     break;
                 case 5:
                     System.out.println("Nos vemos pronto!");
-                    opcion = 5; //aca estamos validando q nos pone exit => lo terminamos 
                     break;
                 default:
                     System.out.println("La opción ingresada no es correcta. Reingrese");
@@ -273,35 +272,11 @@ public class Menu {
             System.out.print(col2[i] + " ");
         }
         System.out.println("");
-<<<<<<< HEAD
-<<<<<<< HEAD
-        System.out.println("COMIENZA EL JUEGO RECTANGULO " + hora);
-        Rectangulo r = sistema.crearRectangulo((nroJugador - 1), configuracion, hora);
-        sistema.agregarJuego(r);
-        jugarARectangulo(sistema, r);
-
-    }
-
-    public static void imprimirMatrizRectangulo(char[][] mat) {
-        for (int i = 0; i < mat.length; i++) {
-            if (i < 9) {
-                System.out.print("0" + (i + 1));
-            } else {
-                System.out.print(i + 1);
-=======
         for (int i = 0; i < mat.length; i++) {
             if (i < 9) {
                 System.out.print("0" + (i + 1) + " ");
             } else {
                 System.out.print((i + 1) + " ");
->>>>>>> main
-=======
-        for (int i = 0; i < mat.length; i++) {
-            if (i < 9) {
-                System.out.print("0" + (i + 1) + " ");
-            } else {
-                System.out.print((i + 1) + " ");
->>>>>>> main
             }
             System.out.print(" ");
             for (int j = 0; j < mat[0].length; j++) {
@@ -324,20 +299,9 @@ public class Menu {
         while (contadorJugadas < 10 && r.quedanJugadas()) {
             Scanner lector = new Scanner(System.in);
             char[][] mat = r.getMatriz();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            imprimirMatrizRectangulo(mat);
-
-=======
             System.out.println("");
             imprimirMatrizRectangulo(mat);
             System.out.println("");
->>>>>>> main
-=======
-            System.out.println("");
-            imprimirMatrizRectangulo(mat);
-            System.out.println("");
->>>>>>> main
             System.out.println("Ingrese coordenadas de su rectangulo");
             String coordenadas = lector.nextLine();
 
@@ -345,22 +309,6 @@ public class Menu {
             int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
             int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-            boolean esAdyacente = r.esAdyacente((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
-            while (seSuperpone || !esAdyacente) {
-                if (seSuperpone && !esAdyacente) {
-                    System.out.println("La matriz ingresada no es correcta. \n Se superpone con una matriz ya existente \n y no es adyacente a la matriz anterior");
-                } else {
-                    if (seSuperpone && esAdyacente) {
-                        System.out.println("La matriz ingresada no es correcta. \n Se superpone con una matriz ya existente");
-                    } else {
-                        if (!seSuperpone && !esAdyacente) {
-                            System.out.println("La matriz ingresada no es correcta. \n No es adyacente a la matriz anterior");
-=======
-=======
->>>>>>> main
             boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
             boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
             while (seSuperpone || !esAdyacente) {
@@ -372,10 +320,6 @@ public class Menu {
                     } else {
                         if (!seSuperpone && !esAdyacente) {
                             System.out.println("La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior");
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> main
                         }
                     }
                 }
@@ -395,14 +339,7 @@ public class Menu {
         }
 
         imprimirMatrizRectangulo(r.getMatriz());
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         System.out.println("");
->>>>>>> main
-=======
-        System.out.println("");
->>>>>>> main
         if (contadorJugadas == 10 && !r.quedanJugadas()) {
             System.out.println("Ya se realizaron 10 jugadas y no quedan movimientos disponibles");
         } else {
@@ -422,14 +359,8 @@ public class Menu {
 
     public static boolean validacionRangoCoords(int[] coords) {
         boolean correcto = true;
-      
-        
         for (int i = 0; i < coords.length; i++) {
-            if(coords[i]==0){
-                
-            }
             if (coords[i] < 1 || coords[i] > 20) {
-                
                 correcto = false;
             }
         }
@@ -441,13 +372,11 @@ public class Menu {
         boolean validar = validacionRangoCoords(coords);
 
         while (!validar) {
-           
             System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
 
             coordenadas = lector.nextLine();
             coords = recibirCoordenadas(coordenadas);
             validar = validacionRangoCoords(coords);
-            
         }
 
         return coords;
@@ -460,16 +389,8 @@ public class Menu {
         while (excedeTamano) {
             System.out.println("La matriz esta fuera de rango. Reingrese");
             coordenadas = lector.nextLine();
-<<<<<<< HEAD
-            coords = recibirCoordenadas(coordenadas); //recibo el array con las coords q me ingresan 
-            coordsCorrectas = coordCorrectas(coords, coordenadas);//
-=======
             coords = recibirCoordenadas(coordenadas);
             coordsCorrectas = coordCorrectas(coords, coordenadas);
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> main
             excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
         }
         return coordsCorrectas;
@@ -485,26 +406,13 @@ public class Menu {
             if (coordenadas.charAt(aux) != ' ') {
                 res += coordenadas.charAt(aux);
                 if (aux != coordenadas.length() - 1) {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     while (coordenadas.charAt(aux + 1) != ' ') {
                         res += coordenadas.charAt(aux + 1);
                         aux++;
-=======
-=======
->>>>>>> main
-
-                    if (coordenadas.charAt(aux + 1) != ' ') {
-                        res += coordenadas.charAt(aux + 1);
-                        aux++;
-<<<<<<< HEAD
-=======
 
                     }
->>>>>>> main
 
->>>>>>> main
-                    }
                 }
 
                 coords[contador] = Integer.parseInt(res);
@@ -513,17 +421,39 @@ public class Menu {
             }
             aux++;
         }
-
         return coords;
     }
 
     public static void opcion4(Sistema sistema) {
+        Scanner lector = new Scanner(System.in);
         ArrayList<Juego> listaJuegos = sistema.getListaJuegos();
         if (listaJuegos.size() == 0) {
             System.out.println("No hay ningun juego registrado en el sistema, porfavor seleccione la opcion 2 o 3 del menu para hacerlo.");
             menuPrincipal(sistema);
         } else {
 
+            System.out.println("Seleccione orden de la lista :" + "\n" + "(A) Por alias creciente" + "\n" + "(B) Por puntaje decreciente");
+            char opcion = (lector.nextLine()).charAt(0);
+            while (opcion != 'A' && opcion != 'a' && opcion != 'B' && opcion != 'b') {
+                System.out.println("La letra ingresada no es valida, reingrese una A o una B.");
+                opcion = (lector.nextLine()).charAt(0);
+            }
+            if (opcion == 'A' && opcion == 'a') {
+                ArrayList<Juego> listaOrdenada = sistema.ordenarXAlias();
+                for (int i = 0; i < listaOrdenada.size(); i++) {
+                    System.out.println((i + 1) + "-");
+                    System.out.println(listaOrdenada.get(i));
+                    System.out.println("");
+                }
+            } else {
+                
+                ArrayList<Juego> listaOrdenada = sistema.ordenarXPuntaje();
+                for (int i = 0; i < listaOrdenada.size(); i++) {
+                    System.out.println((i + 1) + "-");
+                    System.out.println(listaOrdenada.get(i));
+                    System.out.println("");
+                }
+            }
         }
     }
 
@@ -539,7 +469,6 @@ public class Menu {
             } catch (InputMismatchException e) {
                 System.out.println("Error en el formato del número. Reingrese");
                 in.nextLine();
-
             }
         }
         return opcionIngresada;

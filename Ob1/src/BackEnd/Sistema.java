@@ -72,5 +72,25 @@ public class Sistema {
         return esta;
     }
     
+    public ArrayList<Juego> ordenarXAlias(){
+       Collections.sort(listaJuegos, new Comparator<Juego>(){
+           //aca mismo estoy definiendo la clase interna
+           public int compare(Juego j1, Juego j2){
+           return j1.getJugador().getAlias().compareTo(j2.getJugador().getAlias());
+           }
+       }); //le paso la lista y un new de la interfaz
+       return listaJuegos;
+   }
    
+    public class criterioXPuntaje implements Comparator<Juego>{
+       @Override
+       public int compare(Juego j1, Juego j2){
+           return (int)(j2.getPuntaje() - j1.getPuntaje());
+       }
+   }
+    
+    public ArrayList<Juego> ordenarXPuntaje (){
+        Collections.sort(listaJuegos, new criterioXPuntaje());
+        return listaJuegos;
+    }
 }

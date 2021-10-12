@@ -57,7 +57,7 @@ public abstract class Juego {
     }
     
     public String toString(){
-        return "Jugador: " + this.getJugador().getNombre() + "\n Configuracion: " + this.getConfiguracion() + "\n Hora: " + this.getHoraComienzo();
+        return "Jugador: " + "\n Nombre: " + this.getJugador().getNombre() + "\n Alias: " + this.getJugador().getAlias() + "\n Edad: " + this.getJugador().getNombre() + "\nPuntaje: " + this.getPuntaje() + "\nHora comienzo: " + this.getHoraComienzo() + "\nTipo de juego: ";
     }
     
    
