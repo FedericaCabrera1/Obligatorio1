@@ -470,7 +470,6 @@ public class Menu {
             System.out.println("No hay ningun juego registrado en el sistema, porfavor seleccione la opcion 2 o 3 del menu para hacerlo.");
             menuPrincipal(sistema);
         } else {
-
             System.out.println("Seleccione orden de la lista :" + "\n" + "(A) Por alias creciente" + "\n" + "(B) Por puntaje decreciente");
             char opcion = (lector.nextLine()).charAt(0);
             while (opcion != 'A' && opcion != 'a' && opcion != 'B' && opcion != 'b') {
@@ -485,7 +484,6 @@ public class Menu {
                     System.out.println("");
                 }
             } else {
-
                 ArrayList<Juego> listaOrdenada = sistema.ordenarXPuntaje();
                 for (int i = 0; i < listaOrdenada.size(); i++) {
                     System.out.println((i + 1) + "-");
