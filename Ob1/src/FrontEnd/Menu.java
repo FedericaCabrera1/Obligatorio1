@@ -389,6 +389,10 @@ public class Menu {
                 correcto = false;
             }
         }
+        for (int i = 0; i < coords.length; i++) {
+            System.out.println("Coords validando2");
+            System.out.println(coords[i]);
+        }
         return correcto;
     }
 
@@ -421,8 +425,13 @@ public class Menu {
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
                 validarCant = validarCantidadCoords(coords);
+                validarRango = validacionRangoCoords(coords);
             } else if (!validarRango) {
                 System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+                for (int i = 0; i < coords.length; i++) {
+                    System.out.println("Coords validando");
+                    System.out.println(coords[i]);
+                }
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
                 validarRango = validacionRangoCoords(coords);
@@ -526,7 +535,6 @@ public class Menu {
                         System.out.println(coordenadas);
                         aux = 0;
                         contador = 0;
-
                     }
                 }
 
