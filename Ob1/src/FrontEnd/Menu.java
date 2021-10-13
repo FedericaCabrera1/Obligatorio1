@@ -325,13 +325,9 @@ public class Menu {
                 r.getPuntaje();
                 insertoX = true;
             } else {
-
                 int[] coords = recibirCoordenadas(coordenadas);
-
                 int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
-
                 int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-
                 boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
                 boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
                 while (seSuperpone || !esAdyacente) {
@@ -350,11 +346,8 @@ public class Menu {
                     System.out.println("REINGRESE LAS COORDENADAS");
                     coordenadas = lector.nextLine();
                     coords = recibirCoordenadas(coordenadas);
-
                     coordsCorrectas = coordCorrectas(coords, coordenadas);
-
                     coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-
                     seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
                     esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
                 }
@@ -362,31 +355,31 @@ public class Menu {
                 contadorJugadas++;
             }
 
-            imprimirMatrizRectangulo(r.getMatriz());
-            System.out.println("");
-            if (insertoX) {
-                System.out.println("Se termino el juego. Hasta pronto!");
+        }
+        imprimirMatrizRectangulo(r.getMatriz());
+        System.out.println("");
+        if (insertoX) {
+            System.out.println("Se termino el juego. Hasta pronto!");
+        } else {
+            if (contadorJugadas == 10 && !r.quedanJugadas()) {
+                System.out.println("Ya se realizaron 10 jugadas y no quedan movimientos disponibles");
             } else {
-                if (contadorJugadas == 10 && !r.quedanJugadas()) {
-                    System.out.println("Ya se realizaron 10 jugadas y no quedan movimientos disponibles");
+                if (contadorJugadas < 10 && !r.quedanJugadas()) {
+                    System.out.println("No quedan movimientos disponibles");
                 } else {
-                    if (contadorJugadas < 10 && !r.quedanJugadas()) {
-                        System.out.println("No quedan movimientos disponibles");
-                    } else {
-                        if (contadorJugadas == 10 && r.quedanJugadas()) {
-                            System.out.println("Ya se realizaron 10 jugadas");
-                        }
+                    if (contadorJugadas == 10 && r.quedanJugadas()) {
+                        System.out.println("Ya se realizaron 10 jugadas");
                     }
                 }
             }
-
-            System.out.println(
-                    "PUNTAJE FINAL: " + r.getPuntaje());
-            System.out.println(
-                    "Se retornará al Menu Principal automaticamente");
-            System.out.println("");
-
         }
+
+        System.out.println(
+                "PUNTAJE FINAL: " + r.getPuntaje());
+        System.out.println(
+                "Se retornará al Menu Principal automaticamente");
+        System.out.println("");
+
     }
 
     public static boolean validacionRangoCoords(int[] coords) {
@@ -423,40 +416,57 @@ public class Menu {
         boolean validarRango = validacionRangoCoords(coords);
         boolean validarCant = validarCantidadCoords(coords);
         while (!validarCant || !validarRango) {
-            while (!validarCant) {
+            if (!validarCant) {
                 System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
                 coordenadas = lector.nextLine();
-//                boolean hayX = hayX(coordenadas);
-//                if (hayX) {
-//                    coords[0] = -1;
-//                } else {
                 coords = recibirCoordenadas(coordenadas);
                 validarCant = validarCantidadCoords(coords);
-            }
-            while (!validarRango) {
+            } else if (!validarRango) {
                 System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
                 coordenadas = lector.nextLine();
-//                        boolean hayX2 = hayX(coordenadas);
-//                        if (hayX) {
-//                            coords[0] = -1;
-//                        } else {
                 coords = recibirCoordenadas(coordenadas);
                 validarRango = validacionRangoCoords(coords);
                 validarCant = validarCantidadCoords(coords);
-                while (!validarCant) {
-                    System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
-                    coordenadas = lector.nextLine();
-//                                if (hayX) {
-//                                    coords[0] = -1;
-//                                } else {
-                    coords = recibirCoordenadas(coordenadas);
-                    validarCant = validarCantidadCoords(coords);
-
-                }
+//                while (!validarCant) {
+//                    System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
+//                    coordenadas = lector.nextLine();
+//                    coords = recibirCoordenadas(coordenadas);
+//                    validarCant = validarCantidadCoords(coords);
+//                }
             }
 
         }
+        for (int i = 0; i < coords.length; i++) {
+            System.out.println(coords[i]);
+        }
         return coords;
+
+    }
+
+    public static int[] validarRango(int[] coordenadas) {
+        boolean validarRango = validacionRangoCoords(coordenadas);
+        Scanner lector = new Scanner(System.in);
+        String coords = "";
+        while (!validarRango) {
+            System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+            coords = lector.nextLine();
+            coordenadas = recibirCoordenadas(coords);
+            validarRango = validacionRangoCoords(coordenadas);
+        }
+        return coordenadas;
+    }
+
+    public static int[] validarCantidad(int[] coordenadas) {
+        boolean validarCant = validarCantidadCoords(coordenadas);
+        Scanner lector = new Scanner(System.in);
+        String coords = "";
+        while (!validarCant) {
+            System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
+            coords = lector.nextLine();
+            coordenadas = recibirCoordenadas(coords);
+            validarCant = validarCantidadCoords(coordenadas);
+        }
+        return coordenadas;
 
     }
 
@@ -464,6 +474,9 @@ public class Menu {
         Scanner lector = new Scanner(System.in);
         boolean excedeTamano = r.outOfBounds((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
         while (excedeTamano) {
+            for (int i = 0; i < coordsCorrectas.length; i++) {
+                System.out.println(coordsCorrectas[i]);
+            }
             System.out.println("La matriz esta fuera de rango. Reingrese");
             coordenadas = lector.nextLine();
             boolean hayX = hayX(coordenadas);
@@ -486,45 +499,45 @@ public class Menu {
         boolean formatoEsCorrecto = false;
         boolean hayX = false;
 
-        while (aux < coordenadas.length() && !hayX) {
-            for (int i = 0; aux < coordenadas.length() && contador < 4; i++) {
-                String res = "";
-                if (coordenadas.charAt(aux) != ' ') {
-                    res += coordenadas.charAt(aux);
-                    while (aux < (coordenadas.length() - 1) && coordenadas.charAt(aux + 1) != ' ') {
-                        res += coordenadas.charAt(aux + 1);
-                        aux++;
-                        System.out.println(res);
-                    }
-                    if (res.equalsIgnoreCase("x")) {
-                        coords[0] = -1;
-                        hayX = true;
-                    } else {
-                        
-                        
-                        try {
-                            int numero = Integer.parseInt(res);
-                            formatoEsCorrecto = true;
-                            coords[contador] = numero;
-                            contador++;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Error en el formato del número. Reingrese CATCHHHHH");
-                            lector.nextLine();
-                        }
-                        
-                        if (!formatoEsCorrecto) {
-                            System.out.println("Error en el formato del número. Reingrese");
-                            coordenadas = lector.nextLine();
-                            aux = 0;
-                        }
-                    }
-
+        for (int i = 0; aux < coordenadas.length() && contador < 4; i++) {
+            String res = "";
+            if (coordenadas.charAt(aux) != ' ') {
+                res += coordenadas.charAt(aux);
+                while (aux < (coordenadas.length() - 1) && coordenadas.charAt(aux + 1) != ' ') {
+                    res += coordenadas.charAt(aux + 1);
+                    aux++;
                 }
+                if (res.equalsIgnoreCase("x")) {
+                    coords[0] = -1;
+                    hayX = true;
+                } else {
+                    try {
+                        int numero = Integer.parseInt(res);
+                        formatoEsCorrecto = true;
+                        coords[contador] = numero;
+                        contador++;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error en el formato del número.");
+//                            lector.nextLine();
+                    }
+                    if (!formatoEsCorrecto) {
+                        System.out.println("Reingrese las coordenadas");
+                        coordenadas = lector.nextLine();
+                        System.out.println(coordenadas);
+                        aux = 0;
+                        contador = 0;
+
+                    }
+                }
+
+            }
+            if (formatoEsCorrecto || coordenadas.charAt(aux) == ' ') {
                 formatoEsCorrecto = false;
                 aux++;
             }
         }
-        
+
+        System.out.println("Coords");
         for (int i = 0; i < coords.length; i++) {
             System.out.println(coords[i]);
         }
@@ -575,9 +588,9 @@ public class Menu {
                 try {
                     resultado = Integer.parseInt(opcionIngresada);
                     esCorrecto = true;
-                } catch (InputMismatchException e) {
+                } catch (NumberFormatException e) {
                     System.out.println("Error en el formato del número. Reingrese");
-                    in.nextLine();
+                    opcionIngresada = in.nextLine();
                 }
             }
         }
