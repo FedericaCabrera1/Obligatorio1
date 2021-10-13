@@ -144,6 +144,10 @@ public class Saltar extends Juego {
                 }
             }
         }
+        int[] colFichaAdelantada = fichaSola();
+        if (colFichaAdelantada[0] != -1) {
+            columnasQueSePuedenMover[colFichaAdelantada[0]] = 0;
+        }
         return columnasQueSePuedenMover;
     }
 
@@ -157,6 +161,38 @@ public class Saltar extends Juego {
         }
         return contadorPosiciones;
 
+    }
+
+    public int[] fichaSola() {
+        int[] res = new int[2];
+        int fila = -1;
+        int contador = 0;
+        char mat[][] = this.getMatriz();
+        boolean encontre = false;
+        boolean encontreColor = false;
+        int columna = -1;
+        for (int i = 0; i < mat.length && !encontre; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                if (mat[i][j] != ' ') {
+                    contador++;
+                    encontre = true;
+                    if (mat[i][j] == this.getColor()) {
+                        encontreColor = true;
+                        columna = j;
+                        fila = i;
+                    }
+                }
+
+            }
+        }
+        if (contador == 1 && encontreColor) {
+            res[0] = columna;
+            res[1] = fila;
+        } else {
+            res[0] = -1;
+        }
+
+        return res;
     }
 
     public boolean puedeMover(int cantidadPosiciones, int fila, int columna) {
@@ -276,6 +312,12 @@ public class Saltar extends Juego {
                         }
 
                     }
+                }
+            }
+
+            if (fichaSola()[0] != -1) {
+                if (fichaSola()[1] != 0) {
+                    contadorColor++;
                 }
             }
             if (contadorColor == 4) {

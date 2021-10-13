@@ -143,20 +143,15 @@ public class Menu {
                 if (cantidadMovimientos != 4) {
                     System.out.println(res);
                     System.out.println("Ingrese una columna de las opciones brindadas");
+
                     int columna = manejarError();
-                    int cantPosiciones = 0;
-                    boolean validar = false;
-                    for (int i = 0; i < columnas.length; i++) {
-                        if (i == columna) {
-                            if (columnas[i] != 0) {
-                                validar = true;
-                                cantPosiciones = columnas[i];
-                            }
-                        }
-                    }
-                    while (!validar) {
-                        System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
-                        columna = manejarError();
+                    if (columna == -1) {
+                        s.calcularPuntaje();
+                        seTermina = true;
+                    } else {
+
+                        int cantPosiciones = 0;
+                        boolean validar = false;
                         for (int i = 0; i < columnas.length; i++) {
                             if (i == columna) {
                                 if (columnas[i] != 0) {
@@ -165,9 +160,29 @@ public class Menu {
                                 }
                             }
                         }
-                    }
-                    s.hacerMovida(columna, cantPosiciones);
+                        while (!validar) {
+                            System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
+                            columna = manejarError();
+                            if (columna == -1) {
+                                s.calcularPuntaje();
+                                seTermina = true;
+                                validar = true;
+                            } else {
 
+                                for (int i = 0; i < columnas.length; i++) {
+                                    if (i == columna) {
+                                        if (columnas[i] != 0) {
+                                            validar = true;
+                                            cantPosiciones = columnas[i];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        if (!seTermina) {
+                            s.hacerMovida(columna, cantPosiciones);
+                        }
+                    }
                 } else {
                     System.out.println("No hay movimientos disponibles para el color " + s.getColor());
                     System.out.println("");
@@ -367,18 +382,39 @@ public class Menu {
         return correcto;
     }
 
+    public static boolean validarCantidadCoords(int[] coords) {
+        boolean correcto = true;
+        for (int i = 0; i < coords.length; i++) {
+            if (coords[i] == 0) {
+                correcto = false;
+            }
+        }
+        return correcto;
+    }
+
     public static int[] coordCorrectas(int[] coords, String coordenadas) {
         Scanner lector = new Scanner(System.in);
-        boolean validar = validacionRangoCoords(coords);
+        boolean validarRango = validacionRangoCoords(coords);
+        boolean validarCant = validarCantidadCoords(coords);
 
-        while (!validar) {
-            System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+        while (!validarCant || !validarRango) {
 
-            coordenadas = lector.nextLine();
-            coords = recibirCoordenadas(coordenadas);
-            validar = validacionRangoCoords(coords);
+            while (!validarCant) {
+                System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
+                coordenadas = lector.nextLine();
+                coords = recibirCoordenadas(coordenadas);
+                validarCant = validarCantidadCoords(coords);
+                if (!validarRango) {
+                    System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+
+                    coordenadas = lector.nextLine();
+                    coords = recibirCoordenadas(coordenadas);
+                    validarRango = validacionRangoCoords(coords);
+                }
+            }
+            //boolean validarRango = validacionRangoCoords(coords);
+
         }
-
         return coords;
 
     }
@@ -402,25 +438,28 @@ public class Menu {
         int aux = 0;
         for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
             String res = "";
-
             if (coordenadas.charAt(aux) != ' ') {
                 res += coordenadas.charAt(aux);
-                if (aux != coordenadas.length() - 1) {
-
-                    while (coordenadas.charAt(aux + 1) != ' ') {
-                        res += coordenadas.charAt(aux + 1);
-                        aux++;
-
-                    }
-
+                //if (aux < coordenadas.length() - ) {//coord length = 8
+                while (aux < (coordenadas.length() - 2) && coordenadas.charAt(aux + 1) != ' ') {
+                    //if (aux < coordenadas.length() - 1) {
+                    res += coordenadas.charAt(aux + 1);
+                    aux++;
+                    System.out.println(res);
+                    //}
                 }
 
+                //}
                 coords[contador] = Integer.parseInt(res);
                 contador++;
 
             }
             aux++;
         }
+        for (int i = 0; i < coords.length; i++) {
+            System.out.println(coords[i]);
+        }
+
         return coords;
     }
 
@@ -446,7 +485,7 @@ public class Menu {
                     System.out.println("");
                 }
             } else {
-                
+
                 ArrayList<Juego> listaOrdenada = sistema.ordenarXPuntaje();
                 for (int i = 0; i < listaOrdenada.size(); i++) {
                     System.out.println((i + 1) + "-");
@@ -460,18 +499,22 @@ public class Menu {
     public static int manejarError() {
         boolean esCorrecto = false;
         Scanner in = new Scanner(System.in);
-        int opcionIngresada = 0;
-        while (!esCorrecto) {
-            try {
-                opcionIngresada = in.nextInt();
-                esCorrecto = true;
-
-            } catch (InputMismatchException e) {
-                System.out.println("Error en el formato del número. Reingrese");
-                in.nextLine();
+        String opcionIngresada = in.nextLine();
+        int resultado = 0;
+        if (opcionIngresada.equalsIgnoreCase("x")) {
+            resultado = -1;
+        } else {
+            while (!esCorrecto) {
+                try {
+                    resultado = Integer.parseInt(opcionIngresada);
+                    esCorrecto = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Error en el formato del número. Reingrese");
+                    in.nextLine();
+                }
             }
         }
-        return opcionIngresada;
+        return resultado;
     }
 
 }
