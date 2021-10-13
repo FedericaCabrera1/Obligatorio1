@@ -404,13 +404,21 @@ public class Menu {
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
                 validarCant = validarCantidadCoords(coords);
-                if (!validarRango) {
-                    System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+            }
+            while (!validarRango) {
+                System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
 
+                coordenadas = lector.nextLine();
+                coords = recibirCoordenadas(coordenadas);
+                validarRango = validacionRangoCoords(coords);
+                validarCant = validarCantidadCoords(coords);
+                while (!validarCant) {
+                    System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
                     coordenadas = lector.nextLine();
                     coords = recibirCoordenadas(coordenadas);
-                    validarRango = validacionRangoCoords(coords);
+                    validarCant = validarCantidadCoords(coords);
                 }
+
             }
             //boolean validarRango = validacionRangoCoords(coords);
 
@@ -435,13 +443,13 @@ public class Menu {
     public static int[] recibirCoordenadas(String coordenadas) {
         int[] coords = new int[4];
         int contador = 0;
-        int aux = 0;
-        for (int i = 0; i < coordenadas.length() && contador < 4; i++) {
-            String res = "";
+        int aux = 0;//6 -7
+        for (int i = 0; aux < coordenadas.length() && contador < 4; i++) {
+            String res = "";//56789
             if (coordenadas.charAt(aux) != ' ') {
                 res += coordenadas.charAt(aux);
                 //if (aux < coordenadas.length() - ) {//coord length = 8
-                while (aux < (coordenadas.length() - 2) && coordenadas.charAt(aux + 1) != ' ') {
+                while (aux < (coordenadas.length() - 1) && coordenadas.charAt(aux + 1) != ' ') {
                     //if (aux < coordenadas.length() - 1) {
                     res += coordenadas.charAt(aux + 1);
                     aux++;
@@ -457,6 +465,7 @@ public class Menu {
             aux++;
         }
         for (int i = 0; i < coords.length; i++) {
+            System.out.println("hola ");
             System.out.println(coords[i]);
         }
 
