@@ -38,7 +38,7 @@ public class Menu {
                     System.out.println("Nos vemos pronto!");
                     break;
                 default:
-                    System.out.println("La opción ingresada no es correcta. Reingrese");
+                    System.out.println("\u001B[31m" + "La opción ingresada no es correcta. Reingrese" + "\u001B[0m");
             }
         }
 
@@ -58,7 +58,7 @@ public class Menu {
             Jugador jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
             boolean esta = sistema.aliasRepetido(jugadorAgregado);
             while (esta) {
-                System.out.println("El alias elegido ya está en uso. Reingrese");
+                System.out.println("\u001B[31m" + "El alias elegido ya está en uso. Reingrese" + "\u001B[0m");
                 alias = in.nextLine();
                 jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
                 esta = sistema.aliasRepetido(jugadorAgregado);
@@ -83,7 +83,7 @@ public class Menu {
         q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
         ArrayList<Jugador> listaJugadores = sistema.getListaJugadores();
         if (listaJugadores.size() == 0) {
-            System.out.println("No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo.");
+            System.out.println("\u001B[31m" + "No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo." + "\u001B[0m");
             menuPrincipal(sistema);
         } else {
             Scanner lector = new Scanner(System.in);
