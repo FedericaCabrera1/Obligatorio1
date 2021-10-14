@@ -223,8 +223,18 @@ public class Menu {
                 System.out.print(columna[p]);
             }
             for (int k = 0; k < mat[0].length; k++) {
-
-                System.out.print("|" + mat[i][k]);
+                System.out.print("|");
+                if (mat[i][k] == 'R') {
+                    System.out.print("\u001B[31m" + '#' + "\u001B[0m");
+                } else if (mat[i][k] == 'A') {
+                    System.out.print("\u001B[34m" + '#' + "\u001B[0m");
+                } else if (mat[i][k] == 'V') {
+                    System.out.print("\u001B[32m" + '#' + "\u001B[0m");
+                } else if (mat[i][k] == 'M') {
+                    System.out.print("\u001B[33m" + '#' + "\u001B[0m");
+                } else {
+                    System.out.print(" ");
+                }
             }
             System.out.print("|");
             System.out.println("");
@@ -299,9 +309,15 @@ public class Menu {
                 if (mat[i][j] == ' ') {
                     System.out.print('_');
 
-                } else {
-                    System.out.print(mat[i][j]);
-                }
+                } if (mat[i][j] == 'R') {
+                    System.out.print("\u001B[31m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'A') {
+                    System.out.print("\u001B[34m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'V') {
+                    System.out.print("\u001B[32m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'M') {
+                    System.out.print("\u001B[33m" + '#' + "\u001B[0m");
+                } 
                 System.out.print(" ");
 
             }
