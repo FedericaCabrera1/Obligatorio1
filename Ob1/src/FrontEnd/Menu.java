@@ -247,7 +247,7 @@ public class Menu {
     public static void opcion3(Sistema sistema) {
         ArrayList<Jugador> listaJugadores = sistema.getListaJugadores();
         if (listaJugadores.size() == 0) {
-            System.out.println("No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo.");
+            System.out.println("\u001B[31m" + "No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo." + "\u001B[0m");
             menuPrincipal(sistema);
         } else {
             Scanner lector = new Scanner(System.in);
@@ -260,7 +260,7 @@ public class Menu {
             System.out.println("Seleccione un jugador de la lista para empezar: ");
             int nroJugador = manejarError();
             while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
-                System.out.println("El numero ingresado esta fuera del rango. Reingrese.");
+                System.out.println("\u001B[31m" + "El numero ingresado esta fuera del rango. Reingrese." + "\u001B[0m");
                 nroJugador = manejarError();
             }
 
@@ -268,7 +268,7 @@ public class Menu {
             System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
             char configuracion = (lector.nextLine()).charAt(0);
             while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
-                System.out.println("La letra ingresada no es valida, reingrese una P o una A.");
+                System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
                 configuracion = (lector.nextLine()).charAt(0);
             }
 
@@ -305,11 +305,11 @@ public class Menu {
             }
             System.out.print(" ");
             for (int j = 0; j < mat[0].length; j++) {
-
                 if (mat[i][j] == ' ') {
                     System.out.print('_');
-
-                } if (mat[i][j] == 'R') {
+                } else if (mat[i][j] == '*') {
+                    System.out.print('*');
+                } else if (mat[i][j] == 'R') {
                     System.out.print("\u001B[31m" + '#' + "\u001B[0m");
                 } else if (mat[i][j] == 'A') {
                     System.out.print("\u001B[34m" + '#' + "\u001B[0m");
@@ -317,7 +317,11 @@ public class Menu {
                     System.out.print("\u001B[32m" + '#' + "\u001B[0m");
                 } else if (mat[i][j] == 'M') {
                     System.out.print("\u001B[33m" + '#' + "\u001B[0m");
-                } 
+                } else if (mat[i][j] == 'B') {
+                    System.out.print("\u001B[35m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'G') {
+                    System.out.print("\u001B[36m" + '#' + "\u001B[0m");
+                }
                 System.out.print(" ");
 
             }
@@ -348,13 +352,13 @@ public class Menu {
                 boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
                 while (seSuperpone || !esAdyacente) {
                     if (seSuperpone && !esAdyacente) {
-                        System.out.println("La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior");
+                        System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
                     } else {
                         if (seSuperpone && esAdyacente) {
-                            System.out.println("La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada");
+                            System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada" + "\u001B[0m");
                         } else {
                             if (!seSuperpone && !esAdyacente) {
-                                System.out.println("La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior");
+                                System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior" + "\u001B[0m");
                             }
                         }
                     }
@@ -437,13 +441,13 @@ public class Menu {
         boolean validarCant = validarCantidadCoords(coords);
         while (!validarCant || !validarRango) {
             if (!validarCant) {
-                System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
+                System.out.println("\u001B[31m" + "La cantidad de coordenadas ingresadas no es suficiente. Reingrese" + "\u001B[0m");
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
                 validarCant = validarCantidadCoords(coords);
                 validarRango = validacionRangoCoords(coords);
             } else if (!validarRango) {
-                System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+                System.out.println("\u001B[31m" + "Las coordenadas ingresadas estan fuera de rango. Reingrese" + "\u001B[0m");
                 for (int i = 0; i < coords.length; i++) {
                     System.out.println("Coords validando");
                     System.out.println(coords[i]);
@@ -502,7 +506,7 @@ public class Menu {
             for (int i = 0; i < coordsCorrectas.length; i++) {
                 System.out.println(coordsCorrectas[i]);
             }
-            System.out.println("La matriz esta fuera de rango. Reingrese");
+            System.out.println("\u001B[31m" + "La matriz esta fuera de rango. Reingrese" + "\u001B[0m");
             coordenadas = lector.nextLine();
             boolean hayX = hayX(coordenadas);
             if (hayX) {
@@ -542,7 +546,7 @@ public class Menu {
                         coords[contador] = numero;
                         contador++;
                     } catch (NumberFormatException e) {
-                        System.out.println("Error en el formato del número.");
+                        System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
 //                            lector.nextLine();
                     }
                     if (!formatoEsCorrecto) {
