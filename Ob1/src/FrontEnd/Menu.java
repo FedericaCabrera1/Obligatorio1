@@ -96,7 +96,7 @@ public class Menu {
             System.out.println("Seleccione un jugador de la lista para empezar: ");
             int nroJugador = manejarError();
             while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
-                System.out.println("El numero ingresado esta fuera del rango. Reingrese.");
+                System.out.println("\u001B[31m" + "El numero ingresado esta fuera del rango. Reingrese." + "\u001B[0m");
                 nroJugador = manejarError();
             }
 
@@ -104,7 +104,7 @@ public class Menu {
             System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
             char configuracion = (lector.nextLine()).charAt(0);
             while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
-                System.out.println("La letra ingresada no es valida, reingrese una P o una A.");
+                System.out.println("\u001B[31m" +"La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
                 configuracion = (lector.nextLine()).charAt(0);
             }
 
@@ -161,7 +161,7 @@ public class Menu {
                             }
                         }
                         while (!validar) {
-                            System.out.println("Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese.");
+                            System.out.println("\u001B[31m" + "Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese." + "\u001B[0m");
                             columna = manejarError();
                             if (columna == -1) {
                                 s.calcularPuntaje();
@@ -394,10 +394,8 @@ public class Menu {
             }
         }
 
-        System.out.println(
-                "PUNTAJE FINAL: " + r.getPuntaje());
-        System.out.println(
-                "Se retornará al Menu Principal automaticamente");
+        System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
+        System.out.println("Se retornará al Menu Principal automaticamente");
         System.out.println("");
 
     }
@@ -577,13 +575,13 @@ public class Menu {
         Scanner lector = new Scanner(System.in);
         ArrayList<Juego> listaJuegos = sistema.getListaJuegos();
         if (listaJuegos.size() == 0) {
-            System.out.println("No hay ningun juego registrado en el sistema, porfavor seleccione la opcion 2 o 3 del menu para hacerlo.");
+            System.out.println("\u001B[31m" + "No hay ningun juego registrado en el sistema, porfavor seleccione la opcion 2 o 3 del menu para hacerlo." + "\u001B[0m");
             menuPrincipal(sistema);
         } else {
             System.out.println("Seleccione orden de la lista :" + "\n" + "(A) Por alias creciente" + "\n" + "(B) Por puntaje decreciente");
             char opcion = (lector.nextLine()).charAt(0);
             while (opcion != 'A' && opcion != 'a' && opcion != 'B' && opcion != 'b') {
-                System.out.println("La letra ingresada no es valida, reingrese una A o una B.");
+                System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una A o una B." + "\u001B[0m");
                 opcion = (lector.nextLine()).charAt(0);
             }
             if (opcion == 'A' && opcion == 'a') {
@@ -617,7 +615,7 @@ public class Menu {
                     resultado = Integer.parseInt(opcionIngresada);
                     esCorrecto = true;
                 } catch (NumberFormatException e) {
-                    System.out.println("Error en el formato del número. Reingrese");
+                    System.out.println("\u001B[31m" + "Error en el formato del número. Reingrese" + "\u001B[0m");
                     opcionIngresada = in.nextLine();
                 }
             }
