@@ -256,5 +256,9 @@ public class Rectangulo extends Juego {
         this.setPuntaje(this.getPuntaje() + (cantidadFilas * cantidadColumnas));
 
     }
+    
+    public String toString(){
+        return super.toString() + "Rectangulo";
+    }
 
 }

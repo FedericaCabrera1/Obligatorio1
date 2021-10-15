@@ -104,7 +104,7 @@ public class Menu {
             System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
             char configuracion = (lector.nextLine()).charAt(0);
             while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
-                System.out.println("\u001B[31m" +"La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
+                System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
                 configuracion = (lector.nextLine()).charAt(0);
             }
 
@@ -149,7 +149,6 @@ public class Menu {
                         s.calcularPuntaje();
                         seTermina = true;
                     } else {
-
                         int cantPosiciones = 0;
                         boolean validar = false;
                         for (int i = 0; i < columnas.length; i++) {
@@ -168,7 +167,6 @@ public class Menu {
                                 seTermina = true;
                                 validar = true;
                             } else {
-
                                 for (int i = 0; i < columnas.length; i++) {
                                     if (i == columna) {
                                         if (columnas[i] != 0) {
@@ -321,6 +319,14 @@ public class Menu {
                     System.out.print("\u001B[35m" + '#' + "\u001B[0m");
                 } else if (mat[i][j] == 'G') {
                     System.out.print("\u001B[36m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'H') {
+                    System.out.print("\033[1;94m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'I') {
+                    System.out.print("\033[1;92m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'E') {
+                    System.out.print("\033[1;95m" + '#' + "\u001B[0m");
+                } else if (mat[i][j] == 'P') {
+                    System.out.print("\033[1;96m" + '#' + "\u001B[0m");
                 }
                 System.out.print(" ");
 
@@ -344,37 +350,78 @@ public class Menu {
             if (hayX) {
                 r.getPuntaje();
                 insertoX = true;
+
             } else {
                 int[] coords = recibirCoordenadas(coordenadas);
-                int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
-                int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-                boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
-                boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
-                while (seSuperpone || !esAdyacente) {
-                    if (seSuperpone && !esAdyacente) {
-                        System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
+                hayX = hayX2(coords);
+                if (hayX) {
+                    r.getPuntaje();
+                    insertoX = true;
+                } else {
+                    int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
+                    hayX = hayX2(coordsCorrectas);
+                    if (hayX) {
+                        r.getPuntaje();
+                        insertoX = true;
                     } else {
-                        if (seSuperpone && esAdyacente) {
-                            System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada" + "\u001B[0m");
+                        int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
+                        hayX = hayX2(coordsEntran);
+                        if (hayX) {
+                            r.getPuntaje();
+                            insertoX = true;
                         } else {
-                            if (!seSuperpone && !esAdyacente) {
-                                System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior" + "\u001B[0m");
+                            boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
+                            boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
+                            while (seSuperpone || !esAdyacente) {
+                                if (seSuperpone && !esAdyacente) {
+                                    System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
+                                } else {
+                                    if (seSuperpone && esAdyacente) {
+                                        System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada" + "\u001B[0m");
+                                    } else {
+                                        if (!seSuperpone && !esAdyacente) {
+                                            System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior" + "\u001B[0m");
+                                        }
+                                    }
+                                }
+
+                                System.out.println("REINGRESE LAS COORDENADAS");
+                                coordenadas = lector.nextLine();
+
+                                coords = recibirCoordenadas(coordenadas);
+                                hayX = hayX2(coords);
+                                if (hayX) {
+                                    r.getPuntaje();
+                                    insertoX = true;
+                                } else {
+                                    coordsCorrectas = coordCorrectas(coords, coordenadas);
+                                    hayX = hayX2(coordsCorrectas);
+                                    if (hayX) {
+                                        r.getPuntaje();
+                                        insertoX = true;
+                                    } else {
+                                        coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
+                                        hayX = hayX2(coordsEntran);
+                                        if (hayX) {
+                                            r.getPuntaje();
+                                            insertoX = true;
+                                        } else {
+                                            seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+                                            esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+
+                                        }
+                                    }
+                                }
+                            }
+                            if (!hayX) {
+                                r.crearNuevaMatriz((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+                                contadorJugadas++;
                             }
                         }
                     }
 
-                    System.out.println("REINGRESE LAS COORDENADAS");
-                    coordenadas = lector.nextLine();
-                    coords = recibirCoordenadas(coordenadas);
-                    coordsCorrectas = coordCorrectas(coords, coordenadas);
-                    coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-                    seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-                    esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
                 }
-                r.crearNuevaMatriz((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
-                contadorJugadas++;
             }
-
         }
         imprimirMatrizRectangulo(r.getMatriz());
         System.out.println("");
@@ -393,7 +440,6 @@ public class Menu {
                 }
             }
         }
-
         System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
         System.out.println("Se retornará al Menu Principal automaticamente");
         System.out.println("");
@@ -412,6 +458,32 @@ public class Menu {
             System.out.println(coords[i]);
         }
         return correcto;
+    }
+
+    public static boolean deseaSalir() {
+        Scanner lector = new Scanner(System.in);
+        boolean salir = false;
+        System.out.println("Esta seguro de que desea salir del juego?");
+        System.out.println("Ingrese S para salir o C para continuar");
+        char opcion = (lector.nextLine()).charAt(0);
+        while (opcion != 's' && opcion != 'S' && opcion != 'C' && opcion != 'c') {
+            System.out.println("\u001B[31m" + "La opcion ingresada no es una S ni una C. Porfavor reingrese." + "\u001B[0m");
+            opcion = (lector.nextLine()).charAt(0);
+        }
+        if (opcion == 'S' || opcion == 's') {
+            salir = true;
+        }
+        return salir;
+    }
+
+    public static boolean hayX2(int[] coordenadas) {
+        boolean hayX = false;
+        for (int i = 0; i < coordenadas.length; i++) {
+            if (coordenadas[0] == -1) {
+                hayX = true;
+            }
+        }
+        return hayX;
     }
 
     public static boolean hayX(String coordenadas) {
@@ -442,8 +514,13 @@ public class Menu {
                 System.out.println("\u001B[31m" + "La cantidad de coordenadas ingresadas no es suficiente. Reingrese" + "\u001B[0m");
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
-                validarCant = validarCantidadCoords(coords);
-                validarRango = validacionRangoCoords(coords);
+                if (hayX2(coords)) {
+                    validarCant = true;
+                    validarRango = true;
+                } else {
+                    validarCant = validarCantidadCoords(coords);
+                    validarRango = validacionRangoCoords(coords);
+                }
             } else if (!validarRango) {
                 System.out.println("\u001B[31m" + "Las coordenadas ingresadas estan fuera de rango. Reingrese" + "\u001B[0m");
                 for (int i = 0; i < coords.length; i++) {
@@ -452,8 +529,13 @@ public class Menu {
                 }
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
-                validarRango = validacionRangoCoords(coords);
-                validarCant = validarCantidadCoords(coords);
+                if (hayX2(coords)) {
+                    validarCant = true;
+                    validarRango = true;
+                } else {
+                    validarCant = validarCantidadCoords(coords);
+                    validarRango = validacionRangoCoords(coords);
+                }
 //                while (!validarCant) {
 //                    System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
 //                    coordenadas = lector.nextLine();
@@ -526,7 +608,7 @@ public class Menu {
         boolean formatoEsCorrecto = false;
         boolean hayX = false;
 
-        for (int i = 0; aux < coordenadas.length() && contador < 4; i++) {
+        for (int i = 0; aux < coordenadas.length() && contador < 4 && !hayX; i++) {
             String res = "";
             if (coordenadas.charAt(aux) != ' ') {
                 res += coordenadas.charAt(aux);
@@ -611,12 +693,18 @@ public class Menu {
             resultado = -1;
         } else {
             while (!esCorrecto) {
-                try {
-                    resultado = Integer.parseInt(opcionIngresada);
+                if (opcionIngresada.equalsIgnoreCase("x")) {
+                    resultado = -1;
                     esCorrecto = true;
-                } catch (NumberFormatException e) {
-                    System.out.println("\u001B[31m" + "Error en el formato del número. Reingrese" + "\u001B[0m");
-                    opcionIngresada = in.nextLine();
+                } else {
+                    try {
+                        resultado = Integer.parseInt(opcionIngresada);
+                        esCorrecto = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("\u001B[31m" + "Error en el formato del número. Reingrese" + "\u001B[0m");
+
+                        opcionIngresada = in.nextLine();
+                    }
                 }
             }
         }

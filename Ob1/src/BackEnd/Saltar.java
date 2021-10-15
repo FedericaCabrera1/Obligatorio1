@@ -329,5 +329,9 @@ public class Saltar extends Juego {
         }
         return quedanJugadas;
     }
+    
+    public String toString(){
+        return super.toString() + "Saltar";
+    }
 
 }
