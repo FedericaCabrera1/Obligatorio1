@@ -20,6 +20,44 @@ public class Menu {
         int opcion = 0;
         while (opcion != 5) {
             System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+
+            System.out.println("\u001B[31m" + "PRUEBA COLORES" + "\u001B[0m");
+
+            System.out.println("\u001B[34m" + "PRUEBA COLORES" + "\u001B[0m");
+
+            System.out.println("\u001B[32m" + "PRUEBA COLORES" + "\u001B[0m");
+
+            System.out.println("\u001B[33m" + "PRUEBA COLORES" + "\u001B[0m");
+
+            System.out.println("\u001B[35m" + "PRUEBA COLORES" + "\u001B[0m");
+
+            System.out.println("\u001B[36m" + "PRUEBA COLORES" + "\u001B[0m");
+
+            System.out.println("\033[31;1m" + "ROJO CLARO" + "\u001B[0m");
+
+            System.out.println("\033[32;1m" + "VERDE CLARO" + "\u001B[0m");
+
+            System.out.println("\033[33;1m" + "AMARILLO CLARO" + "\u001B[0m");
+
+            System.out.println("\033[34;1m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[36;2m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[38;1m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m");
+            System.out.println("\033[38;2m" + "PRUEBA " + "\u001B[40m");
+
+            
+            System.out.println("\033[34;5m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[36;42m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
+            System.out.println("\033[40;1m" + "PRUEBA COLORES holaaaaaaaaaaa" + "\u001B[0m");
+            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m");
+            
+            System.out.println("\033[1;92m" + " COLORES" + "\u001B[0m");
+            System.out.println("\033[1;91m" + "PRUEBA COLORES" + "\u001B[40m");
+
             opcion = manejarError();
             switch (opcion) {
                 case 1:
@@ -303,33 +341,79 @@ public class Menu {
             }
             System.out.print(" ");
             for (int j = 0; j < mat[0].length; j++) {
-                if (mat[i][j] == ' ') {
-                    System.out.print('_');
-                } else if (mat[i][j] == '*') {
-                    System.out.print('*');
-                } else if (mat[i][j] == 'R') {
-                    System.out.print("\u001B[31m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'A') {
-                    System.out.print("\u001B[34m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'V') {
-                    System.out.print("\u001B[32m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'M') {
-                    System.out.print("\u001B[33m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'B') {
-                    System.out.print("\u001B[35m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'G') {
-                    System.out.print("\u001B[36m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'H') {
-                    System.out.print("\033[1;94m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'I') {
-                    System.out.print("\033[1;92m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'E') {
-                    System.out.print("\033[1;95m" + '#' + "\u001B[0m");
-                } else if (mat[i][j] == 'P') {
-                    System.out.print("\033[1;96m" + '#' + "\u001B[0m");
+                char charr = mat[i][j];
+                switch (charr) {
+                    case ' ':
+                        System.out.print('_');
+                        break;
+                    case '*':
+                        System.out.print('*');
+                        break;
+                    case 'R':
+                        System.out.print("\u001B[31m" + '#' + "\u001B[0m");
+                        break;
+
+                    case 'A':
+                        System.out.print("\u001B[34m" + '#' + "\u001B[0m");
+                        break;
+                    case 'V':
+                        System.out.print("\u001B[32m" + '#' + "\u001B[0m");
+                        break;
+                    case 'M':
+                        System.out.print("\u001B[33m" + '#' + "\u001B[0m");
+                        break;
+                    case 'B':
+                        System.out.print("\u001B[35m" + '#' + "\u001B[0m");
+                        break;
+                    case 'G':
+                        System.out.print("\033[34;1m" + '#' + "\u001B[0m");
+                        break;
+                    case 'H':
+                        System.out.print("\033[32;1m" + '#' + "\u001B[0m");//4 1
+                        break;
+                    case 'I':
+                        System.out.print("\033[36;1m" + '#' + "\u001B[0m");
+                        break;
+                    case 'E':
+                        System.out.print("\033[37;1m" + '#' + "\u001B[0m");
+                        break;
+                    case 'P':
+                        System.out.print("\033[34;47m" + '#' + "\u001B[0m");
+                        break;
                 }
                 System.out.print(" ");
 
+//                if (mat[i][j] == ' ') {
+//                    System.out.print('_');
+//                } else if (mat[i][j] == '*') {
+//                    System.out.print('*');
+//                } else if (mat[i][j] == 'R') {
+//                    System.out.print("\u001B[31m" + '#' + "\u001B[0m");
+//                    //System.out.print("\u001B[86m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'A') {
+//                    System.out.print("\u001B[34m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'V') {
+//                    System.out.print("\u001B[32m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'M') {
+//                    System.out.print("\u001B[33m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'B') {
+//                    System.out.print("\u001B[35m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'G') {
+//                    System.out.print("\u001B[36m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'H') {
+//                    System.out.print("\033[1;94m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'I') {
+//                    System.out.print("\033[1;92m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'E') {
+//                    System.out.print("\033[1;95m" + '#' + "\u001B[0m");
+//                } else if (mat[i][j] == 'P') {
+//                    System.out.print("\033[1;96m" + '#' + "\u001B[0m");
+//                }
+//
+//                System.out.print(" ");
+//
+//            }
+                //System.out.println("");
             }
             System.out.println("");
         }
@@ -558,6 +642,7 @@ public class Menu {
         String coords = "";
         while (!validarRango) {
             System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
+            System.out.println("HOLAAAAAAAAA ENTRE AL VALIDAR RANGO");
             coords = lector.nextLine();
             coordenadas = recibirCoordenadas(coords);
             validarRango = validacionRangoCoords(coordenadas);
