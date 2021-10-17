@@ -139,8 +139,8 @@ public class Menu {
             }
             System.out.println("Seleccione un jugador de la lista para empezar: ");
             int nroJugador = manejarError();
-            while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
-                System.out.println("\u001B[31m" + "El numero ingresado esta fuera del rango. Reingrese." + "\u001B[0m");
+            while (nroJugador <= 0 || nroJugador > listaJugadores.size()) {
+                System.out.println("\u001B[31m" + "Jugador no existente. Reingrese." + "\u001B[0m");
                 nroJugador = manejarError();
             }
 
@@ -175,7 +175,18 @@ public class Menu {
         while (!esCorrecto) {
             try {
                 conf = configuracion.charAt(0);
-                esCorrecto = true;
+                boolean hayEspaciosEnBlanco = true;
+                for (int i = 1; i < configuracion.length(); i++) {
+                    if (configuracion.charAt(i) != ' ') {
+                        hayEspaciosEnBlanco = false;
+                    }
+                }
+                if (hayEspaciosEnBlanco) {
+                    esCorrecto = true;
+                } else {
+                    System.out.println("\u001B[31m" + "La letra ingresada no es correcta, tiene que ser un único caracter. Reingree" + "\u001B[0m");
+                    configuracion = lector.nextLine();
+                }
             } catch (Exception e) {
                 System.out.println("\u001B[31m" + "El formato de la letra ingresada es incorrecto. Reingree" + "\u001B[0m");
                 configuracion = lector.nextLine();
@@ -201,7 +212,7 @@ public class Menu {
                     String res = "Las columnas que se pueden mover para el color " + s.getColor() + " son: ";
                     for (int i = 0; i < columnas.length; i++) {
                         if (columnas[i] != 0) {
-                            res += "\nColumna " + (i+1) + ": " + columnas[i] + " posiciones";
+                            res += "\nColumna " + (i + 1) + ": " + columnas[i] + " posiciones";
                         } else {
                             cantidadMovimientos++;
                         }
@@ -214,7 +225,7 @@ public class Menu {
                         int cantPosiciones = 0;
                         boolean validar = false;
                         for (int i = 0; i < columnas.length; i++) {
-                            if (i == (columna-1)) {
+                            if (i == (columna - 1)) {
                                 if (columnas[i] != 0) {
                                     validar = true;
                                     cantPosiciones = columnas[i];
@@ -226,17 +237,16 @@ public class Menu {
                             columna = manejarError();
                             hayXSaltar(columna, s, sistema);
                             for (int i = 0; i < columnas.length; i++) {
-                                if (i == (columna-1)) {
+                                if (i == (columna - 1)) {
                                     if (columnas[i] != 0) {
                                         validar = true;
                                         cantPosiciones = columnas[i];
                                     }
                                 }
                             }
-
                         }
                         if (!seTermina) {
-                            s.hacerMovida((columna-1), cantPosiciones);
+                            s.hacerMovida((columna - 1), cantPosiciones);
                         }
 
                     } else {
@@ -247,7 +257,6 @@ public class Menu {
                 } else {
                     seTermina = true;
                 }
-
             }
             imprimirMatrizSaltar(s);
             if (s.quedanDosFichas() && !s.quedanJugadasDisponibles()) {
@@ -262,7 +271,6 @@ public class Menu {
 
                 }
             }
-
             System.out.println("PUNTAJE FINAL: " + s.calcularPuntaje());
             boolean volverAlMenu = volverAMenu("volver a jugar a Saltar?", "S para volver a jugar", 's');
             if (volverAlMenu) {
@@ -345,7 +353,7 @@ public class Menu {
             }
             System.out.println("Seleccione un jugador de la lista para empezar: ");
             int nroJugador = manejarError();
-            while (nroJugador < 0 || nroJugador > listaJugadores.size()) {
+            while (nroJugador <= 0 || nroJugador > listaJugadores.size()) {
                 System.out.println("\u001B[31m" + "El numero ingresado esta fuera del rango. Reingrese." + "\u001B[0m");
                 nroJugador = manejarError();
             }
@@ -455,11 +463,8 @@ public class Menu {
                 hayX2Rectangulo(coordsCorrectas, r, s);
                 int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s);
                 hayX2Rectangulo(coordsEntran, r, s);
-                boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
-                boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
-                for(int i=0; i<coordsCorrectas.length; i++){
-                    System.out.println(coordsCorrectas[i]);
-                }
+                boolean seSuperpone = r.validacionSuperposicion((coordsEntran[0] - 1), (coordsEntran[1] - 1), coordsEntran[2], coordsEntran[3]);
+                boolean esAdyacente = r.esAdyacente((coordsEntran[0] - 1), (coordsEntran[1] - 1), coordsEntran[2], coordsEntran[3]);
                 while (seSuperpone || !esAdyacente) {
                     if (seSuperpone && !esAdyacente) {
                         System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
@@ -480,11 +485,11 @@ public class Menu {
                     hayX2Rectangulo(coordsCorrectas, r, s);
                     coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s);
                     hayX2Rectangulo(coordsEntran, r, s);
-                    seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-                    esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+                    seSuperpone = r.validacionSuperposicion((coordsEntran[0] - 1), (coordsEntran[1] - 1), (coordsEntran[2]), (coordsEntran[3]));
+                    esAdyacente = r.esAdyacente((coordsEntran[0] - 1), (coordsEntran[1] - 1), (coordsEntran[2]), (coordsEntran[3]));
                 }
 
-                r.crearNuevaMatriz((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+                r.crearNuevaMatriz((coordsEntran[0]) - 1, (coordsEntran[1]) - 1, (coordsEntran[2]), (coordsEntran[3]));
                 contadorJugadas++;
             }
 
@@ -664,6 +669,9 @@ public class Menu {
                         try {
                             int numero = Integer.parseInt(res);
                             formatoEsCorrecto = true;
+                            if (contador == 0 && numero == -1) {
+                                numero = -2;
+                            }
                             coords[contador] = numero;
                             contador++;
                         } catch (NumberFormatException e) {
@@ -733,7 +741,7 @@ public class Menu {
                     opcion = chequearConfiguracion();
                 }
                 System.out.println("");
-                if (opcion == 'A' && opcion == 'a') {
+                if (opcion == 'A' || opcion == 'a') {
                     ArrayList<Juego> listaOrdenada = sistema.ordenarXAlias();
                     for (int i = 0; i < listaOrdenada.size(); i++) {
                         System.out.println((i + 1) + "-");

@@ -136,7 +136,6 @@ public class Rectangulo extends Juego {
         if (filaIA == -1) {
             esAdy = true;
         } else {
-            System.out.println("FI:" + filaInicial + " FF: " + filaFinal + " CI: " + columnaInicial + " CF: " + columnaFinal);
             for (int i = columnaInicial; i <= columnaFinal; i++) {
                 if (filaInicial != 0 && filaFinal != 19) {
                     if (this.getMatriz()[filaInicial - 1][i] == this.getColorAnterior() || this.getMatriz()[filaFinal + 1][i] == this.getColorAnterior()) {
@@ -159,7 +158,6 @@ public class Rectangulo extends Juego {
             }
 
             for (int j = filaInicial; j <= filaFinal; j++) {
-                System.out.println("Cont: " + this.getMatriz()[j][columnaInicial - 1]);
                 if (columnaInicial != 0 && columnaFinal != 19) {
                     if (this.getMatriz()[j][columnaInicial - 1] == this.getColorAnterior() || this.getMatriz()[j][columnaFinal + 1] == this.getColorAnterior()) {
                         esAdy = true;
