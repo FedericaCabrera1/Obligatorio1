@@ -11,6 +11,7 @@ import java.util.*;
 public class Menu {
 
     public static void main(String[] args) {
+        System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
         Sistema sistema = new Sistema();
         menuPrincipal(sistema);
     }
@@ -19,44 +20,41 @@ public class Menu {
         Scanner in = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 5) {
-            System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
-
-            System.out.println("\u001B[31m" + "PRUEBA COLORES" + "\u001B[0m");
-
-            System.out.println("\u001B[34m" + "PRUEBA COLORES" + "\u001B[0m");
-
-            System.out.println("\u001B[32m" + "PRUEBA COLORES" + "\u001B[0m");
-
-            System.out.println("\u001B[33m" + "PRUEBA COLORES" + "\u001B[0m");
-
-            System.out.println("\u001B[35m" + "PRUEBA COLORES" + "\u001B[0m");
-
-            System.out.println("\u001B[36m" + "PRUEBA COLORES" + "\u001B[0m");
-
-            System.out.println("\033[31;1m" + "ROJO CLARO" + "\u001B[0m");
-
-            System.out.println("\033[32;1m" + "VERDE CLARO" + "\u001B[0m");
-
-            System.out.println("\033[33;1m" + "AMARILLO CLARO" + "\u001B[0m");
-
-            System.out.println("\033[34;1m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[36;2m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[38;1m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m");
-            System.out.println("\033[38;2m" + "PRUEBA " + "\u001B[40m");
-
-            System.out.println("\033[34;5m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[36;42m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
-            System.out.println("\033[40;1m" + "PRUEBA COLORES holaaaaaaaaaaa" + "\u001B[0m");
-            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m");
-
-            System.out.println("\033[1;92m" + " COLORES" + "\u001B[0m");
-            System.out.println("\033[1;91m" + "PRUEBA COLORES" + "\u001B[40m");
-
+//            System.out.println("\u001B[31m" + "PRUEBA COLORES" + "\u001B[0m");
+//
+//            System.out.println("\u001B[34m" + "PRUEBA COLORES" + "\u001B[0m");
+//
+//            System.out.println("\u001B[32m" + "PRUEBA COLORES" + "\u001B[0m");
+//
+//            System.out.println("\u001B[33m" + "PRUEBA COLORES" + "\u001B[0m");
+//
+//            System.out.println("\u001B[35m" + "PRUEBA COLORES" + "\u001B[0m");
+//
+//            System.out.println("\u001B[36m" + "PRUEBA COLORES" + "\u001B[0m");
+//
+//            System.out.println("\033[31;1m" + "ROJO CLARO" + "\u001B[0m");
+//
+//            System.out.println("\033[32;1m" + "VERDE CLARO" + "\u001B[0m");
+//
+//            System.out.println("\033[33;1m" + "AMARILLO CLARO" + "\u001B[0m");
+//
+//            System.out.println("\033[34;1m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[36;2m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[38;1m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m" + "\u001B[0m");
+//            System.out.println("\033[38;2m" + "PRUEBA " + "\u001B[40m" + "\u001B[0m");
+//
+//            System.out.println("\033[34;5m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[36;42m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
+//            System.out.println("\033[40;1m" + "PRUEBA COLORES holaaaaaaaaaaa" + "\u001B[0m");
+//            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m" + "\u001B[0m");
+//
+//            System.out.println("\033[1;92m" + " COLORES" + "\u001B[0m");
+//            System.out.println("\033[1;91m" + "PRUEBA COLORES" + "\u001B[40m" + "\u001B[0m");
             opcion = manejarError();
             switch (opcion) {
                 case 1:
@@ -73,6 +71,7 @@ public class Menu {
                     break;
                 case 5:
                     System.out.println("Nos vemos pronto!");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("\u001B[31m" + "La opción ingresada no es correcta. Reingrese" + "\u001B[0m");
@@ -87,11 +86,15 @@ public class Menu {
             System.out.println("REGISTRO DE NUEVO JUGADOR");
             Scanner in = new Scanner(System.in);
             System.out.println("Ingrese Nombre:");
-            String nombre = in.nextLine();
+            String nombre = validarString();
             System.out.println("Ingrese Edad:");
             int edad = manejarError();
+            while (edad <= 0 || edad >= 100) {
+                System.out.println("\u001B[31m" + "La edad ingresada está fuera de rango. Debe ser entre 1 y 100. Reingrese" + "\u001B[0m");
+                edad = manejarError();
+            }
             System.out.println("Ingrese Alias:");
-            String alias = in.nextLine();
+            String alias = validarString();
             Jugador jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
             boolean esta = sistema.aliasRepetido(jugadorAgregado);
             while (esta) {
@@ -105,11 +108,38 @@ public class Menu {
             System.out.println("Jugador Registrado con éxito");
             System.out.println("¿Que desea hacer? \n 1) Registrar otro jugador \n 2) Volver al menú principal \n 3) Exit");
             int opcionIngresada = manejarError();
+            while (opcionIngresada != 1 && opcionIngresada != 2 && opcionIngresada != 3) {
+                System.out.println("\u001B[31m" + "La opcion ingresada esta fuera de rango. Reingrese." + "\u001B[0m");
+                opcionIngresada = manejarError();
+
+            }
             if (opcionIngresada == 2) {
                 seguirIngresando = false;
+            } else if (opcionIngresada == 3) {
+                System.out.println("Nos vemos pronto!");
+                System.exit(0);
             }
         }
+        System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
         menuPrincipal(sistema);
+    }
+
+    public static String validarString() {
+        Scanner lector = new Scanner(System.in);
+        String string = lector.nextLine();
+        boolean hayAlgo = false;
+        while (!hayAlgo) {
+            for (int i = 0; i < string.length(); i++) {
+                if (string.charAt(i) != ' ') {
+                    hayAlgo = true;
+                }
+            }
+            if (!hayAlgo) {
+                System.out.println("\u001B[31m" + "La informacion ingresada es un espacio en blanco. Reingrese" + "\u001B[0m");
+                string = lector.nextLine();
+            }
+        }
+        return string;
     }
 
     public static void opcion2(Sistema sistema) {
@@ -139,10 +169,11 @@ public class Menu {
 
             System.out.println("");
             System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
-            char configuracion = (lector.nextLine()).charAt(0);
+
+            char configuracion = chequearConfiguracion();
             while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
                 System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
-                configuracion = (lector.nextLine()).charAt(0);
+                configuracion = chequearConfiguracion();
             }
 
             Date now = new Date(System.currentTimeMillis());
@@ -159,33 +190,50 @@ public class Menu {
 
     }
 
-    public static void jugarASaltar(Sistema sistema, Saltar s) {
-        //while(noSeTermina) 
-        boolean seTermina = false;
-        while (!seTermina) {
-            char[][] mat = s.getMatriz();
-            imprimirMatrizSaltar(s);
-            if (!(s.quedanDosFichas()) && s.quedanJugadasDisponibles()) {
-                //Se le muestra al jugador las columnas que puede mover para ese color
-                int[] columnas = sistema.mostrarColumnasAUsuario(s);
-                String res = "Las columnas que se pueden mover para el color " + s.getColor() + " son: ";
-                int cantidadMovimientos = 0;
-                for (int i = 0; i < columnas.length; i++) {
-                    if (columnas[i] != 0) {
-                        res += "\n" + i + ": " + columnas[i];
-                    } else {
-                        cantidadMovimientos++;
-                    }
-                }
-                if (cantidadMovimientos != 4) {
-                    System.out.println(res);
-                    System.out.println("Ingrese una columna de las opciones brindadas");
+    public static char chequearConfiguracion() {
+        Scanner lector = new Scanner(System.in);
+        String configuracion = lector.nextLine();
+        boolean esCorrecto = false;
+        char conf = ' ';
+        while (!esCorrecto) {
+            try {
+                conf = configuracion.charAt(0);
+                esCorrecto = true;
+            } catch (Exception e) {
+                System.out.println("\u001B[31m" + "El formato de la letra ingresada es incorrecto. Reingree" + "\u001B[0m");
+                configuracion = lector.nextLine();
+            }
+        }
+        return conf;
+    }
 
-                    int columna = manejarError();
-                    if (columna == -1) {
-                        s.calcularPuntaje();
-                        seTermina = true;
-                    } else {
+    public static void jugarASaltar(Sistema sistema, Saltar s) {
+        boolean volverAJugar = true;
+        while (volverAJugar) {
+            boolean seTermina = false;
+            int cantidadMovimientos = 0;
+            while (!seTermina) {
+                char[][] mat = s.getMatriz();
+                if (!(s.quedanDosFichas()) && s.quedanJugadasDisponibles()) {
+                    //Se le muestra al jugador las columnas que puede mover para ese color
+                    if (cantidadMovimientos != 4) {
+                        imprimirMatrizSaltar(s);
+                    }
+                    cantidadMovimientos = 0;
+                    int[] columnas = sistema.mostrarColumnasAUsuario(s);
+                    String res = "Las columnas que se pueden mover para el color " + s.getColor() + " son: ";
+                    for (int i = 0; i < columnas.length; i++) {
+                        if (columnas[i] != 0) {
+                            res += "\n" + i + ": " + columnas[i];
+                        } else {
+                            cantidadMovimientos++;
+                        }
+                    }
+                    if (cantidadMovimientos != 4) {
+                        System.out.println(res);
+                        System.out.println("Ingrese una columna de las opciones brindadas");
+                        int columna = manejarError();
+                        hayXSaltar(columna, s, sistema);
                         int cantPosiciones = 0;
                         boolean validar = false;
                         for (int i = 0; i < columnas.length; i++) {
@@ -199,49 +247,75 @@ public class Menu {
                         while (!validar) {
                             System.out.println("\u001B[31m" + "Error, la columna ingresada no esta dentro de las opciones brindadas. Reingrese." + "\u001B[0m");
                             columna = manejarError();
-                            if (columna == -1) {
-                                s.calcularPuntaje();
-                                seTermina = true;
-                                validar = true;
-                            } else {
-                                for (int i = 0; i < columnas.length; i++) {
-                                    if (i == columna) {
-                                        if (columnas[i] != 0) {
-                                            validar = true;
-                                            cantPosiciones = columnas[i];
-                                        }
+                            hayXSaltar(columna, s, sistema);
+                            for (int i = 0; i < columnas.length; i++) {
+                                if (i == columna) {
+                                    if (columnas[i] != 0) {
+                                        validar = true;
+                                        cantPosiciones = columnas[i];
                                     }
                                 }
                             }
+
                         }
                         if (!seTermina) {
                             s.hacerMovida(columna, cantPosiciones);
                         }
+
+                    } else {
+                        System.out.println("\u001B[31m" + "No hay movimientos disponibles para el color " + s.getColor() + "\u001B[0m");
+                        System.out.println("");
+                        s.setColor(s.getColor());
                     }
                 } else {
-                    System.out.println("No hay movimientos disponibles para el color " + s.getColor());
-                    System.out.println("");
-                    s.setColor(s.getColor());
+                    seTermina = true;
                 }
-            } else {
-                seTermina = true;
+
             }
+            imprimirMatrizSaltar(s);
             if (s.quedanDosFichas() && !s.quedanJugadasDisponibles()) {
-                System.out.println("El juego se termino porque solo quedan dos fichas en el area base y porque no hay mas movimientos para realizar");
+                System.out.println("\u001B[35m" + "El juego se termino porque solo quedan dos fichas en el area base y porque no hay mas movimientos para realizar" + "\u001B[0m");
             } else {
                 if (s.quedanDosFichas()) {
-                    System.out.println("El juego se termino porque solo quedan dos fichas en el area base");
+                    System.out.println("\u001B[35m" + "El juego se termino porque solo quedan dos fichas en el area base" + "\u001B[0m");
                 } else {
                     if (!s.quedanJugadasDisponibles()) {
-                        System.out.println("El juego se termino porque no hay mas movimientos para realizar");
+                        System.out.println("\u001B[35m" + "El juego se termino porque no hay mas movimientos para realizar" + "\u001B[0m");
                     }
 
                 }
             }
+
+            System.out.println("PUNTAJE FINAL: " + s.calcularPuntaje());
+            boolean volverAlMenu = volverAMenu("volver a jugar a Saltar?", "S para volver a jugar", 's');
+            if (volverAlMenu) {
+                volverAJugar = false;
+            } else {
+                opcion2(sistema);
+            }
         }
-        System.out.println("PUNTAJE FINAL: " + s.calcularPuntaje());
+
+        System.out.println("");
         System.out.println("Se retornará al Menu Principal automaticamente");
         System.out.println("");
+        System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+        menuPrincipal(sistema);
+    }
+
+    public static void hayXSaltar(int columna, Saltar s, Sistema sistema) {
+        boolean hayX = false;
+        if (columna == -1) {
+            boolean deseaSalir = deseaSalir();
+            if (deseaSalir) {
+                System.out.println("PUNTAJE FINAL: " + s.calcularPuntaje());
+                System.out.println("Se retornará al Menu Principal automaticamente");
+                System.out.println("");
+                System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+                menuPrincipal(sistema);
+            } else {
+                jugarASaltar(sistema, s);
+            }
+        }
     }
 
     public static void imprimirMatrizSaltar(Saltar s) {
@@ -301,10 +375,10 @@ public class Menu {
 
             System.out.println("");
             System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
-            char configuracion = (lector.nextLine()).charAt(0);
+            char configuracion = chequearConfiguracion();
             while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
                 System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
-                configuracion = (lector.nextLine()).charAt(0);
+                configuracion = chequearConfiguracion();
             }
 
             Date now = new Date(System.currentTimeMillis());
@@ -351,7 +425,6 @@ public class Menu {
                     case 'R':
                         System.out.print("\u001B[31m" + '#' + "\u001B[0m");
                         break;
-
                     case 'A':
                         System.out.print("\u001B[34m" + '#' + "\u001B[0m");
                         break;
@@ -368,7 +441,7 @@ public class Menu {
                         System.out.print("\033[34;1m" + '#' + "\u001B[0m");
                         break;
                     case 'H':
-                        System.out.print("\033[32;1m" + '#' + "\u001B[0m");//4 1
+                        System.out.print("\033[35;2m" + '#' + "\u001B[0m");//4 1
                         break;
                     case 'I':
                         System.out.print("\033[36;1m" + '#' + "\u001B[0m");
@@ -377,155 +450,92 @@ public class Menu {
                         System.out.print("\033[37;1m" + '#' + "\u001B[0m");
                         break;
                     case 'P':
-                        System.out.print("\033[34;47m" + '#' + "\u001B[40m");
+                        System.out.print("\033[36;2m" + '#' + "\u001B[0m");
                         break;
                 }
                 System.out.print(" ");
-
-//                if (mat[i][j] == ' ') {
-//                    System.out.print('_');
-//                } else if (mat[i][j] == '*') {
-//                    System.out.print('*');
-//                } else if (mat[i][j] == 'R') {
-//                    System.out.print("\u001B[31m" + '#' + "\u001B[0m");
-//                    //System.out.print("\u001B[86m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'A') {
-//                    System.out.print("\u001B[34m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'V') {
-//                    System.out.print("\u001B[32m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'M') {
-//                    System.out.print("\u001B[33m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'B') {
-//                    System.out.print("\u001B[35m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'G') {
-//                    System.out.print("\u001B[36m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'H') {
-//                    System.out.print("\033[1;94m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'I') {
-//                    System.out.print("\033[1;92m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'E') {
-//                    System.out.print("\033[1;95m" + '#' + "\u001B[0m");
-//                } else if (mat[i][j] == 'P') {
-//                    System.out.print("\033[1;96m" + '#' + "\u001B[0m");
-//                }
-//
-//                System.out.print(" ");
-//
-//            }
-                //System.out.println("");
             }
             System.out.println("");
         }
     }
 
     public static void jugarARectangulo(Sistema s, Rectangulo r) {
-        int contadorJugadas = 0;
-        boolean insertoX = false;
-        while (contadorJugadas < 10 && r.quedanJugadas() && !insertoX) {
-            Scanner lector = new Scanner(System.in);
-            char[][] mat = r.getMatriz();
-            System.out.println("");
-            imprimirMatrizRectangulo(mat);
-            System.out.println("");
-            System.out.println("Ingrese coordenadas de su rectangulo");
-            String coordenadas = lector.nextLine();
-            boolean hayX = hayX(coordenadas);
-            if (hayX) {
-                r.getPuntaje();
-                insertoX = true;
-
-            } else {
+        boolean volverAJugar = true;
+        while (volverAJugar) {
+            int contadorJugadas = 0;
+            while (contadorJugadas < 10 && r.quedanJugadas()) {
+                Scanner lector = new Scanner(System.in);
+                char[][] mat = r.getMatriz();
+                System.out.println("");
+                imprimirMatrizRectangulo(mat);
+                System.out.println("");
+                System.out.println("Ingrese coordenadas de su rectangulo");
+                String coordenadas = lector.nextLine();
+                hayXRectangulo(coordenadas, r, s);
                 int[] coords = recibirCoordenadas(coordenadas);
-                hayX = hayX2(coords);
-                if (hayX) {
-                    r.getPuntaje();
-                    insertoX = true;
-                } else {
-                    int[] coordsCorrectas = coordCorrectas(coords, coordenadas);
-                    hayX = hayX2(coordsCorrectas);
-                    if (hayX) {
-                        r.getPuntaje();
-                        insertoX = true;
+                hayX2Rectangulo(coords, r, s);
+                int[] coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
+                hayX2Rectangulo(coordsCorrectas, r, s);
+                int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s);
+                hayX2Rectangulo(coordsEntran, r, s);
+                boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
+                boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
+                while (seSuperpone || !esAdyacente) {
+                    if (seSuperpone && !esAdyacente) {
+                        System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
                     } else {
-                        int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-                        hayX = hayX2(coordsEntran);
-                        if (hayX) {
-                            r.getPuntaje();
-                            insertoX = true;
+                        if (seSuperpone && esAdyacente) {
+                            System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada" + "\u001B[0m");
                         } else {
-                            boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
-                            boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
-                            while (seSuperpone || !esAdyacente) {
-                                if (seSuperpone && !esAdyacente) {
-                                    System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
-                                } else {
-                                    if (seSuperpone && esAdyacente) {
-                                        System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada" + "\u001B[0m");
-                                    } else {
-                                        if (!seSuperpone && !esAdyacente) {
-                                            System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior" + "\u001B[0m");
-                                        }
-                                    }
-                                }
-
-                                System.out.println("REINGRESE LAS COORDENADAS");
-                                coordenadas = lector.nextLine();
-
-                                coords = recibirCoordenadas(coordenadas);
-                                hayX = hayX2(coords);
-                                if (hayX) {
-                                    r.getPuntaje();
-                                    insertoX = true;
-                                } else {
-                                    coordsCorrectas = coordCorrectas(coords, coordenadas);
-                                    hayX = hayX2(coordsCorrectas);
-                                    if (hayX) {
-                                        r.getPuntaje();
-                                        insertoX = true;
-                                    } else {
-                                        coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r);
-                                        hayX = hayX2(coordsEntran);
-                                        if (hayX) {
-                                            r.getPuntaje();
-                                            insertoX = true;
-                                        } else {
-                                            seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-                                            esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-
-                                        }
-                                    }
-                                }
-                            }
-                            if (!hayX) {
-                                r.crearNuevaMatriz((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
-                                contadorJugadas++;
+                            if (!seSuperpone && !esAdyacente) {
+                                System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior" + "\u001B[0m");
                             }
                         }
                     }
-
+                    System.out.println("REINGRESE LAS COORDENADAS");
+                    coordenadas = lector.nextLine();
+                    coords = recibirCoordenadas(coordenadas);
+                    hayX2Rectangulo(coords, r, s);
+                    coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
+                    hayX2Rectangulo(coordsCorrectas, r, s);
+                    coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s);
+                    hayX2Rectangulo(coordsEntran, r, s);
+                    seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+                    esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
                 }
+
+                r.crearNuevaMatriz((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+                contadorJugadas++;
             }
-        }
-        imprimirMatrizRectangulo(r.getMatriz());
-        System.out.println("");
-        if (insertoX) {
-            System.out.println("Se termino el juego. Hasta pronto!");
-        } else {
+
+            imprimirMatrizRectangulo(r.getMatriz());
+            System.out.println("");
+
             if (contadorJugadas == 10 && !r.quedanJugadas()) {
-                System.out.println("Ya se realizaron 10 jugadas y no quedan movimientos disponibles");
+                System.out.println("\u001B[35m" + "Ya se realizaron 10 jugadas y no quedan movimientos disponibles" + "\u001B[0m");
             } else {
                 if (contadorJugadas < 10 && !r.quedanJugadas()) {
-                    System.out.println("No quedan movimientos disponibles");
+                    System.out.println("\u001B[35m"+ "No quedan movimientos disponibles" + "\u001B[0m");
                 } else {
                     if (contadorJugadas == 10 && r.quedanJugadas()) {
-                        System.out.println("Ya se realizaron 10 jugadas");
+                        System.out.println("\u001B[35m" + "Ya se realizaron 10 jugadas" + "\u001B[0m");
                     }
                 }
             }
+            System.out.println("");
+            System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
+            boolean volverAlMenu = volverAMenu("volver a jugar a Rectángulo?", "R para volver a jugar", 'r');
+            if (volverAlMenu) {
+                volverAJugar = false;
+            } else {
+                opcion3(s);
+            }
         }
-        System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
+        System.out.println("");
         System.out.println("Se retornará al Menu Principal automaticamente");
         System.out.println("");
+        System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+        menuPrincipal(s);
 
     }
 
@@ -536,22 +546,19 @@ public class Menu {
                 correcto = false;
             }
         }
-        for (int i = 0; i < coords.length; i++) {
-            System.out.println("Coords validando2");
-            System.out.println(coords[i]);
-        }
         return correcto;
     }
 
     public static boolean deseaSalir() {
         Scanner lector = new Scanner(System.in);
         boolean salir = false;
-        System.out.println("Esta seguro de que desea salir del juego?");
-        System.out.println("Ingrese S para salir o C para continuar");
-        char opcion = (lector.nextLine()).charAt(0);
+        System.out.println("");
+        System.out.println("\u001B[35m" + "Esta seguro de que desea salir del juego?" + "\u001B[0m");
+        System.out.println("\u001B[35m" + "Ingrese S para salir o C para continuar" + "\u001B[0m");
+        char opcion = chequearConfiguracion();
         while (opcion != 's' && opcion != 'S' && opcion != 'C' && opcion != 'c') {
             System.out.println("\u001B[31m" + "La opcion ingresada no es una S ni una C. Porfavor reingrese." + "\u001B[0m");
-            opcion = (lector.nextLine()).charAt(0);
+            opcion = chequearConfiguracion();
         }
         if (opcion == 'S' || opcion == 's') {
             salir = true;
@@ -559,23 +566,45 @@ public class Menu {
         return salir;
     }
 
-    public static boolean hayX2(int[] coordenadas) {
+    public static void hayX2Rectangulo(int[] coordenadas, Rectangulo r, Sistema s) {
         boolean hayX = false;
         for (int i = 0; i < coordenadas.length; i++) {
             if (coordenadas[0] == -1) {
                 hayX = true;
             }
         }
-        return hayX;
+        if (hayX) {
+            boolean deseaSalir = deseaSalir();
+            if (deseaSalir) {
+                System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
+                System.out.println("Se retornará al Menu Principal automaticamente");
+                System.out.println("");
+                System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+                menuPrincipal(s);
+            } else {
+                jugarARectangulo(s, r);
+            }
+        }
     }
 
-    public static boolean hayX(String coordenadas) {
+    public static void hayXRectangulo(String coordenadas, Rectangulo r, Sistema sistema) {
         boolean hayX = false;
         String s = coordenadas.trim();
         if (s.equalsIgnoreCase("x")) {
             hayX = true;
         }
-        return hayX;
+        if (hayX) {
+            boolean deseaSalir = deseaSalir();
+            if (deseaSalir) {
+                System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
+                System.out.println("Se retornará al Menu Principal automaticamente");
+                System.out.println("");
+                System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+                menuPrincipal(sistema);
+            } else {
+                jugarARectangulo(sistema, r);
+            }
+        }
     }
 
     public static boolean validarCantidadCoords(int[] coords) {
@@ -588,7 +617,7 @@ public class Menu {
         return correcto;
     }
 
-    public static int[] coordCorrectas(int[] coords, String coordenadas) {
+    public static int[] coordCorrectas(int[] coords, String coordenadas, Rectangulo r, Sistema s) {
         Scanner lector = new Scanner(System.in);
         boolean validarRango = validacionRangoCoords(coords);
         boolean validarCant = validarCantidadCoords(coords);
@@ -597,90 +626,36 @@ public class Menu {
                 System.out.println("\u001B[31m" + "La cantidad de coordenadas ingresadas no es suficiente. Reingrese" + "\u001B[0m");
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
-                if (hayX2(coords)) {
-                    validarCant = true;
-                    validarRango = true;
-                } else {
-                    validarCant = validarCantidadCoords(coords);
-                    validarRango = validacionRangoCoords(coords);
-                }
+                hayX2Rectangulo(coords, r, s);
+                validarCant = validarCantidadCoords(coords);
+                validarRango = validacionRangoCoords(coords);
+
             } else if (!validarRango) {
                 System.out.println("\u001B[31m" + "Las coordenadas ingresadas estan fuera de rango. Reingrese" + "\u001B[0m");
-                for (int i = 0; i < coords.length; i++) {
-                    System.out.println("Coords validando");
-                    System.out.println(coords[i]);
-                }
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
-                if (hayX2(coords)) {
-                    validarCant = true;
-                    validarRango = true;
-                } else {
-                    validarCant = validarCantidadCoords(coords);
-                    validarRango = validacionRangoCoords(coords);
-                }
-//                while (!validarCant) {
-//                    System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
-//                    coordenadas = lector.nextLine();
-//                    coords = recibirCoordenadas(coordenadas);
-//                    validarCant = validarCantidadCoords(coords);
-//                }
+                hayX2Rectangulo(coords, r, s);
+                validarCant = validarCantidadCoords(coords);
+                validarRango = validacionRangoCoords(coords);
             }
 
-        }
-        for (int i = 0; i < coords.length; i++) {
-            System.out.println(coords[i]);
         }
         return coords;
 
     }
 
-    public static int[] validarRango(int[] coordenadas) {
-        boolean validarRango = validacionRangoCoords(coordenadas);
-        Scanner lector = new Scanner(System.in);
-        String coords = "";
-        while (!validarRango) {
-            System.out.println("Las coordenadas ingresadas estan fuera de rango. Reingrese");
-            System.out.println("HOLAAAAAAAAA ENTRE AL VALIDAR RANGO");
-            coords = lector.nextLine();
-            coordenadas = recibirCoordenadas(coords);
-            validarRango = validacionRangoCoords(coordenadas);
-        }
-        return coordenadas;
-    }
-
-    public static int[] validarCantidad(int[] coordenadas) {
-        boolean validarCant = validarCantidadCoords(coordenadas);
-        Scanner lector = new Scanner(System.in);
-        String coords = "";
-        while (!validarCant) {
-            System.out.println("La cantidad de coordenadas ingresadas no es suficiente. Reingrese");
-            coords = lector.nextLine();
-            coordenadas = recibirCoordenadas(coords);
-            validarCant = validarCantidadCoords(coordenadas);
-        }
-        return coordenadas;
-
-    }
-
-    public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r) {
+    public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r, Sistema s) {
         Scanner lector = new Scanner(System.in);
         boolean excedeTamano = r.outOfBounds((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
         while (excedeTamano) {
-            for (int i = 0; i < coordsCorrectas.length; i++) {
-                System.out.println(coordsCorrectas[i]);
-            }
             System.out.println("\u001B[31m" + "La matriz esta fuera de rango. Reingrese" + "\u001B[0m");
             coordenadas = lector.nextLine();
-            boolean hayX = hayX(coordenadas);
-            if (hayX) {
-                coordsCorrectas[0] = -1;
-            } else {
-                coords = recibirCoordenadas(coordenadas);
-                coordsCorrectas = coordCorrectas(coords, coordenadas);
-                excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
-            }
+            hayXRectangulo(coordenadas, r, s);
+            coords = recibirCoordenadas(coordenadas);
+            coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
+            excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
         }
+
         return coordsCorrectas;
     }
 
@@ -693,7 +668,7 @@ public class Menu {
         boolean hayX = false;
         boolean hayMasDeCuatro = true;
 
-        while (hayMasDeCuatro ) {
+        while (hayMasDeCuatro) {
             for (int i = 0; aux < coordenadas.length() && contador < 4 && !hayX; i++) {
                 String res = "";
                 if (coordenadas.charAt(aux) != ' ') {
@@ -731,40 +706,30 @@ public class Menu {
                 }
             }
 
-            if (aux < coordenadas.length()) {
+            if (aux < coordenadas.length() && coords[0] != -1) {
+                System.out.println(aux);
                 boolean seExcede = chequearMasCoords(coordenadas, aux);
                 System.out.println(seExcede);
                 if (!seExcede) {
                     hayMasDeCuatro = false;
                 } else {
                     System.out.println("\u001B[31m" + "La cantidad de coordenadas es mayor que 4. Reingrese" + "\u001B[0m");
-                   
                     coordenadas = lector.nextLine();
-                    System.out.println(coordenadas);
                     aux = 0;
                     contador = 0;
                 }
-            }else{
+            } else {
                 hayMasDeCuatro = false;
             }
         }
-
-        System.out.println("Coords");
-        for (int i = 0; i < coords.length; i++) {
-            System.out.println(coords[i]);
-        }
-
         return coords;
     }
 
     public static boolean chequearMasCoords(String stringCoords, int ultiPosi) {
         boolean seExcedenCords = false;
-        
         for (int i = ultiPosi; i < stringCoords.length(); i++) {
-            System.out.println("ultiPosi" + i);
-            System.out.println("coooooooooooooord" + stringCoords.charAt(i));
+            System.out.println(stringCoords.charAt(i));
             if (stringCoords.charAt(i) != ' ') {
-                
                 seExcedenCords = true;
             }
         }
@@ -773,33 +738,63 @@ public class Menu {
 
     public static void opcion4(Sistema sistema) {
         Scanner lector = new Scanner(System.in);
-        ArrayList<Juego> listaJuegos = sistema.getListaJuegos();
-        if (listaJuegos.size() == 0) {
-            System.out.println("\u001B[31m" + "No hay ningun juego registrado en el sistema, porfavor seleccione la opcion 2 o 3 del menu para hacerlo." + "\u001B[0m");
-            menuPrincipal(sistema);
-        } else {
-            System.out.println("Seleccione orden de la lista :" + "\n" + "(A) Por alias creciente" + "\n" + "(B) Por puntaje decreciente");
-            char opcion = (lector.nextLine()).charAt(0);
-            while (opcion != 'A' && opcion != 'a' && opcion != 'B' && opcion != 'b') {
-                System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una A o una B." + "\u001B[0m");
-                opcion = (lector.nextLine()).charAt(0);
-            }
-            if (opcion == 'A' && opcion == 'a') {
-                ArrayList<Juego> listaOrdenada = sistema.ordenarXAlias();
-                for (int i = 0; i < listaOrdenada.size(); i++) {
-                    System.out.println((i + 1) + "-");
-                    System.out.println(listaOrdenada.get(i));
-                    System.out.println("");
-                }
+        boolean salir = false;
+        while (!salir) {
+            ArrayList<Juego> listaJuegos = sistema.getListaJuegos();
+            if (listaJuegos.size() == 0) {
+                System.out.println("\u001B[31m" + "No hay ningun juego registrado en el sistema, porfavor seleccione la opcion 2 o 3 del menu para hacerlo." + "\u001B[0m");
+                System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+                menuPrincipal(sistema);
             } else {
-                ArrayList<Juego> listaOrdenada = sistema.ordenarXPuntaje();
-                for (int i = 0; i < listaOrdenada.size(); i++) {
-                    System.out.println((i + 1) + "-");
-                    System.out.println(listaOrdenada.get(i));
-                    System.out.println("");
+                System.out.println("Seleccione orden de la lista :" + "\n" + "(A) Por alias creciente" + "\n" + "(B) Por puntaje decreciente");
+                char opcion = chequearConfiguracion();
+                while (opcion != 'A' && opcion != 'a' && opcion != 'B' && opcion != 'b') {
+                    System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una A o una B." + "\u001B[0m");
+                    opcion = chequearConfiguracion();
                 }
+                System.out.println("");
+                if (opcion == 'A' && opcion == 'a') {
+                    ArrayList<Juego> listaOrdenada = sistema.ordenarXAlias();
+                    for (int i = 0; i < listaOrdenada.size(); i++) {
+                        System.out.println((i + 1) + "-");
+                        System.out.println(listaOrdenada.get(i));
+                        System.out.println("");
+                    }
+                } else {
+                    ArrayList<Juego> listaOrdenada = sistema.ordenarXPuntaje();
+                    for (int i = 0; i < listaOrdenada.size(); i++) {
+                        System.out.println((i + 1) + "-");
+                        System.out.println(listaOrdenada.get(i));
+                        System.out.println("");
+                    }
+                }
+            }
+            boolean volverAlMenu = volverAMenu("ver la bitacóra nuevamente?", "B para ver la bitácora", 'b');
+            if (volverAlMenu) {
+                System.out.println("");
+                System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+                menuPrincipal(sistema);
+                salir = true;
             }
         }
+
+    }
+
+    public static boolean volverAMenu(String s1, String s2, char letra) {
+        boolean volverMenu = false;
+        System.out.println("");
+        System.out.println("¿Desea volver al menú o " + s1);
+        System.out.println("Ingrese M para volver al menú o " + s2);
+        char opcion = chequearConfiguracion();
+        while (opcion != 'M' && opcion != 'm' && opcion != Character.toUpperCase(letra) && opcion != letra) {
+            System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una de las opciones dictadas." + "\u001B[0m");
+            opcion = chequearConfiguracion();
+
+        }
+        if (opcion == 'M' || opcion == 'm') {
+            volverMenu = true;
+        }
+        return volverMenu;
     }
 
     public static int manejarError() {
@@ -811,16 +806,19 @@ public class Menu {
             resultado = -1;
         } else {
             while (!esCorrecto) {
+                opcionIngresada = opcionIngresada.trim();
                 if (opcionIngresada.equalsIgnoreCase("x")) {
                     resultado = -1;
                     esCorrecto = true;
                 } else {
                     try {
                         resultado = Integer.parseInt(opcionIngresada);
+                        if (resultado == -1) {
+                            resultado = -2;
+                        }
                         esCorrecto = true;
                     } catch (NumberFormatException e) {
                         System.out.println("\u001B[31m" + "Error en el formato del número. Reingrese" + "\u001B[0m");
-
                         opcionIngresada = in.nextLine();
                     }
                 }
