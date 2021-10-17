@@ -47,14 +47,13 @@ public class Menu {
             System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m");
             System.out.println("\033[38;2m" + "PRUEBA " + "\u001B[40m");
 
-            
             System.out.println("\033[34;5m" + "PRUEBA COLORES" + "\u001B[0m");
             System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
             System.out.println("\033[36;42m" + "PRUEBA COLORES" + "\u001B[0m");
             System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
             System.out.println("\033[40;1m" + "PRUEBA COLORES holaaaaaaaaaaa" + "\u001B[0m");
             System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m");
-            
+
             System.out.println("\033[1;92m" + " COLORES" + "\u001B[0m");
             System.out.println("\033[1;91m" + "PRUEBA COLORES" + "\u001B[40m");
 
@@ -378,7 +377,7 @@ public class Menu {
                         System.out.print("\033[37;1m" + '#' + "\u001B[0m");
                         break;
                     case 'P':
-                        System.out.print("\033[34;47m" + '#' + "\u001B[0m");
+                        System.out.print("\033[34;47m" + '#' + "\u001B[40m");
                         break;
                 }
                 System.out.print(" ");
@@ -692,41 +691,61 @@ public class Menu {
         int aux = 0;
         boolean formatoEsCorrecto = false;
         boolean hayX = false;
+        boolean hayMasDeCuatro = true;
 
-        for (int i = 0; aux < coordenadas.length() && contador < 4 && !hayX; i++) {
-            String res = "";
-            if (coordenadas.charAt(aux) != ' ') {
-                res += coordenadas.charAt(aux);
-                while (aux < (coordenadas.length() - 1) && coordenadas.charAt(aux + 1) != ' ') {
-                    res += coordenadas.charAt(aux + 1);
+        while (hayMasDeCuatro ) {
+            for (int i = 0; aux < coordenadas.length() && contador < 4 && !hayX; i++) {
+                String res = "";
+                if (coordenadas.charAt(aux) != ' ') {
+                    res += coordenadas.charAt(aux);
+                    while (aux < (coordenadas.length() - 1) && coordenadas.charAt(aux + 1) != ' ') {
+                        res += coordenadas.charAt(aux + 1);
+                        aux++;
+                    }
+                    if (res.equalsIgnoreCase("x")) {
+                        coords[0] = -1;
+                        hayX = true;
+                    } else {
+                        try {
+                            int numero = Integer.parseInt(res);
+                            formatoEsCorrecto = true;
+                            coords[contador] = numero;
+                            contador++;
+                        } catch (NumberFormatException e) {
+                            System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
+//                            lector.nextLine();
+                        }
+                        if (!formatoEsCorrecto) {
+                            System.out.println("Reingrese las coordenadas");
+                            coordenadas = lector.nextLine();
+                            System.out.println(coordenadas);
+                            aux = 0;
+                            contador = 0;
+                        }
+                    }
+
+                }
+                if (formatoEsCorrecto || coordenadas.charAt(aux) == ' ') {
+                    formatoEsCorrecto = false;
                     aux++;
                 }
-                if (res.equalsIgnoreCase("x")) {
-                    coords[0] = -1;
-                    hayX = true;
-                } else {
-                    try {
-                        int numero = Integer.parseInt(res);
-                        formatoEsCorrecto = true;
-                        coords[contador] = numero;
-                        contador++;
-                    } catch (NumberFormatException e) {
-                        System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
-//                            lector.nextLine();
-                    }
-                    if (!formatoEsCorrecto) {
-                        System.out.println("Reingrese las coordenadas");
-                        coordenadas = lector.nextLine();
-                        System.out.println(coordenadas);
-                        aux = 0;
-                        contador = 0;
-                    }
-                }
-
             }
-            if (formatoEsCorrecto || coordenadas.charAt(aux) == ' ') {
-                formatoEsCorrecto = false;
-                aux++;
+
+            if (aux < coordenadas.length()) {
+                boolean seExcede = chequearMasCoords(coordenadas, aux);
+                System.out.println(seExcede);
+                if (!seExcede) {
+                    hayMasDeCuatro = false;
+                } else {
+                    System.out.println("\u001B[31m" + "La cantidad de coordenadas es mayor que 4. Reingrese" + "\u001B[0m");
+                   
+                    coordenadas = lector.nextLine();
+                    System.out.println(coordenadas);
+                    aux = 0;
+                    contador = 0;
+                }
+            }else{
+                hayMasDeCuatro = false;
             }
         }
 
@@ -736,6 +755,20 @@ public class Menu {
         }
 
         return coords;
+    }
+
+    public static boolean chequearMasCoords(String stringCoords, int ultiPosi) {
+        boolean seExcedenCords = false;
+        
+        for (int i = ultiPosi; i < stringCoords.length(); i++) {
+            System.out.println("ultiPosi" + i);
+            System.out.println("coooooooooooooord" + stringCoords.charAt(i));
+            if (stringCoords.charAt(i) != ' ') {
+                
+                seExcedenCords = true;
+            }
+        }
+        return seExcedenCords;
     }
 
     public static void opcion4(Sistema sistema) {
