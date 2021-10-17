@@ -201,7 +201,7 @@ public class Menu {
                     String res = "Las columnas que se pueden mover para el color " + s.getColor() + " son: ";
                     for (int i = 0; i < columnas.length; i++) {
                         if (columnas[i] != 0) {
-                            res += "\n" + i + ": " + columnas[i];
+                            res += "\nColumna " + (i+1) + ": " + columnas[i] + " posiciones";
                         } else {
                             cantidadMovimientos++;
                         }
@@ -214,7 +214,7 @@ public class Menu {
                         int cantPosiciones = 0;
                         boolean validar = false;
                         for (int i = 0; i < columnas.length; i++) {
-                            if (i == columna) {
+                            if (i == (columna-1)) {
                                 if (columnas[i] != 0) {
                                     validar = true;
                                     cantPosiciones = columnas[i];
@@ -226,7 +226,7 @@ public class Menu {
                             columna = manejarError();
                             hayXSaltar(columna, s, sistema);
                             for (int i = 0; i < columnas.length; i++) {
-                                if (i == columna) {
+                                if (i == (columna-1)) {
                                     if (columnas[i] != 0) {
                                         validar = true;
                                         cantPosiciones = columnas[i];
@@ -236,7 +236,7 @@ public class Menu {
 
                         }
                         if (!seTermina) {
-                            s.hacerMovida(columna, cantPosiciones);
+                            s.hacerMovida((columna-1), cantPosiciones);
                         }
 
                     } else {
@@ -457,6 +457,9 @@ public class Menu {
                 hayX2Rectangulo(coordsEntran, r, s);
                 boolean seSuperpone = r.validacionSuperposicion((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
                 boolean esAdyacente = r.esAdyacente((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), coordsCorrectas[2], coordsCorrectas[3]);
+                for(int i=0; i<coordsCorrectas.length; i++){
+                    System.out.println(coordsCorrectas[i]);
+                }
                 while (seSuperpone || !esAdyacente) {
                     if (seSuperpone && !esAdyacente) {
                         System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
