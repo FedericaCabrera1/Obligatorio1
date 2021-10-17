@@ -3,7 +3,6 @@ package BackEnd;
 import java.util.*;
 
 public class Rectangulo extends Juego {
-
     private char color;
     private int[] coordsMatrizAnterior;
     private char colorAnterior;

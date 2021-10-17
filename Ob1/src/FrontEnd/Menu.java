@@ -20,41 +20,6 @@ public class Menu {
         Scanner in = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 5) {
-//            System.out.println("\u001B[31m" + "PRUEBA COLORES" + "\u001B[0m");
-//
-//            System.out.println("\u001B[34m" + "PRUEBA COLORES" + "\u001B[0m");
-//
-//            System.out.println("\u001B[32m" + "PRUEBA COLORES" + "\u001B[0m");
-//
-//            System.out.println("\u001B[33m" + "PRUEBA COLORES" + "\u001B[0m");
-//
-//            System.out.println("\u001B[35m" + "PRUEBA COLORES" + "\u001B[0m");
-//
-//            System.out.println("\u001B[36m" + "PRUEBA COLORES" + "\u001B[0m");
-//
-//            System.out.println("\033[31;1m" + "ROJO CLARO" + "\u001B[0m");
-//
-//            System.out.println("\033[32;1m" + "VERDE CLARO" + "\u001B[0m");
-//
-//            System.out.println("\033[33;1m" + "AMARILLO CLARO" + "\u001B[0m");
-//
-//            System.out.println("\033[34;1m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[36;2m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[38;1m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m" + "\u001B[0m");
-//            System.out.println("\033[38;2m" + "PRUEBA " + "\u001B[40m" + "\u001B[0m");
-//
-//            System.out.println("\033[34;5m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[35;1m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[36;42m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[37;1m" + "PRUEBA COLORES" + "\u001B[0m");
-//            System.out.println("\033[40;1m" + "PRUEBA COLORES holaaaaaaaaaaa" + "\u001B[0m");
-//            System.out.println("\033[34;47m" + "PRUEBA COLORES" + "\u001B[42m" + "\u001B[0m");
-//
-//            System.out.println("\033[1;92m" + " COLORES" + "\u001B[0m");
-//            System.out.println("\033[1;91m" + "PRUEBA COLORES" + "\u001B[40m" + "\u001B[0m");
             opcion = manejarError();
             switch (opcion) {
                 case 1:
@@ -95,12 +60,24 @@ public class Menu {
             }
             System.out.println("Ingrese Alias:");
             String alias = validarString();
-            Jugador jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
+            String aliasSinEspacios = "";
+            for (int i = 0; i < alias.length(); i++) {
+                if (alias.charAt(i) != ' ') {
+                    aliasSinEspacios += String.valueOf(alias.charAt(i));
+                }
+            }
+            Jugador jugadorAgregado = sistema.crearJugador(nombre, edad, aliasSinEspacios);
             boolean esta = sistema.aliasRepetido(jugadorAgregado);
             while (esta) {
                 System.out.println("\u001B[31m" + "El alias elegido ya está en uso. Reingrese" + "\u001B[0m");
                 alias = in.nextLine();
-                jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
+                aliasSinEspacios = "";
+                for (int i = 0; i < alias.length(); i++) {
+                    if (alias.charAt(i) != ' ') {
+                        aliasSinEspacios += String.valueOf(alias.charAt(i));
+                    }
+                }
+                jugadorAgregado = sistema.crearJugador(nombre, edad, aliasSinEspacios);
                 esta = sistema.aliasRepetido(jugadorAgregado);
             }
             sistema.agregarJugador(nombre, edad, alias);
@@ -515,7 +492,7 @@ public class Menu {
                 System.out.println("\u001B[35m" + "Ya se realizaron 10 jugadas y no quedan movimientos disponibles" + "\u001B[0m");
             } else {
                 if (contadorJugadas < 10 && !r.quedanJugadas()) {
-                    System.out.println("\u001B[35m"+ "No quedan movimientos disponibles" + "\u001B[0m");
+                    System.out.println("\u001B[35m" + "No quedan movimientos disponibles" + "\u001B[0m");
                 } else {
                     if (contadorJugadas == 10 && r.quedanJugadas()) {
                         System.out.println("\u001B[35m" + "Ya se realizaron 10 jugadas" + "\u001B[0m");
