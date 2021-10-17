@@ -120,18 +120,17 @@ public class Menu {
     }
 
     public static void opcion2(Sistema sistema) {
-        /*primero mostramos la lista de jugadores A MODO DE MENU, le pedimos q elija uno, 
-        chequeamos q este todo OK y entonces comienza el juego con ese jugador*/
+        ingresoDatosJuego(sistema, "SALTAR");
+    }
 
- /*aca llamamos al metodo epico de la clase sistema 
-        q nos conecta con los metodos en la clase SALTAR y arranca el juego*/
+    public static void ingresoDatosJuego(Sistema sistema, String tipoDeJuego) {
         ArrayList<Jugador> listaJugadores = sistema.getListaJugadores();
         if (listaJugadores.size() == 0) {
             System.out.println("\u001B[31m" + "No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo." + "\u001B[0m");
             menuPrincipal(sistema);
         } else {
             Scanner lector = new Scanner(System.in);
-            System.out.println("BIENVENIDO AL JUEGO SALTAR");
+            System.out.println("BIENVENIDO AL JUEGO " + tipoDeJuego);
             System.out.println("Lista de jugadores");
             listaJugadores = sistema.getListaJugadores();
             for (int i = 0; i < listaJugadores.size(); i++) {
@@ -156,12 +155,18 @@ public class Menu {
             Date now = new Date(System.currentTimeMillis());
             SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
             String hora = hour.format(now) + "";
-
             System.out.println("");
-            System.out.println("COMIENZA EL JUEGO SALTAR " + hora);
-            Saltar s = sistema.crearSaltar((nroJugador - 1), configuracion, hora);
-            sistema.agregarJuego(s);
-            jugarASaltar(sistema, s);
+            System.out.println("COMIENZA EL JUEGO " + tipoDeJuego + " " + hora);
+            if (tipoDeJuego.equalsIgnoreCase("saltar")) {
+                Saltar s = sistema.crearSaltar((nroJugador - 1), configuracion, hora);
+                sistema.agregarJuego(s);
+                jugarASaltar(sistema, s);
+
+            } else {
+                Rectangulo r = sistema.crearRectangulo((nroJugador - 1), configuracion, hora);
+                sistema.agregarJuego(r);
+                jugarARectangulo(sistema, r);
+            }
 
         }
 
@@ -339,43 +344,7 @@ public class Menu {
     }
 
     public static void opcion3(Sistema sistema) {
-        ArrayList<Jugador> listaJugadores = sistema.getListaJugadores();
-        if (listaJugadores.size() == 0) {
-            System.out.println("\u001B[31m" + "No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo." + "\u001B[0m");
-            menuPrincipal(sistema);
-        } else {
-            Scanner lector = new Scanner(System.in);
-            System.out.println("BIENVENIDO AL JUEGO RECTANGULO");
-            System.out.println("Lista de jugadores");
-            listaJugadores = sistema.getListaJugadores();
-            for (int i = 0; i < listaJugadores.size(); i++) {
-                System.out.println((i + 1) + ": " + listaJugadores.get(i));
-            }
-            System.out.println("Seleccione un jugador de la lista para empezar: ");
-            int nroJugador = manejarError();
-            while (nroJugador <= 0 || nroJugador > listaJugadores.size()) {
-                System.out.println("\u001B[31m" + "El numero ingresado esta fuera del rango. Reingrese." + "\u001B[0m");
-                nroJugador = manejarError();
-            }
-
-            System.out.println("");
-            System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
-            char configuracion = chequearConfiguracion();
-            while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
-                System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
-                configuracion = chequearConfiguracion();
-            }
-
-            Date now = new Date(System.currentTimeMillis());
-            SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
-            String hora = hour.format(now) + "";
-
-            System.out.println("");
-            System.out.println("COMIENZA EL JUEGO RECTANGULO " + hora);
-            Rectangulo r = sistema.crearRectangulo((nroJugador - 1), configuracion, hora);
-            sistema.agregarJuego(r);
-            jugarARectangulo(sistema, r);
-        }
+        ingresoDatosJuego(sistema, "RECTÁNGULO");
     }
 
     public static void imprimirMatrizRectangulo(char[][] mat) {
@@ -672,21 +641,21 @@ public class Menu {
                             if (contador == 0 && numero == -1) {
                                 numero = -2;
                             }
+                            if (numero == 0) {
+                                numero = -3;
+                            }
                             coords[contador] = numero;
                             contador++;
                         } catch (NumberFormatException e) {
                             System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
-//                            lector.nextLine();
                         }
                         if (!formatoEsCorrecto) {
                             System.out.println("Reingrese las coordenadas");
                             coordenadas = lector.nextLine();
-                            System.out.println(coordenadas);
                             aux = 0;
                             contador = 0;
                         }
                     }
-
                 }
                 if (formatoEsCorrecto || coordenadas.charAt(aux) == ' ') {
                     formatoEsCorrecto = false;
@@ -716,7 +685,6 @@ public class Menu {
     public static boolean chequearMasCoords(String stringCoords, int ultiPosi) {
         boolean seExcedenCords = false;
         for (int i = ultiPosi; i < stringCoords.length(); i++) {
-            System.out.println(stringCoords.charAt(i));
             if (stringCoords.charAt(i) != ' ') {
                 seExcedenCords = true;
             }
