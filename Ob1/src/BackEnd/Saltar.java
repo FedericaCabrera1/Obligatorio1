@@ -286,51 +286,6 @@ public class Saltar extends Juego {
         }
         return seTermina;
     }
-
-//    public boolean quedanJugadasDisponibles() {
-//        Metodo que verifica si quedan jugadas disponibles en alguna ficha de algun color
-//        char[][] mat = this.getMatriz();
-//        boolean quedanJugadas = false;
-//        int jugadasNoHechas = 0;
-//        char color = this.getColor();
-//        while (jugadasNoHechas != 4 && !quedanJugadas) {
-//            Empieza con el color actual y se fija si puede hacer algun movimiento con el
-//            int contadorColor = 0;
-//            System.out.println("color: " + this.getColor());
-//            for (int i = 0; i < mat.length; i++) {
-//                for (int j = 0; j < mat[0].length; j++) {
-//                    if (mat[i][j] == this.getColor()) {
-//                        int cantidadPosiciones = this.cantidadDePosicionesAMover(i);
-//                        boolean puedeConEsteColor = this.puedeMover(cantidadPosiciones, i, j);
-//                        if (!puedeConEsteColor) {
-//                            contadorColor++;
-//                        }
-//                    }
-//                }
-//            }
-//            System.out.println(contadorColor);
-//            if (fichaSola()[0] != -1) {
-//                if (fichaSola()[1] != 0) {
-//                    contadorColor++;
-//                }
-//            } else {
-//                if (contadorColor == 4) {
-//                    this.setColor(this.getColor());
-//                    jugadasNoHechas++;
-//                } else {
-//                    quedanJugadas = true;
-//                }
-//                System.out.println("Contador " + this.getColor() + " : " + contadorColor);
-//            }
-//        }
-//        if (quedanJugadas) {
-//            this.setColor2(color);
-//
-//        }
-//        System.out.println(quedanJugadas);
-//        return quedanJugadas;
-//
-//    }
     
      public boolean quedanJugadasDisponibles() {
          boolean quedanJugadas = false;

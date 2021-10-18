@@ -213,12 +213,12 @@ public class Rectangulo extends Juego {
                     quedanJugadas = true;
                 }
             } else {
-                if (filaInicial == 0 && filaFinal != 19) {
+                if (filaInicial == 0) {
                     if (this.getMatriz()[filaFinal + 1][i] == ' ') {
                         quedanJugadas = true;
                     }
                 } else {
-                    if (filaFinal == 19 && filaInicial != 0) {
+                    if (filaFinal == 19) {
                         if (this.getMatriz()[filaInicial - 1][i] == ' ') {
                             quedanJugadas = true;
                         }
@@ -226,28 +226,28 @@ public class Rectangulo extends Juego {
                 }
 
             }
+        }
 
-            for (int j = filaInicial; j <= filaFinal; j++) {
-                if (columnaInicial != 0 && columnaFinal != 19) {
-                    if (this.getMatriz()[j][columnaInicial - 1] == ' ' || this.getMatriz()[j][columnaFinal + 1] == ' ') {
+        for (int j = filaInicial; j <= filaFinal; j++) {
+            if (columnaInicial != 0 && columnaFinal != 19) {
+                if (this.getMatriz()[j][columnaInicial - 1] == ' ' || this.getMatriz()[j][columnaFinal + 1] == ' ') {
+                    quedanJugadas = true;
+                }
+            } else {
+                if (columnaInicial == 0) {
+                    if (this.getMatriz()[j][columnaFinal + 1] == ' ') {
                         quedanJugadas = true;
                     }
                 } else {
-                    if (columnaInicial == 0 && columnaFinal != 19) {
-                        if (this.getMatriz()[j][columnaFinal + 1] == ' ') {
+                    if (columnaFinal == 19) {
+                        if (this.getMatriz()[j][columnaInicial - 1] == ' ') {
                             quedanJugadas = true;
-                        } else {
-                            if (columnaFinal == 19 && columnaInicial != 0) {
-                                if (this.getMatriz()[j][columnaInicial - 1] == ' ') {
-                                    quedanJugadas = true;
-                                }
-                            }
                         }
-
                     }
                 }
 
             }
+
         }
         return quedanJugadas;
     }
@@ -268,7 +268,7 @@ public class Rectangulo extends Juego {
     }
 
     public String toString() {
-         //Metodo que hereda el toString() de la clase Juego y le agrega informacion
+        //Metodo que hereda el toString() de la clase Juego y le agrega informacion
         return super.toString() + "Rectangulo";
     }
 

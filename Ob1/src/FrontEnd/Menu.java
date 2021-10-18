@@ -54,6 +54,7 @@ public class Menu {
             Scanner in = new Scanner(System.in);
             System.out.println("Ingrese Nombre:");
             String nombre = validarString();
+            nombre = quitarEspacios(nombre);
             System.out.println("Ingrese Edad:");
             int edad = manejarError();
             while (edad <= 0 || edad >= 100) {
@@ -62,24 +63,14 @@ public class Menu {
             }
             System.out.println("Ingrese Alias:");
             String alias = validarString();
-            String aliasSinEspacios = "";
-            for (int i = 0; i < alias.length(); i++) {
-                if (alias.charAt(i) != ' ') {
-                    aliasSinEspacios += String.valueOf(alias.charAt(i));
-                }
-            }
-            Jugador jugadorAgregado = sistema.crearJugador(nombre, edad, aliasSinEspacios);
+            alias = quitarEspacios(alias);
+            Jugador jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
             boolean esta = sistema.aliasRepetido(jugadorAgregado);
             while (esta) {
                 System.out.println("\u001B[31m" + "El alias elegido ya está en uso. Reingrese" + "\u001B[0m");
-                alias = in.nextLine();
-                aliasSinEspacios = "";
-                for (int i = 0; i < alias.length(); i++) {
-                    if (alias.charAt(i) != ' ') {
-                        aliasSinEspacios += String.valueOf(alias.charAt(i));
-                    }
-                }
-                jugadorAgregado = sistema.crearJugador(nombre, edad, aliasSinEspacios);
+                alias = validarString();
+                alias = quitarEspacios(alias);
+                jugadorAgregado = sistema.crearJugador(nombre, edad, alias);
                 esta = sistema.aliasRepetido(jugadorAgregado);
             }
             sistema.agregarJugador(nombre, edad, alias);
@@ -100,6 +91,16 @@ public class Menu {
         }
         System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
         menuPrincipal(sistema);
+    }
+
+    public static String quitarEspacios(String s) {
+        String sinEspacios = "";
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') {
+                sinEspacios += String.valueOf(s.charAt(i));
+            }
+        }
+        return sinEspacios;
     }
 
     public static String validarString() {
@@ -611,6 +612,7 @@ public class Menu {
                     coordenadas = lector.nextLine();
                     aux = 0;
                     contador = 0;
+                    coords = new int[4];
                 }
             } else {
                 hayMasDeCuatro = false;
