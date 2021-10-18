@@ -245,9 +245,15 @@ public class Menu {
                     }
                 } else {
                     seTermina = true;
+
                 }
             }
             imprimirMatrizSaltar(s);
+            System.out.println("\u001B[31m" + "No hay movimientos disponibles para el color R" + "\u001B[0m");
+            System.out.println("\u001B[31m" + "No hay movimientos disponibles para el color A" + "\u001B[0m");
+            System.out.println("\u001B[31m" + "No hay movimientos disponibles para el color V" + "\u001B[0m");
+            System.out.println("\u001B[31m" + "No hay movimientos disponibles para el color M" + "\u001B[0m");
+            System.out.println("");
             if (s.quedanDosFichas() && !s.quedanJugadasDisponibles()) {
                 System.out.println("\u001B[35m" + "El juego se termino porque solo quedan dos fichas en el area base y porque no hay mas movimientos para realizar" + "\u001B[0m");
             } else {

@@ -105,6 +105,11 @@ public class Saltar extends Juego {
         return mat;
 
     }
+    
+    public char setColor2(char unColor){
+        color = unColor;
+        return color;
+    }
 
     public boolean validarFila(char mat[][], char[] arr) {
         //Metodo que verifica que una letra no se repita en una misma columna 
@@ -123,6 +128,7 @@ public class Saltar extends Juego {
         //Metodo que se llama una vez que la movida ya fue validada y realiza la movida
         this.setMatriz(this.matrizNueva(columna, cantidadPosiciones));
         this.setColor(this.getColor());
+        System.out.println(this.getColor());
     }
 
     public int[] indicarColumnasParaJugador() {
@@ -161,7 +167,7 @@ public class Saltar extends Juego {
     }
 
     public int[] fichaSola() {
-        //Metodo que identifica y guarda la ficha mas adelantada de la matriz para impedir que el usuario mueva esa
+        //Metodo que identifica y guarda la ficha mas adelantada de cada color para impedir que el usuario mueva esa
         int[] res = new int[2];
         int fila = -1;
         int contador = 0;
@@ -169,19 +175,20 @@ public class Saltar extends Juego {
         boolean encontre = false;
         boolean encontreColor = false;
         int columna = -1;
-        for (int i = 0; i < mat.length && !encontre; i++) {
+        for (int i = 0; i < mat.length && !encontreColor; i++) {
             for (int j = 0; j < mat[i].length; j++) {
-                if (mat[i][j] != ' ') {
-                    contador++;
-                    encontre = true;
-                    if (mat[i][j] == this.getColor()) {
-                        encontreColor = true;
-                        columna = j;
-                        fila = i;
+                if (mat[i][j] == this.getColor()) {
+                    encontreColor = true;
+                    columna = j;
+                    fila = i;
+                    for (int k = 0; k < mat[i].length; k++) {
+                        if (mat[i][k] != ' ') {
+                            contador++;
+                        }
                     }
                 }
-
             }
+
         }
         if (contador == 1 && encontreColor) {
             res[0] = columna;
@@ -189,7 +196,6 @@ public class Saltar extends Juego {
         } else {
             res[0] = -1;
         }
-
         return res;
     }
 
@@ -262,7 +268,7 @@ public class Saltar extends Juego {
         }
         return mat;
     }
-    
+
     public boolean quedanDosFichas() {
         //Metodo que verifica si en el area base quedan dos fichas para saber si terminar el juego o no
         char[][] mat = this.getMatriz();
@@ -286,6 +292,7 @@ public class Saltar extends Juego {
         char[][] mat = this.getMatriz();
         boolean quedanJugadas = false;
         int jugadasNoHechas = 0;
+        char color = this.getColor();
         while (jugadasNoHechas != 4 && !quedanJugadas) {
             //Empieza con el color actual y se fija si puede hacer algun movimiento con el
             int contadorColor = 0;
@@ -301,7 +308,7 @@ public class Saltar extends Juego {
                     }
                 }
             }
-
+            System.out.println(contadorColor);
             if (fichaSola()[0] != -1) {
                 if (fichaSola()[1] != 0) {
                     contadorColor++;
@@ -313,11 +320,15 @@ public class Saltar extends Juego {
             } else {
                 quedanJugadas = true;
             }
+            System.out.println("Contador " + this.getColor() + " : " + contadorColor);
+        }
+        if (quedanJugadas) {
+            this.setColor2(color);
         }
         return quedanJugadas;
     }
-    
-    public String toString(){
+
+    public String toString() {
         //Metodo que hereda el toString() de la clase Juego y le agrega informacion
         return super.toString() + "Saltar";
     }
