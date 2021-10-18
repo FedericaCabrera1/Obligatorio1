@@ -112,7 +112,7 @@ public class Saltar extends Juego {
     }
 
     public boolean validarFila(char mat[][], char[] arr) {
-        //Metodo que verifica que una letra no se repita en una misma columna 
+        //Metodo que verifica que una letra no se repita en una misma fila al momento de crear la matriz random 
         boolean algunRepetido = false;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < mat.length && !algunRepetido; j++) {

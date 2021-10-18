@@ -45,13 +45,13 @@ public class Rectangulo extends Juego {
         return coordsMatrizAnterior;
     }
 
-    public boolean outOfBounds(int filaInicial, int columnaInicial, int cantFilas, int cantColumnas) {
+    public boolean excedeRango(int filaInicial, int columnaInicial, int cantFilas, int cantColumnas) {
         //Metodo que verifica que el tamaño de la nueva matriz no exceda el rango de la matriz original (20x20)
-        boolean outOfBounds = false;
+        boolean excedeRango = false;
         if (filaInicial + (cantFilas - 1) > 19 || columnaInicial + (cantColumnas - 1) > 19) {
-            outOfBounds = true;
+            excedeRango = true;
         }
-        return outOfBounds;
+        return excedeRango;
     }
 
     public void setCoordsMatrizAnterior(int filaInicialAnt, int columnaInicialAnt, int cantFilasAnt, int cantColumnasAnt) {
@@ -118,18 +118,32 @@ public class Rectangulo extends Juego {
         return mat;
     }
 
-    public boolean validacionSuperposicion(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
+    public boolean validacionSuperposicionAsterisco(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
         //Metodo que verifica que la matriz no se superponga con alguna posicion ya ocupada
         char[][] mat = this.getMatriz();
-        boolean seSuperpone = false;
+        boolean seSuperponeAsterisco = false;
         for (int i = filaInicial; i <= filaInicial + (cantidadFilas - 1); i++) {
             for (int j = columnaInicial; j <= columnaInicial + (cantidadColumnas - 1); j++) {
-                if (mat[i][j] != ' ') {
-                    seSuperpone = true;
+                if (mat[i][j] == '*') {
+                    seSuperponeAsterisco = true;
                 }
             }
         }
-        return seSuperpone;
+        return seSuperponeAsterisco;
+    }
+    
+     public boolean validacionSuperposicionRectangulo(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
+        //Metodo que verifica que la matriz no se superponga con alguna posicion ya ocupada
+        char[][] mat = this.getMatriz();
+        boolean seSuperponeRectangulo = false;
+        for (int i = filaInicial; i <= filaInicial + (cantidadFilas - 1); i++) {
+            for (int j = columnaInicial; j <= columnaInicial + (cantidadColumnas - 1); j++) {
+                if (mat[i][j] != '*' && mat[i][j]!=' ') {
+                    seSuperponeRectangulo = true;
+                }
+            }
+        }
+        return seSuperponeRectangulo;
     }
 
     public boolean esAdyacente(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {

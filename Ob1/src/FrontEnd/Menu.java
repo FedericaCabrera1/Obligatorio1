@@ -176,7 +176,7 @@ public class Menu {
             } else {
                 Rectangulo r = sistema.crearRectangulo((nroJugador - 1), configuracion, hora);
                 sistema.agregarJuego(r);
-                jugarARectangulo(sistema, r);
+                jugarARectangulo(sistema, r, 0);
             }
 
         }
@@ -404,12 +404,11 @@ public class Menu {
         }
     }
 
-    public static void jugarARectangulo(Sistema s, Rectangulo r) {
+    public static void jugarARectangulo(Sistema s, Rectangulo r, int contadorJugadas) {
         //Método que realiza cada jugada de Rectangulo
         //Recibe las coordenadas, las verifica y realiza la jugada
         boolean volverAJugar = true;
         while (volverAJugar) {
-            int contadorJugadas = 0;
             while (contadorJugadas < 10 && r.quedanJugadas()) {
                 Scanner lector = new Scanner(System.in);
                 char[][] mat = r.getMatriz();
@@ -418,36 +417,47 @@ public class Menu {
                 System.out.println("");
                 System.out.println("Ingrese coordenadas de su rectangulo");
                 String coordenadas = lector.nextLine();
-                hayXRectangulo(coordenadas, r, s);
+                hayXRectangulo(coordenadas, r, s, contadorJugadas);
                 int[] coords = recibirCoordenadas(coordenadas);
-                hayX2Rectangulo(coords, r, s);
-                int[] coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
-                hayX2Rectangulo(coordsCorrectas, r, s);
-                int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s);
-                hayX2Rectangulo(coordsEntran, r, s);
-                boolean seSuperpone = r.validacionSuperposicion((coordsEntran[0] - 1), (coordsEntran[1] - 1), coordsEntran[2], coordsEntran[3]);
+                hayX2Rectangulo(coords, r, s, contadorJugadas);
+                int[] coordsCorrectas = coordCorrectas(coords, coordenadas, r, s, contadorJugadas);
+                hayX2Rectangulo(coordsCorrectas, r, s, contadorJugadas);
+                int[] coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s, contadorJugadas);
+                hayX2Rectangulo(coordsEntran, r, s, contadorJugadas);
+                boolean seSuperponeAsterisco = r.validacionSuperposicionAsterisco((coordsEntran[0] - 1), (coordsEntran[1] - 1), coordsEntran[2], coordsEntran[3]);
+                boolean seSuperponeRectangulo = r.validacionSuperposicionRectangulo((coordsEntran[0] - 1), (coordsEntran[1] - 1), (coordsEntran[2]), (coordsEntran[3]));
                 boolean esAdyacente = r.esAdyacente((coordsEntran[0] - 1), (coordsEntran[1] - 1), coordsEntran[2], coordsEntran[3]);
-                while (seSuperpone || !esAdyacente) {
-                    if (seSuperpone && !esAdyacente) {
-                        System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada y no es adyacente a la matriz anterior" + "\u001B[0m");
+                while (seSuperponeAsterisco || seSuperponeRectangulo || !esAdyacente) {
+                    if (seSuperponeAsterisco && seSuperponeRectangulo && !esAdyacente) {
+                        System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con algun asterisco y rectangulo anterior. Ademas no es adyacente a la matriz anterior" + "\u001B[0m");
                     } else {
-                        if (seSuperpone && esAdyacente) {
-                            System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con una posicion ya ocupada" + "\u001B[0m");
+                        if (seSuperponeAsterisco && !seSuperponeRectangulo && esAdyacente) {
+                            System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con algun asterisco." + "\u001B[0m");
                         } else {
-                            if (!seSuperpone && !esAdyacente) {
+                            if (!seSuperponeAsterisco && !seSuperponeRectangulo && !esAdyacente) {
                                 System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nNo es adyacente a la matriz anterior" + "\u001B[0m");
+                            } else if (!seSuperponeAsterisco && seSuperponeRectangulo && esAdyacente) {
+                                System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con un rectangulo anterior." + "\u001B[0m");
+                            } else if (seSuperponeAsterisco && !seSuperponeRectangulo && !esAdyacente) {
+                                System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con algun asterisco y no es adyacente a la matriz anterior." + "\u001B[0m");
+                            } else if (!seSuperponeAsterisco && seSuperponeRectangulo && !esAdyacente) {
+                                System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con un rectangulo anterior y no es adyacente a la matriz anterior." + "\u001B[0m");
+                            } else if (seSuperponeAsterisco && seSuperponeRectangulo && esAdyacente) {
+                                System.out.println("\u001B[31m" + "La matriz ingresada no es correcta. \nSe superpone con un rectangulo anterior y con algun asterisco." + "\u001B[0m");
+
                             }
                         }
                     }
                     System.out.println("REINGRESE LAS COORDENADAS");
                     coordenadas = lector.nextLine();
                     coords = recibirCoordenadas(coordenadas);
-                    hayX2Rectangulo(coords, r, s);
-                    coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
-                    hayX2Rectangulo(coordsCorrectas, r, s);
-                    coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s);
-                    hayX2Rectangulo(coordsEntran, r, s);
-                    seSuperpone = r.validacionSuperposicion((coordsEntran[0] - 1), (coordsEntran[1] - 1), (coordsEntran[2]), (coordsEntran[3]));
+                    hayX2Rectangulo(coords, r, s, contadorJugadas);
+                    coordsCorrectas = coordCorrectas(coords, coordenadas, r, s, contadorJugadas);
+                    hayX2Rectangulo(coordsCorrectas, r, s, contadorJugadas);
+                    coordsEntran = coordEntran(coordenadas, coords, coordsCorrectas, r, s, contadorJugadas);
+                    hayX2Rectangulo(coordsEntran, r, s, contadorJugadas);
+                    seSuperponeAsterisco = r.validacionSuperposicionAsterisco((coordsEntran[0] - 1), (coordsEntran[1] - 1), (coordsEntran[2]), (coordsEntran[3]));
+                    seSuperponeRectangulo = r.validacionSuperposicionRectangulo((coordsEntran[0] - 1), (coordsEntran[1] - 1), (coordsEntran[2]), (coordsEntran[3]));
                     esAdyacente = r.esAdyacente((coordsEntran[0] - 1), (coordsEntran[1] - 1), (coordsEntran[2]), (coordsEntran[3]));
                 }
 
@@ -486,7 +496,7 @@ public class Menu {
 
     }
 
-    public static void hayXRectangulo(String coordenadas, Rectangulo r, Sistema sistema) {
+    public static void hayXRectangulo(String coordenadas, Rectangulo r, Sistema sistema, int contadorActualJugadas) {
         //Metodo que verifica si se ingreso una X como primer jugada, antes de ingresar las coordenadas
         boolean hayX = false;
         String s = coordenadas.trim();
@@ -502,12 +512,12 @@ public class Menu {
                 System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
                 menuPrincipal(sistema);
             } else {
-                jugarARectangulo(sistema, r);
+                jugarARectangulo(sistema, r, contadorActualJugadas);
             }
         }
     }
 
-    public static void hayX2Rectangulo(int[] coordenadas, Rectangulo r, Sistema s) {
+    public static void hayX2Rectangulo(int[] coordenadas, Rectangulo r, Sistema s, int contadorActualJugadas) {
         //Metodo que verifica si una x fue ingresada un vez que ya se hizo la primer jugada. 
         boolean hayX = false;
         for (int i = 0; i < coordenadas.length; i++) {
@@ -524,7 +534,7 @@ public class Menu {
                 System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
                 menuPrincipal(s);
             } else {
-                jugarARectangulo(s, r);
+                jugarARectangulo(s, r, contadorActualJugadas);
             }
         }
     }
@@ -590,6 +600,11 @@ public class Menu {
                         if (!formatoEsCorrecto) {
                             System.out.println("Reingrese las coordenadas");
                             coordenadas = lector.nextLine();
+                            while (coordenadas.length() == 0) {
+                                System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
+                                System.out.println("Reingrese las coordenadas");
+                                coordenadas = lector.nextLine();
+                            }
                             aux = 0;
                             contador = 0;
                         }
@@ -600,25 +615,68 @@ public class Menu {
                     aux++;
                 }
             }
-
             if (aux < coordenadas.length() && coords[0] != -1) {
-                System.out.println(aux);
                 boolean seExcede = chequearMasCoords(coordenadas, aux);
-                System.out.println(seExcede);
                 if (!seExcede) {
                     hayMasDeCuatro = false;
                 } else {
                     System.out.println("\u001B[31m" + "La cantidad de coordenadas es mayor que 4. Reingrese" + "\u001B[0m");
                     coordenadas = lector.nextLine();
+                    while (coordenadas.length() == 0) {
+                        System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
+                        System.out.println("Reingrese las coordenadas");
+                        coordenadas = lector.nextLine();
+                    }
                     aux = 0;
                     contador = 0;
                     coords = new int[4];
                 }
             } else {
-                hayMasDeCuatro = false;
+                if (aux < coordenadas.length() && coords[0] == -1) {
+                    boolean haySoloX = cantidadCoordsX(coordenadas);
+                    if (!haySoloX) {
+                        System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
+                        System.out.println("Reingrese las coordenadas");
+                        coordenadas = lector.nextLine();
+                        while (coordenadas.length() == 0) {
+                            System.out.println("\u001B[31m" + "Error en el formato del número." + "\u001B[0m");
+                            System.out.println("Reingrese las coordenadas");
+                            coordenadas = lector.nextLine();
+                        }
+                        aux = 0;
+                        contador = 0;
+                        coords = new int[4];
+                        hayX = false;
+                    } else {
+                        hayMasDeCuatro = false;
+                    }
+                } else {
+                    hayMasDeCuatro = false;
+                }
+
             }
         }
         return coords;
+    }
+
+    public static boolean cantidadCoordsX(String s) {
+        boolean tieneSoloX = true;
+        int contadorX = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') {
+                if (s.charAt(i) == 'x' || s.charAt(i) == 'X') {
+                    contadorX++;
+                } else {
+                    tieneSoloX = false;
+                }
+            }
+        }
+        if(tieneSoloX){
+            if(contadorX>1){
+                tieneSoloX = false;
+            }
+        }
+        return tieneSoloX;
     }
 
     public static boolean chequearMasCoords(String stringCoords, int ultimaPosicion) {
@@ -632,7 +690,7 @@ public class Menu {
         return seExcedenCords;
     }
 
-    public static int[] coordCorrectas(int[] coords, String coordenadas, Rectangulo r, Sistema s) {
+    public static int[] coordCorrectas(int[] coords, String coordenadas, Rectangulo r, Sistema s, int contadorActualJugadas) {
         //Método recibe las coordenadas con el formato adecuado
         //Verifica que esten entre 1 y 20
         //Verifica que no haya menos que 4 coordenadas
@@ -644,7 +702,7 @@ public class Menu {
                 System.out.println("\u001B[31m" + "La cantidad de coordenadas ingresadas no es suficiente. Reingrese" + "\u001B[0m");
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
-                hayX2Rectangulo(coords, r, s);
+                hayX2Rectangulo(coords, r, s, contadorActualJugadas);
                 validarCant = validarCantidadCoords(coords);
                 validarRango = validacionRangoCoords(coords);
 
@@ -652,7 +710,7 @@ public class Menu {
                 System.out.println("\u001B[31m" + "Las coordenadas ingresadas estan fuera de rango. Reingrese" + "\u001B[0m");
                 coordenadas = lector.nextLine();
                 coords = recibirCoordenadas(coordenadas);
-                hayX2Rectangulo(coords, r, s);
+                hayX2Rectangulo(coords, r, s, contadorActualJugadas);
                 validarCant = validarCantidadCoords(coords);
                 validarRango = validacionRangoCoords(coords);
             }
@@ -684,17 +742,17 @@ public class Menu {
         return correcto;
     }
 
-    public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r, Sistema s) {
+    public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r, Sistema s, int contadorActualJugadas) {
         //Método que verifica que la matriz ingresada este dentro del rango de la matriz original 20x20
         Scanner lector = new Scanner(System.in);
-        boolean excedeTamano = r.outOfBounds((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+        boolean excedeTamano = r.excedeRango((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
         while (excedeTamano) {
             System.out.println("\u001B[31m" + "La matriz esta fuera de rango. Reingrese" + "\u001B[0m");
             coordenadas = lector.nextLine();
-            hayXRectangulo(coordenadas, r, s);
+            hayXRectangulo(coordenadas, r, s, contadorActualJugadas);
             coords = recibirCoordenadas(coordenadas);
-            coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
-            excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+            coordsCorrectas = coordCorrectas(coords, coordenadas, r, s, contadorActualJugadas);
+            excedeTamano = r.excedeRango((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
         }
 
         return coordsCorrectas;
