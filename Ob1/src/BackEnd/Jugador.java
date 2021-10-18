@@ -38,6 +38,7 @@ public class Jugador {
     
     @Override
     public String toString(){
+        //Metodo que imprime los datos de cada jugador
         return this.getNombre() + " (" + this.getAlias() + ")";
     }
     

@@ -17,6 +17,7 @@ public class Menu {
     }
 
     public static void menuPrincipal(Sistema sistema) {
+        //Metodo que genera el menu y recibe la opcion ingresada por el usuario
         Scanner in = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 5) {
@@ -46,6 +47,7 @@ public class Menu {
     }
 
     public static void opcion1(Sistema sistema) {
+        //Metodo que se encarga de pedir los datos de cada jugador y registrarlo
         boolean seguirIngresando = true;
         while (seguirIngresando) {
             System.out.println("REGISTRO DE NUEVO JUGADOR");
@@ -88,7 +90,6 @@ public class Menu {
             while (opcionIngresada != 1 && opcionIngresada != 2 && opcionIngresada != 3) {
                 System.out.println("\u001B[31m" + "La opcion ingresada esta fuera de rango. Reingrese." + "\u001B[0m");
                 opcionIngresada = manejarError();
-
             }
             if (opcionIngresada == 2) {
                 seguirIngresando = false;
@@ -102,6 +103,8 @@ public class Menu {
     }
 
     public static String validarString() {
+        //Metodo que valida el ingreso del nombre y alias en el jugador
+        //Verifica que tenga al menos una letra
         Scanner lector = new Scanner(System.in);
         String string = lector.nextLine();
         boolean hayAlgo = false;
@@ -120,10 +123,17 @@ public class Menu {
     }
 
     public static void opcion2(Sistema sistema) {
+        //Metodo que se encarga de pedir el ingreso de datos para Saltar
         ingresoDatosJuego(sistema, "SALTAR");
     }
 
+    public static void opcion3(Sistema sistema) {
+        //Metodo que se encarga de pedir el ingreso de datos para Rectangulo
+        ingresoDatosJuego(sistema, "RECTÁNGULO");
+    }
+
     public static void ingresoDatosJuego(Sistema sistema, String tipoDeJuego) {
+        //Metodo que se encarga de pedir y recibir los datos de cada juego en general
         ArrayList<Jugador> listaJugadores = sistema.getListaJugadores();
         if (listaJugadores.size() == 0) {
             System.out.println("\u001B[31m" + "No hay ningun jugador registrado en el sistema, porfavor seleccione la opción 1 del menu para hacerlo." + "\u001B[0m");
@@ -146,10 +156,10 @@ public class Menu {
             System.out.println("");
             System.out.println("Ingrese A para configuracion AL AZAR o P para configuracion PREDETERMINADA");
 
-            char configuracion = chequearConfiguracion();
+            char configuracion = chequearCaracter();
             while (configuracion != 'A' && configuracion != 'a' && configuracion != 'P' && configuracion != 'p') {
                 System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una P o una A." + "\u001B[0m");
-                configuracion = chequearConfiguracion();
+                configuracion = chequearCaracter();
             }
 
             Date now = new Date(System.currentTimeMillis());
@@ -172,35 +182,9 @@ public class Menu {
 
     }
 
-    public static char chequearConfiguracion() {
-        Scanner lector = new Scanner(System.in);
-        String configuracion = lector.nextLine();
-        boolean esCorrecto = false;
-        char conf = ' ';
-        while (!esCorrecto) {
-            try {
-                conf = configuracion.charAt(0);
-                boolean hayEspaciosEnBlanco = true;
-                for (int i = 1; i < configuracion.length(); i++) {
-                    if (configuracion.charAt(i) != ' ') {
-                        hayEspaciosEnBlanco = false;
-                    }
-                }
-                if (hayEspaciosEnBlanco) {
-                    esCorrecto = true;
-                } else {
-                    System.out.println("\u001B[31m" + "La letra ingresada no es correcta, tiene que ser un único caracter. Reingree" + "\u001B[0m");
-                    configuracion = lector.nextLine();
-                }
-            } catch (Exception e) {
-                System.out.println("\u001B[31m" + "El formato de la letra ingresada es incorrecto. Reingree" + "\u001B[0m");
-                configuracion = lector.nextLine();
-            }
-        }
-        return conf;
-    }
-
     public static void jugarASaltar(Sistema sistema, Saltar s) {
+        //Metodo que se encarga de realizar cada jugada del juego Saltar
+        //Recibe los datos, los verifica y realiza la jugada
         boolean volverAJugar = true;
         while (volverAJugar) {
             boolean seTermina = false;
@@ -293,6 +277,7 @@ public class Menu {
     }
 
     public static void hayXSaltar(int columna, Saltar s, Sistema sistema) {
+        //Metodo que verifica si se ingreso una x en lugar del numero de una columna en el juego Saltar
         boolean hayX = false;
         if (columna == -1) {
             boolean deseaSalir = deseaSalir();
@@ -343,11 +328,8 @@ public class Menu {
         System.out.println(filaNums);
     }
 
-    public static void opcion3(Sistema sistema) {
-        ingresoDatosJuego(sistema, "RECTÁNGULO");
-    }
-
     public static void imprimirMatrizRectangulo(char[][] mat) {
+        //Metodo que imprime la matriz rectangulo, generando los colores y demas
         String[] col1 = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2"};
         String[] col2 = {" ", " ", " ", " ", " ", " ", " ", " ", " ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
         System.out.print("    ");
@@ -414,6 +396,8 @@ public class Menu {
     }
 
     public static void jugarARectangulo(Sistema s, Rectangulo r) {
+        //Método que realiza cada jugada de Rectangulo
+        //Recibe las coordenadas, las verifica y realiza la jugada
         boolean volverAJugar = true;
         while (volverAJugar) {
             int contadorJugadas = 0;
@@ -493,34 +477,29 @@ public class Menu {
 
     }
 
-    public static boolean validacionRangoCoords(int[] coords) {
-        boolean correcto = true;
-        for (int i = 0; i < coords.length; i++) {
-            if (coords[i] < 1 || coords[i] > 20) {
-                correcto = false;
+    public static void hayXRectangulo(String coordenadas, Rectangulo r, Sistema sistema) {
+        //Metodo que verifica si se ingreso una X como primer jugada, antes de ingresar las coordenadas
+        boolean hayX = false;
+        String s = coordenadas.trim();
+        if (s.equalsIgnoreCase("x")) {
+            hayX = true;
+        }
+        if (hayX) {
+            boolean deseaSalir = deseaSalir();
+            if (deseaSalir) {
+                System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
+                System.out.println("Se retornará al Menu Principal automaticamente");
+                System.out.println("");
+                System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
+                menuPrincipal(sistema);
+            } else {
+                jugarARectangulo(sistema, r);
             }
         }
-        return correcto;
-    }
-
-    public static boolean deseaSalir() {
-        Scanner lector = new Scanner(System.in);
-        boolean salir = false;
-        System.out.println("");
-        System.out.println("\u001B[35m" + "Esta seguro de que desea salir del juego?" + "\u001B[0m");
-        System.out.println("\u001B[35m" + "Ingrese S para salir o C para continuar" + "\u001B[0m");
-        char opcion = chequearConfiguracion();
-        while (opcion != 's' && opcion != 'S' && opcion != 'C' && opcion != 'c') {
-            System.out.println("\u001B[31m" + "La opcion ingresada no es una S ni una C. Porfavor reingrese." + "\u001B[0m");
-            opcion = chequearConfiguracion();
-        }
-        if (opcion == 'S' || opcion == 's') {
-            salir = true;
-        }
-        return salir;
     }
 
     public static void hayX2Rectangulo(int[] coordenadas, Rectangulo r, Sistema s) {
+        //Metodo que verifica si una x fue ingresada un vez que ya se hizo la primer jugada. 
         boolean hayX = false;
         for (int i = 0; i < coordenadas.length; i++) {
             if (coordenadas[0] == -1) {
@@ -541,79 +520,27 @@ public class Menu {
         }
     }
 
-    public static void hayXRectangulo(String coordenadas, Rectangulo r, Sistema sistema) {
-        boolean hayX = false;
-        String s = coordenadas.trim();
-        if (s.equalsIgnoreCase("x")) {
-            hayX = true;
-        }
-        if (hayX) {
-            boolean deseaSalir = deseaSalir();
-            if (deseaSalir) {
-                System.out.println("PUNTAJE FINAL: " + r.getPuntaje());
-                System.out.println("Se retornará al Menu Principal automaticamente");
-                System.out.println("");
-                System.out.println("ESTE ES EL MENU: \n 1) Registrar jugador \n 2) Jugar juego Saltar \n 3) Jugar juego Rectángulo \n 4) Bitácora \n 5) Exit");
-                menuPrincipal(sistema);
-            } else {
-                jugarARectangulo(sistema, r);
-            }
-        }
-    }
-
-    public static boolean validarCantidadCoords(int[] coords) {
-        boolean correcto = true;
-        for (int i = 0; i < coords.length; i++) {
-            if (coords[i] == 0) {
-                correcto = false;
-            }
-        }
-        return correcto;
-    }
-
-    public static int[] coordCorrectas(int[] coords, String coordenadas, Rectangulo r, Sistema s) {
+    public static boolean deseaSalir() {
+        //Método que, una vez ingresada una x, verifica si el usuario desea seguir jugando o no
         Scanner lector = new Scanner(System.in);
-        boolean validarRango = validacionRangoCoords(coords);
-        boolean validarCant = validarCantidadCoords(coords);
-        while (!validarCant || !validarRango) {
-            if (!validarCant) {
-                System.out.println("\u001B[31m" + "La cantidad de coordenadas ingresadas no es suficiente. Reingrese" + "\u001B[0m");
-                coordenadas = lector.nextLine();
-                coords = recibirCoordenadas(coordenadas);
-                hayX2Rectangulo(coords, r, s);
-                validarCant = validarCantidadCoords(coords);
-                validarRango = validacionRangoCoords(coords);
-
-            } else if (!validarRango) {
-                System.out.println("\u001B[31m" + "Las coordenadas ingresadas estan fuera de rango. Reingrese" + "\u001B[0m");
-                coordenadas = lector.nextLine();
-                coords = recibirCoordenadas(coordenadas);
-                hayX2Rectangulo(coords, r, s);
-                validarCant = validarCantidadCoords(coords);
-                validarRango = validacionRangoCoords(coords);
-            }
-
+        boolean salir = false;
+        System.out.println("");
+        System.out.println("\u001B[35m" + "Esta seguro de que desea salir del juego?" + "\u001B[0m");
+        System.out.println("\u001B[35m" + "Ingrese S para salir o C para continuar" + "\u001B[0m");
+        char opcion = chequearCaracter();
+        while (opcion != 's' && opcion != 'S' && opcion != 'C' && opcion != 'c') {
+            System.out.println("\u001B[31m" + "La opcion ingresada no es una S ni una C. Porfavor reingrese." + "\u001B[0m");
+            opcion = chequearCaracter();
         }
-        return coords;
-
-    }
-
-    public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r, Sistema s) {
-        Scanner lector = new Scanner(System.in);
-        boolean excedeTamano = r.outOfBounds((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
-        while (excedeTamano) {
-            System.out.println("\u001B[31m" + "La matriz esta fuera de rango. Reingrese" + "\u001B[0m");
-            coordenadas = lector.nextLine();
-            hayXRectangulo(coordenadas, r, s);
-            coords = recibirCoordenadas(coordenadas);
-            coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
-            excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+        if (opcion == 'S' || opcion == 's') {
+            salir = true;
         }
-
-        return coordsCorrectas;
+        return salir;
     }
 
     public static int[] recibirCoordenadas(String coordenadas) {
+        //Método que verifica el ingreso de las coordenadas
+        //Verifica que no se ingresen letras o en el caso de recibir una x, la identifica
         Scanner lector = new Scanner(System.in);
         int[] coords = new int[4];
         int contador = 0;
@@ -639,9 +566,11 @@ public class Menu {
                             int numero = Integer.parseInt(res);
                             formatoEsCorrecto = true;
                             if (contador == 0 && numero == -1) {
+                                //Si el numero ingresado es un -1, se cambia a -2 para no confundir con el ingreso de una x
                                 numero = -2;
                             }
                             if (numero == 0) {
+                                //Si el numero ingresado es un 0, se cambia a -3 para no confundir con la falta de coordenadas
                                 numero = -3;
                             }
                             coords[contador] = numero;
@@ -682,9 +611,10 @@ public class Menu {
         return coords;
     }
 
-    public static boolean chequearMasCoords(String stringCoords, int ultiPosi) {
+    public static boolean chequearMasCoords(String stringCoords, int ultimaPosicion) {
+        //Método que verifica si las coordenadas de Rectángulo son mas que 4
         boolean seExcedenCords = false;
-        for (int i = ultiPosi; i < stringCoords.length(); i++) {
+        for (int i = ultimaPosicion; i < stringCoords.length(); i++) {
             if (stringCoords.charAt(i) != ' ') {
                 seExcedenCords = true;
             }
@@ -692,7 +622,76 @@ public class Menu {
         return seExcedenCords;
     }
 
+    public static int[] coordCorrectas(int[] coords, String coordenadas, Rectangulo r, Sistema s) {
+        //Método recibe las coordenadas con el formato adecuado
+        //Verifica que esten entre 1 y 20
+        //Verifica que no haya menos que 4 coordenadas
+        Scanner lector = new Scanner(System.in);
+        boolean validarRango = validacionRangoCoords(coords);
+        boolean validarCant = validarCantidadCoords(coords);
+        while (!validarCant || !validarRango) {
+            if (!validarCant) {
+                System.out.println("\u001B[31m" + "La cantidad de coordenadas ingresadas no es suficiente. Reingrese" + "\u001B[0m");
+                coordenadas = lector.nextLine();
+                coords = recibirCoordenadas(coordenadas);
+                hayX2Rectangulo(coords, r, s);
+                validarCant = validarCantidadCoords(coords);
+                validarRango = validacionRangoCoords(coords);
+
+            } else if (!validarRango) {
+                System.out.println("\u001B[31m" + "Las coordenadas ingresadas estan fuera de rango. Reingrese" + "\u001B[0m");
+                coordenadas = lector.nextLine();
+                coords = recibirCoordenadas(coordenadas);
+                hayX2Rectangulo(coords, r, s);
+                validarCant = validarCantidadCoords(coords);
+                validarRango = validacionRangoCoords(coords);
+            }
+
+        }
+        return coords;
+
+    }
+
+    public static boolean validacionRangoCoords(int[] coords) {
+        //Metodo que valida el rango (1-20) de las coordenadas ingresadas
+        boolean correcto = true;
+        for (int i = 0; i < coords.length; i++) {
+            if (coords[i] < 1 || coords[i] > 20) {
+                correcto = false;
+            }
+        }
+        return correcto;
+    }
+
+    public static boolean validarCantidadCoords(int[] coords) {
+        //Metodo que valida la cantidad de coordenadas ingresadas
+        boolean correcto = true;
+        for (int i = 0; i < coords.length; i++) {
+            if (coords[i] == 0) {
+                correcto = false;
+            }
+        }
+        return correcto;
+    }
+
+    public static int[] coordEntran(String coordenadas, int[] coords, int[] coordsCorrectas, Rectangulo r, Sistema s) {
+        //Método que verifica que la matriz ingresada este dentro del rango de la matriz original 20x20
+        Scanner lector = new Scanner(System.in);
+        boolean excedeTamano = r.outOfBounds((coordsCorrectas[0] - 1), (coordsCorrectas[1] - 1), (coordsCorrectas[2]), (coordsCorrectas[3]));
+        while (excedeTamano) {
+            System.out.println("\u001B[31m" + "La matriz esta fuera de rango. Reingrese" + "\u001B[0m");
+            coordenadas = lector.nextLine();
+            hayXRectangulo(coordenadas, r, s);
+            coords = recibirCoordenadas(coordenadas);
+            coordsCorrectas = coordCorrectas(coords, coordenadas, r, s);
+            excedeTamano = r.outOfBounds((coordsCorrectas[0]) - 1, (coordsCorrectas[1]) - 1, (coordsCorrectas[2]), (coordsCorrectas[3]));
+        }
+
+        return coordsCorrectas;
+    }
+
     public static void opcion4(Sistema sistema) {
+        //Metodo que muestra la lista de juegos segun el orden seleccionado
         Scanner lector = new Scanner(System.in);
         boolean salir = false;
         while (!salir) {
@@ -703,10 +702,10 @@ public class Menu {
                 menuPrincipal(sistema);
             } else {
                 System.out.println("Seleccione orden de la lista :" + "\n" + "(A) Por alias creciente" + "\n" + "(B) Por puntaje decreciente");
-                char opcion = chequearConfiguracion();
+                char opcion = chequearCaracter();
                 while (opcion != 'A' && opcion != 'a' && opcion != 'B' && opcion != 'b') {
                     System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una A o una B." + "\u001B[0m");
-                    opcion = chequearConfiguracion();
+                    opcion = chequearCaracter();
                 }
                 System.out.println("");
                 if (opcion == 'A' || opcion == 'a') {
@@ -737,15 +736,15 @@ public class Menu {
     }
 
     public static boolean volverAMenu(String s1, String s2, char letra) {
+        //Metodo que se encarga de preguntarle al usuario si desea continuar jugando o volver al menu
         boolean volverMenu = false;
         System.out.println("");
         System.out.println("¿Desea volver al menú o " + s1);
         System.out.println("Ingrese M para volver al menú o " + s2);
-        char opcion = chequearConfiguracion();
+        char opcion = chequearCaracter();
         while (opcion != 'M' && opcion != 'm' && opcion != Character.toUpperCase(letra) && opcion != letra) {
             System.out.println("\u001B[31m" + "La letra ingresada no es valida, reingrese una de las opciones dictadas." + "\u001B[0m");
-            opcion = chequearConfiguracion();
-
+            opcion = chequearCaracter();
         }
         if (opcion == 'M' || opcion == 'm') {
             volverMenu = true;
@@ -753,7 +752,39 @@ public class Menu {
         return volverMenu;
     }
 
+    public static char chequearCaracter() {
+        //Método que verifica el formato del ingreso de caracteres
+        //Por ejemplo, en el ingreso de la configuración de los juegos
+        Scanner lector = new Scanner(System.in);
+        String configuracion = lector.nextLine();
+        boolean esCorrecto = false;
+        char conf = ' ';
+        while (!esCorrecto) {
+            try {
+                conf = configuracion.charAt(0);
+                boolean hayEspaciosEnBlanco = true;
+                for (int i = 1; i < configuracion.length(); i++) {
+                    if (configuracion.charAt(i) != ' ') {
+                        hayEspaciosEnBlanco = false;
+                    }
+                }
+                if (hayEspaciosEnBlanco) {
+                    esCorrecto = true;
+                } else {
+                    System.out.println("\u001B[31m" + "La letra ingresada no es correcta, tiene que ser un único caracter. Reingree" + "\u001B[0m");
+                    configuracion = lector.nextLine();
+                }
+            } catch (Exception e) {
+                System.out.println("\u001B[31m" + "El formato de la letra ingresada es incorrecto. Reingree" + "\u001B[0m");
+                configuracion = lector.nextLine();
+            }
+        }
+        return conf;
+    }
+
     public static int manejarError() {
+        //Metodo que verifica el formato de un unico numero ingresado
+        //Verifica que no sea una letra o en el caso de la x, la identifica
         boolean esCorrecto = false;
         Scanner in = new Scanner(System.in);
         String opcionIngresada = in.nextLine();

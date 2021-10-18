@@ -46,6 +46,7 @@ public class Rectangulo extends Juego {
     }
 
     public boolean outOfBounds(int filaInicial, int columnaInicial, int cantFilas, int cantColumnas) {
+        //Metodo que verifica que el tamaño de la nueva matriz no exceda el rango de la matriz original (20x20)
         boolean outOfBounds = false;
         if (filaInicial + (cantFilas - 1) > 19 || columnaInicial + (cantColumnas - 1) > 19) {
             outOfBounds = true;
@@ -63,6 +64,7 @@ public class Rectangulo extends Juego {
     public char[][] crearMatriz() {
         char[][] mat = new char[20][20];
         if (this.getConfiguracion() == 'A' || this.getConfiguracion() == 'a') {
+            //Crear la matriz al azar
             boolean repetido = true;
             int filaRandom = 0;
             int columnaRandom = 0;
@@ -82,6 +84,7 @@ public class Rectangulo extends Juego {
                 }
             }
         } else {
+            //Crear la matriz predeterminada
             mat[0][2] = '*';
             mat[2][2] = '*';
             mat[3][4] = '*';
@@ -116,6 +119,7 @@ public class Rectangulo extends Juego {
     }
 
     public boolean validacionSuperposicion(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
+        //Metodo que verifica que la matriz no se superponga con alguna posicion ya ocupada
         char[][] mat = this.getMatriz();
         boolean seSuperpone = false;
         for (int i = filaInicial; i <= filaInicial + (cantidadFilas - 1); i++) {
@@ -129,6 +133,8 @@ public class Rectangulo extends Juego {
     }
 
     public boolean esAdyacente(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
+        //Metodo que verifica si la nueva matriz que se quiere ingresar es adyacente a la anterior ingresada
+        //Recorre el borde de la nueva matriz y si encuentra una ficha del color anterior en alguna posicion, es adyacente
         boolean esAdy = false;
         int filaFinal = (filaInicial + cantidadFilas) - 1;
         int columnaFinal = (columnaInicial + cantidadColumnas) - 1;
@@ -137,6 +143,7 @@ public class Rectangulo extends Juego {
             esAdy = true;
         } else {
             for (int i = columnaInicial; i <= columnaFinal; i++) {
+                //Recorro la primer y ultima fila de la nueva matriz
                 if (filaInicial != 0 && filaFinal != 19) {
                     if (this.getMatriz()[filaInicial - 1][i] == this.getColorAnterior() || this.getMatriz()[filaFinal + 1][i] == this.getColorAnterior()) {
                         esAdy = true;
@@ -158,6 +165,7 @@ public class Rectangulo extends Juego {
             }
 
             for (int j = filaInicial; j <= filaFinal; j++) {
+                //Recorro la primer y ultima columna de la nueva matriz
                 if (columnaInicial != 0 && columnaFinal != 19) {
                     if (this.getMatriz()[j][columnaInicial - 1] == this.getColorAnterior() || this.getMatriz()[j][columnaFinal + 1] == this.getColorAnterior()) {
                         esAdy = true;
@@ -184,6 +192,8 @@ public class Rectangulo extends Juego {
     }
 
     public boolean quedanJugadas() {
+        //Metodo que verifica si se pueden seguir agregando rectangulos o no
+        //Recorre el borde de la ultima matriz agregada, y si no encuentra ningun espacio libre, indica que no quedan jugadas disponibles
         boolean quedanJugadas = false;
 
         int filaInicial = this.getCoordsMatrizAnterior()[0];
@@ -243,6 +253,7 @@ public class Rectangulo extends Juego {
     }
 
     public void crearNuevaMatriz(int filaInicial, int columnaInicial, int cantidadFilas, int cantidadColumnas) {
+        //Metodo que genera la nueva matriz, guardando el nuevo rectangulo agregado
         char[][] mat = this.getMatriz();
         for (int i = filaInicial; i < filaInicial + cantidadFilas; i++) {
             for (int j = columnaInicial; j < columnaInicial + cantidadColumnas; j++) {
@@ -257,6 +268,7 @@ public class Rectangulo extends Juego {
     }
 
     public String toString() {
+         //Metodo que hereda el toString() de la clase Juego y le agrega informacion
         return super.toString() + "Rectangulo";
     }
 

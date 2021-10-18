@@ -107,7 +107,7 @@ public class Saltar extends Juego {
     }
 
     public boolean validarFila(char mat[][], char[] arr) {
-        //Verifico que una letra no se repita en una misma columna 
+        //Metodo que verifica que una letra no se repita en una misma columna 
         boolean algunRepetido = false;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < mat.length && !algunRepetido; j++) {
@@ -120,17 +120,13 @@ public class Saltar extends Juego {
     }
 
     public void hacerMovida(int columna, int cantidadPosiciones) {
-        //metodo que se llama una vez que la movida ya fue validada
-        //llamar a los metodos this.getMatriz() y this.setMatriz(matriz cambiada);
+        //Metodo que se llama una vez que la movida ya fue validada y realiza la movida
         this.setMatriz(this.matrizNueva(columna, cantidadPosiciones));
         this.setColor(this.getColor());
     }
 
-//    public char[][] getMatrizSaltar() {
-//        return this.getMatriz();
-//    }
     public int[] indicarColumnasParaJugador() {
-        //Devuelvo un array con las columnas que puede mover el jugador
+        //Metodo que devuelve un array con las columnas que puede mover el jugador
         char[][] mat = this.getMatriz();
         int[] columnasQueSePuedenMover = new int[4];
         for (int i = mat.length - 1; i >= 0; i--) {
@@ -152,6 +148,7 @@ public class Saltar extends Juego {
     }
 
     public int cantidadDePosicionesAMover(int fila) {
+        //Metodo que calcula la cantidad de posiciones que se puede mover cada ficha de un determinado color
         char[][] mat = this.getMatriz();
         int contadorPosiciones = 0;
         for (int i = 0; i < 4; i++) {
@@ -164,6 +161,7 @@ public class Saltar extends Juego {
     }
 
     public int[] fichaSola() {
+        //Metodo que identifica y guarda la ficha mas adelantada de la matriz para impedir que el usuario mueva esa
         int[] res = new int[2];
         int fila = -1;
         int contador = 0;
@@ -196,7 +194,8 @@ public class Saltar extends Juego {
     }
 
     public boolean puedeMover(int cantidadPosiciones, int fila, int columna) {
-        //Chequear que la posicion no este ocupada
+        //Metodo que verifica que la posicion a la que se quiere llegar no este ocupada
+        //Verifica tambien que, en caso de estar en el area base, en la fila a la que se quiere llegar no haya dos fichas del mismo color
         char[][] mat = this.getMatriz();
         boolean sePuede = true;
         if (fila - cantidadPosiciones < 0) {
@@ -209,7 +208,7 @@ public class Saltar extends Juego {
 
             } else {
                 if (fila - cantidadPosiciones >= 5) {
-                    //Chequeo que no se repitan dos fichas de un mismo color
+                    //Chequea que no se repitan dos fichas de un mismo color
                     fila = fila - cantidadPosiciones;
                     for (int i = 0; i < 4; i++) {
                         if (mat[fila][i] == this.getColor()) {
@@ -229,6 +228,7 @@ public class Saltar extends Juego {
     }
 
     public int calcularPuntaje() {
+        //Metodo que calcula el puntaje total del juego Saltar
         char[][] mat = this.getMatriz();
         int puntaje = 0;
         int contador = 10;
@@ -250,6 +250,7 @@ public class Saltar extends Juego {
     }
 
     public char[][] matrizNueva(int columna, int cantidadPosiciones) {
+        //Metodo que genera la nueva matriz del juego, guardando la movida realizada
         char[][] mat = this.getMatriz();
         boolean colorMovido = false;
         for (int i = mat.length - 1; i >= 0 && !colorMovido; i--) {
@@ -261,24 +262,9 @@ public class Saltar extends Juego {
         }
         return mat;
     }
-
-//    public String mostrarMensajeAlJugador(boolean[] array) {
-//        String res = "Las columnas que se pueden mover son: ";
-//        int contador = 0;
-//        for (int i = 0; i < array.length; i++) {
-//            if (!array[i]) {
-//                contador++;
-//            } else {
-//                res += array[i] + " ";
-//            }
-//        }
-//        if (contador == 4) {
-//            res = "No hay posibles movimientos para el color " + this.getColor();
-//            this.setColor(this.getColor());
-//        }
-//        return res;
-//    }
+    
     public boolean quedanDosFichas() {
+        //Metodo que verifica si en el area base quedan dos fichas para saber si terminar el juego o no
         char[][] mat = this.getMatriz();
         boolean seTermina = false;
         int contador = 0;
@@ -296,11 +282,12 @@ public class Saltar extends Juego {
     }
 
     public boolean quedanJugadasDisponibles() {
+        //Metodo que verifica si quedan jugadas disponibles en alguna ficha de algun color
         char[][] mat = this.getMatriz();
         boolean quedanJugadas = false;
         int jugadasNoHechas = 0;
         while (jugadasNoHechas != 4 && !quedanJugadas) {
-            //Empiezo con el color que tengo y me fijo si puedo hacer algun movimiento con el
+            //Empieza con el color actual y se fija si puede hacer algun movimiento con el
             int contadorColor = 0;
             for (int i = 0; i < mat.length; i++) {
                 for (int j = 0; j < mat[0].length; j++) {
@@ -331,6 +318,7 @@ public class Saltar extends Juego {
     }
     
     public String toString(){
+        //Metodo que hereda el toString() de la clase Juego y le agrega informacion
         return super.toString() + "Saltar";
     }
 

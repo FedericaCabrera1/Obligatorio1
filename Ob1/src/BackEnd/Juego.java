@@ -57,7 +57,8 @@ public abstract class Juego {
     }
     
     public String toString(){
-        return "Jugador: " + "\n Nombre: " + this.getJugador().getNombre() + "\n Alias: " + this.getJugador().getAlias() + "\n Edad: " + this.getJugador().getNombre() + "\nPuntaje: " + this.getPuntaje() + "\nHora comienzo: " + this.getHoraComienzo() + "\nTipo de juego: ";
+        //Metodo que imprime los datos de cada juego
+        return "\u001B[32m" + "Jugador: " + "\u001B[0m" + "\n" + "\u001B[32m" + " Nombre: " + "\u001B[0m" + this.getJugador().getNombre() + "\n" + "\u001B[32m" + " Alias: " + "\u001B[0m" + this.getJugador().getAlias() + "\n" + "\u001B[32m" + " Edad: " + "\u001B[0m" + this.getJugador().getNombre() + "\n" + "\u001B[32m" + "Puntaje: " + "\u001B[0m" + this.getPuntaje() + "\n" + "\u001B[32m" + "Hora comienzo: " + "\u001B[0m" + this.getHoraComienzo() + "\n" + "\u001B[32m" + "Tipo de juego: " + "\u001B[0m" ;
     }
     
    
